@@ -1,5 +1,12 @@
 package USER;
 
+/*
+ *  User class is an Abstract class where Register and Login are some abstract methods 
+ *  where its implementation depends on the type of User who uses it
+ *  Here type of user means : jobSeeker,Recuiter or Administrator where there will some details differs for each type
+ *  these classes inherits User class
+ */
+
 public abstract class User{
     private String firstName;
     private String lastName;
@@ -8,6 +15,9 @@ public abstract class User{
     private String gender;
     private String mobileNumber;
     private String dateOfBirth;
+    /*
+     * data fields above are the basic details of user(any of jobSeeker,Recuiter,Administrator) who uses Job Portal System
+     */
     public User(String firstName, String lastName, String email, String password, String gender, String mobileNumber,
             String dateOfBirth) {
         this.firstName = firstName;
@@ -18,6 +28,7 @@ public abstract class User{
         this.mobileNumber = mobileNumber;
         this.dateOfBirth = dateOfBirth;
     }
+    /*Constructor for User class with all arguments */
     public String getFirstName() {
         return firstName;
     }
@@ -60,12 +71,15 @@ public abstract class User{
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    /*Above are the getter and setter methods for all data fields */
     
     @Override
     public String toString() {
         return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password
                 + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", dateOfBirth=" + dateOfBirth + "]";
-    }
+    } 
+    /*below are the abstract methods in User class */
     public abstract boolean Login();
     public abstract boolean Register();
     public abstract boolean Logout();
