@@ -1,5 +1,5 @@
 package USER.JOBSEEKER;
 
-public class JobSeeker {
+public class JobSeeker{
     
 }
