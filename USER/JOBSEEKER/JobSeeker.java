@@ -1,18 +1,26 @@
 package USER.JOBSEEKER;
+
 import USER.User;
 public class JobSeeker extends User{
    private String qualification;
-
+   private int work_experience;
     public JobSeeker (String firstName, String lastName, String email, String password, String gender, String mobileNumber,
-    String dateOfBirth, String Qualification){
+    String dateOfBirth, String Qualification,int workexperience){
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
         qualification=Qualification;
+        work_experience=workexperience;
     }
     void setQualification(String Qualification){
       this.qualification=Qualification;
     }
     String getQualification(){
        return qualification; 
+    }
+    public void setWorkExperience(int work_experience) {
+        this.work_experience = work_experience;
+    }
+    public int getWork_experience() {
+        return work_experience;
     }
      @Override
     public boolean Login(String email ,String password) {
@@ -41,6 +49,7 @@ public class JobSeeker extends User{
         // TODO Auto-generated method stub
         return false;
     }
+    
    
 }
 
