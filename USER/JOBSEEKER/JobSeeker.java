@@ -15,7 +15,7 @@ public class JobSeeker extends User{
        return qualification; 
     }
      @Override
-    public boolean Login() {
+    public boolean Login(String email ,String password) {
        if(this.getEmail().equals(email)){
          if(this.getPassword().equals(password)){
             return true;
