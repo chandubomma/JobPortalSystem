@@ -19,7 +19,8 @@ public class JobSeeker extends User{
        if(this.getEmail().equals(email)){
          if(this.getPassword().equals(password)){
             return true;
-         } 
+         }
+            return false; 
        }
        else {
         System.out.println("Invalid Email");
