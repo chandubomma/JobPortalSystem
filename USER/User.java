@@ -18,6 +18,9 @@ public abstract class User{
     /*
      * data fields above are the basic details of user(any of jobSeeker,Recuiter,Administrator) who uses Job Portal System
      */
+    public User(String email){
+        this.email = email;
+    }
     public User(String firstName, String lastName, String email, String password, String gender, String mobileNumber,
             String dateOfBirth) {
         this.firstName = firstName;
