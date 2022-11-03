@@ -17,8 +17,8 @@ public class Administrator extends User{
     }
 
     @Override
-    public boolean Login() {
-        // TODO 
+    public boolean Login (String email, String password) {
+         
         return false;
     }
 
