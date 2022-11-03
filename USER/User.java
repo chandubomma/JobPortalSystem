@@ -83,7 +83,7 @@ public abstract class User{
                 + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", dateOfBirth=" + dateOfBirth + "]";
     } 
     /*below are the abstract methods in User class */
-    public abstract boolean Login();
+    public abstract boolean Login(String email,String password);
     public abstract boolean Register();
     public abstract boolean Logout();
     public abstract boolean deleteUser();
