@@ -1,87 +1,162 @@
 package USER.RECRUITER;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Job {
-    private int id;
-    private String jobtitle;
+    private String id;
+    private String jobTitle;
     private String location;
-    private String company_name;
+    private String companyName;
+    private String deadline;
+    private int numberOfVacancies;
+    private String skillRequired;
+    private int maxAge;
+    private int minExperience;
     private String description;
-    private String pdate;
-    private int no_of_vacancies;
-    private String skill1;
-    private String skill2;
-    private String skill3;
+    private boolean active;
     
-    public Job(String jobtitle, String location, String company_name, String description, String pdate,int n_vacancy,String skill1,String skill2,String skill3) {
-        this.jobtitle = jobtitle;
+
+    public Job(String id, String jobTitle, String location, String companyName, String deadline, int numberOfVacancies,
+            String skillRequired, int maxAge, int minExperience, String description) {
+        this.id = id;
+        this.jobTitle = jobTitle;
         this.location = location;
-        this.company_name = company_name;
+        this.companyName = companyName;
+        this.deadline = deadline;
+        this.numberOfVacancies = numberOfVacancies;
+        this.skillRequired = skillRequired;
+        this.maxAge = maxAge;
+        this.minExperience = minExperience;
         this.description = description;
-        this.pdate = pdate;
-        this.no_of_vacancies = n_vacancy;
-        this.skill1 = skill1;
-        this.skill2 = skill2;
-        this.skill3 = skill3; 
+        this.active = isActive();
     }
-    public int getId() {
+
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(String id) {
         this.id = id;
     }
-    public String getCompany_name() {
-        return company_name;
+
+    public String getJobTitle() {
+        return jobTitle;
     }
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
-    public String getSkill1() {
-        return skill1;
-    }
-    public void setSkill1(String skill1) {
-        this.skill1 = skill1;
-    }
-    public String getSkill2() {
-        return skill2;
-    }
-    public void setSkill2(String skill2) {
-        this.skill2 = skill2;
-    }
-    public String getSkill3() {
-        return skill3;
-    }
-    public void setSkill3(String skill3) {
-        this.skill3 = skill3;
-    }
-    public String getjobTitle() {
-        return jobtitle;
-    }
-    public void setjobTitle(String jobtitle) {
-        this.jobtitle = jobtitle;
-    }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
-    public String getcompany_name() {
-        return company_name;
+
+    public String getCompanyName() {
+        return companyName;
     }
-    public void setcomapny_name(String company_name) {
-        this.company_name = company_name;
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    public int getNumberOfVacancies() {
+        return numberOfVacancies;
+    }
+
+    public void setNumberOfVacancies(int numberOfVacancies) {
+        this.numberOfVacancies = numberOfVacancies;
+    }
+
+    public String getSkillRequired() {
+        return skillRequired;
+    }
+
+    public void setSkillRequired(String skillRequired) {
+        this.skillRequired = skillRequired;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
+    }
+
+    public int getMinExperience() {
+        return minExperience;
+    }
+
+    public void setMinExperience(int minExperience) {
+        this.minExperience = minExperience;
+    }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getPdate() {
-        return pdate;
+
+    public boolean isActive(){
+        try 
+        {
+            SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+            Date d1 = sdformat.parse(this.deadline);
+            Date d2 = new Date();
+            if(d1.compareTo(d2) >= 0) {
+                this.active=true;
+                return this.active;
+            } 
+            else{
+                this.active=false;
+                return this.active;
+            }
+        }
+        catch (ParseException e) 
+        {
+            e.printStackTrace();                    
+            this.active=true;
+            return this.active;
+        }
     }
-    public void setPdate(String pdate) {
-        this.pdate = pdate;
+
+    public void apply(USER.JOBSEEKER.JobSeeker obj){
+        //add user in the database of applicants of this job 
+    }
+
+    public void updateJob(){
+        //update details of the job in the database
+    }
+
+    public boolean isEligible(USER.JOBSEEKER.JobSeeker obj){
+        if(this.active==false)
+            return false;
+        else if(obj.getAge()>this.maxAge || this.maxAge==0)
+            return false;
+        else if(obj.getExperience()<=this.minExperience)
+            return false;
+        else if(! (obj.getSkill1().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
+                    obj.getSkill2().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
+                    obj.getSkill3().toLowerCase().equals(this.skillRequired.toLowerCase()) ) 
+                )
+            return false;
+        return true;
     }
     
 }
