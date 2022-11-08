@@ -163,7 +163,7 @@ public class JobSeeker extends User{
     @Override
     public boolean deleteUser() throws SQLException {
       
-            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.addJobSeekerRecord(this));
+            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.deleteJobSeekerRecord(this));
        
     }
 
