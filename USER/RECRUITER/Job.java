@@ -17,7 +17,6 @@ public class Job {
     private String description;
     private boolean active;
     
-
     public Job(String id, String jobTitle, String location, String companyName, String deadline, int numberOfVacancies,
             String skillRequired, int maxAge, int minExperience, String description) {
         this.id = id;
@@ -30,7 +29,7 @@ public class Job {
         this.maxAge = maxAge;
         this.minExperience = minExperience;
         this.description = description;
-        this.active = isActive();
+        this.active= this.isActive();
     }
 
     public String getId() {
@@ -123,7 +122,7 @@ public class Job {
                 this.active=true;
                 return this.active;
             } 
-            else{
+            else {
                 this.active=false;
                 return this.active;
             }
@@ -136,7 +135,7 @@ public class Job {
         }
     }
 
-    public void apply(USER.JOBSEEKER.JobSeeker obj){
+    public void apply(JobSeeker obj){
         //add user in the database of applicants of this job 
     }
 
@@ -144,19 +143,21 @@ public class Job {
         //update details of the job in the database
     }
 
-    public boolean isEligible(USER.JOBSEEKER.JobSeeker obj){
-        if(this.active==false)
-            return false;
-        else if(obj.getAge()>this.maxAge || this.maxAge==0)
-            return false;
-        else if(obj.getExperience()<=this.minExperience)
-            return false;
-        else if(! (obj.getSkill1().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
-                    obj.getSkill2().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
-                    obj.getSkill3().toLowerCase().equals(this.skillRequired.toLowerCase()) ) 
-                )
-            return false;
-        return true;
+    public boolean isEligible(JobSeeker obj){
+        if(this.active==true)
+        {
+            if(obj.getAge()<this.maxAge || this.maxAge==0)
+            {
+                if(obj.getExperience()>=this.minExperience)
+                {
+                    if (obj.getSkill1().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
+                        obj.getSkill2().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
+                        obj.getSkill3().toLowerCase().equals(this.skillRequired.toLowerCase()) 
+                        )
+                        return true;
+                }
+            }
+        }
+        return false;
     }
-    
 }
