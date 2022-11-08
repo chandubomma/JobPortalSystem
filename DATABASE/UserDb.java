@@ -6,7 +6,8 @@ import USER.User;
 public class UserDb  {
     private static Connection connection;
     private Database database;
-    private Statement statement;
+    protected Statement statement;
+    protected ResultSet resultSet;
 
     public UserDb() {
         database = new Database();
@@ -30,5 +31,9 @@ public class UserDb  {
         return statement.execute(Query);
     }
 
-    // TODO methods
+    public String getUserPassword(String email) throws SQLException{
+        String Query = "select password from user where email = '"+email+"'";
+        resultSet = statement.executeQuery(Query);
+        return(resultSet.getString("password"));
+    }
 }

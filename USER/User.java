@@ -1,5 +1,9 @@
 package USER;
 
+import java.sql.SQLException;
+
+import DATABASE.UserDb;
+
 /*
  *  User class is an Abstract class where Register and Login are some abstract methods 
  *  where its implementation depends on the type of User who uses it
@@ -15,6 +19,7 @@ public abstract class User{
     private String gender;
     private String mobileNumber;
     private String dateOfBirth;
+    
     /*
      * data fields above are the basic details of user(any of jobSeeker,Recuiter,Administrator) who uses Job Portal System
      */
@@ -30,6 +35,7 @@ public abstract class User{
         this.gender = gender;
         this.mobileNumber = mobileNumber;
         this.dateOfBirth = dateOfBirth;
+       
     }
     /*Constructor for User class with all arguments */
     public String getFirstName() {
@@ -83,9 +89,9 @@ public abstract class User{
                 + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", dateOfBirth=" + dateOfBirth + "]";
     } 
     /*below are the abstract methods in User class */
-    public abstract boolean Login(String email,String password);
-    public abstract boolean Register();
+    public abstract boolean Login(String email,String password) throws SQLException;
+    public abstract boolean Register() throws SQLException;
     public abstract boolean Logout();
-    public abstract boolean deleteUser();
+    public abstract boolean deleteUser() throws SQLException;
     
 }

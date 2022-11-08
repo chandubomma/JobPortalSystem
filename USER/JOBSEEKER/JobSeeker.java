@@ -1,8 +1,11 @@
 package USER.JOBSEEKER;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
 import MAIN.Main;
@@ -17,6 +20,7 @@ public class JobSeeker extends User{
     private String skill2;
     private String skill3;
     private int experience;
+    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();   
@@ -34,6 +38,7 @@ public class JobSeeker extends User{
         this.skill2 = skill2;
         this.skill3 = skill3;
         this.experience = experience;
+      
     }
 
     public String getUserKey() {
@@ -139,16 +144,14 @@ public class JobSeeker extends User{
         this.appliedJobs = appliedJobs;
     }
 
+   
     @Override
-    public boolean Login() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean Register() {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean Register() throws SQLException {
+        
+           return( jobSeekerDb.addUserRecord(this) &&
+            jobSeekerDb.addJobSeekerRecord(this));
+       
+       
     }
 
     @Override
@@ -158,8 +161,17 @@ public class JobSeeker extends User{
     }
 
     @Override
-    public boolean deleteUser() {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean deleteUser() throws SQLException {
+      
+            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.addJobSeekerRecord(this));
+       
+    }
+
+    @Override
+    public boolean Login(String email, String password) throws SQLException {
+       String userPassword = jobSeekerDb.getUserPassword(email);
+       if(userPassword.equals(password))return true;
+       else return false;
+        
     }
 }
