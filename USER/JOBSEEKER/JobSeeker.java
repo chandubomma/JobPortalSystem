@@ -23,8 +23,14 @@ public class JobSeeker extends User{
     private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
-    ArrayList<Job> appliedJobs = new ArrayList<Job>();   
+    ArrayList<Job> appliedJobs = new ArrayList<Job>();  
 
+    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+    String mobileNumber, String dateOfBirth) {
+super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
+super.setUserType("jobseeker");
+} 
+    
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
                     String mobileNumber, String dateOfBirth, String userKey, String college, String qualification,
                     int percentage, String skill1, String skill2, String skill3, int experience) 
@@ -38,7 +44,7 @@ public class JobSeeker extends User{
         this.skill2 = skill2;
         this.skill3 = skill3;
         this.experience = experience;
-      
+        super.setUserType("jobseeker");
     }
 
     public String getUserKey() {
@@ -153,6 +159,8 @@ public class JobSeeker extends User{
        
        
     }
+
+    
 
     @Override
     public boolean Logout() {

@@ -9,7 +9,7 @@ public class Recruiter extends User {
     public Recruiter(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-        //TODO Auto-generated constructor stub
+       super.setUserType("recruiter");
     }
      
    

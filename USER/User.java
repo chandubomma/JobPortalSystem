@@ -19,7 +19,15 @@ public abstract class User{
     private String gender;
     private String mobileNumber;
     private String dateOfBirth;
+    private String userType;
+    private boolean isLoggedIn;
     
+    public String getUserType() {
+        return userType;
+    }
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
     /*
      * data fields above are the basic details of user(any of jobSeeker,Recuiter,Administrator) who uses Job Portal System
      */
@@ -35,7 +43,7 @@ public abstract class User{
         this.gender = gender;
         this.mobileNumber = mobileNumber;
         this.dateOfBirth = dateOfBirth;
-       
+        
     }
     /*Constructor for User class with all arguments */
     public String getFirstName() {
@@ -93,5 +101,11 @@ public abstract class User{
     public abstract boolean Register() throws SQLException;
     public abstract boolean Logout();
     public abstract boolean deleteUser() throws SQLException;
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+    public void setLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
     
 }

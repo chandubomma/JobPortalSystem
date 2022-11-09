@@ -4,7 +4,7 @@ package DATABASE;
 public class Database {
     	private  String dbURL="jdbc:mysql://localhost:3306/jobportalsystem";
     	private String dbUserName="root";
-    	private String dbPassword="chandu@mysql";
+    	private String dbPassword="chandu@mysql";   // change this details according to your local mysql credentials
         public Database(){}
         public Database(String dbURL, String dbUserName, String dbPassword) {
             this.dbURL = dbURL;

@@ -1,14 +1,18 @@
 package USER.ADMINISTRATOR;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DATABASE.AdministratorDb;
 import USER.User;
 /*
  * Administrator class inherits User class
  */
+import USER.JOBSEEKER.JobSeeker;
 
 public class Administrator extends User{
     private String AdministratorKey;
+    private  static AdministratorDb administratorDb = new AdministratorDb();
 
     public Administrator(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth, String administratorKey) {
@@ -23,9 +27,10 @@ public class Administrator extends User{
     }
 
     @Override
-    public boolean Register() {
-        // TODO
-        return false;
+    public boolean Register() throws SQLException {
+       
+        return(administratorDb.addUserRecord(this) &&
+        administratorDb.addAdministratorRecord(this));
     }
 
     @Override
@@ -35,9 +40,8 @@ public class Administrator extends User{
     }
 
     @Override
-    public boolean deleteUser() {
-        // TODO 
-        return false;
+    public boolean deleteUser() throws SQLException {
+        return(administratorDb.deleteUserRecord(this) && administratorDb.deleteAdministratorRecord(this));
     }
 
     public String getAdministratorKey() {
@@ -48,10 +52,8 @@ public class Administrator extends User{
         AdministratorKey = administratorKey;
     }
     /* methods, a administrator has access to do  */
-    public ArrayList<User> getAllUserList(){
-      
-        //TODO
-        return null;
+    public ArrayList<JobSeeker> getAllJobSeekerList() throws SQLException{
+       return administratorDb.getAllJobSeekers();
     }
 
     public boolean approveUser(User user){
