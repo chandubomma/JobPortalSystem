@@ -1,6 +1,9 @@
 package USER.RECRUITER;
 
 import java.util.Date;
+
+import USER.JOBSEEKER.JobSeeker;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

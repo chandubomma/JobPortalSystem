@@ -1,8 +1,12 @@
 package DATABASE;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import USER.User;
 import USER.ADMINISTRATOR.Administrator;
+import USER.JOBSEEKER.JobSeeker;
 
 public class AdministratorDb extends UserDb {
     public boolean addAdministratorRecord(Administrator administrator) throws SQLException{
@@ -13,5 +17,15 @@ public class AdministratorDb extends UserDb {
     public boolean deleteAdministratorRecord(Administrator administrator) throws SQLException{
         String Query = "delete from administrator where email="+administrator.getEmail();
         return statement.execute(Query);
+    }
+
+    public ArrayList<JobSeeker> getAllJobSeekers() throws SQLException{
+        String Query = "select * from user where type = 'jobseeker'";
+        ResultSet rs = statement.executeQuery(Query);
+        ArrayList<JobSeeker> userList  = new ArrayList<>();
+        while(resultSet.next()){
+            userList.add(new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth")));
+        }
+        return userList;
     }
 }
