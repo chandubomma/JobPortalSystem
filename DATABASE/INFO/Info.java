@@ -2,44 +2,26 @@ package DATABASE.INFO;
 
 
 import java.sql.*;
+
+import com.mysql.cj.protocol.Resultset;
+
 import DATABASE.Database;
+import DATABASE.UserDb;
 import USER.ADMINISTRATOR.Administrator;
-public class Info {
-    Database Db=new Database();
-    Connection con;
-    Statement st;
-    public void infoDb() {     
-       try {
-        con = DriverManager.getConnection(Db.getDbURL(),Db.getDbUserName(),Db.getDbPassword());
-         st = con.createStatement();
-        } catch (SQLException e) {
-       
-            e.printStackTrace();
-        }
-    }
-import USER.ADMINISTRATOR.Administrator;
-import java.sql.*;
-import DATABASE.Database;
-public class Info {
-    Database Db=new Database();
-    Connection con =DriverManager.getConnection(Db.getDbURL(),Db.getDbUserName(),Db.getDbPassword());
-    Statement st =   con.createStatement();
- 
+public class Info extends UserDb {
+
    public void count(Administrator user) throws SQLException{
        
-       ResultSet rs =  st.executeQuery("select usertype,count(email) from user group by usertype;");
+        resultSet =  statement.executeQuery("select usertype,count(email) from user group by usertype;");
       
-         int js= rs.getInt(2);
-         rs.next();
-         int rc =rs.getInt(2);
-         rs.next();
-         int ad =rs.getInt(2);
+         int js= resultSet.getInt(2);
+         resultSet.next();
+         int rc =resultSet.getInt(2);
+         resultSet.next();
+         int ad =resultSet.getInt(2);
          int total =js+rc+ad;
          System.out.println("                   Total logins : "+total);
          System.out.println("Jobseekers : "+js+"    Recruiters : "+rc+"Administraters : "+ad)
-         int total =js+rc;
-         System.out.println("       Total logins : "+total);
-         System.out.println("Jobseekers : "+js+"    Recruiters : "+rc);
    }
   public void display_company() throws SQLException{
    int k=1;
@@ -53,5 +35,6 @@ public class Info {
    int k=1;
    ResultSet rs =st.executeQuery("Select distint job from jobs;");
    System.out.println(k+"."+rs.getString(1));
+   k++;
  }
 }
