@@ -5,7 +5,6 @@ import java.sql.*;
 
 import com.mysql.cj.protocol.Resultset;
 
-import DATABASE.Database;
 import DATABASE.UserDb;
 import USER.ADMINISTRATOR.Administrator;
 public class Info extends UserDb {
@@ -25,16 +24,16 @@ public class Info extends UserDb {
    }
   public void display_company() throws SQLException{
    int k=1;
-   ResultSet rs = st.executeQuery("select distinct company_name from jobs;");
-   while(rs.next()){
-     System.out.println(k+"."+rs.getString(1)); 
+   ResultSet resultSet = statement.executeQuery("select distinct company_name from jobs;");
+   while(resultSet.next()){
+     System.out.println(k+"."+resultSet.getString(1)); 
      k++;
    }
   }
  public void display_jobs() throws SQLException{
    int k=1;
-   ResultSet rs =st.executeQuery("Select distint job from jobs;");
-   System.out.println(k+"."+rs.getString(1));
+   ResultSet resultSet =statement.executeQuery("Select distint job from jobs;");
+   System.out.println(k+"."+resultSet.getString(1));
    k++;
  }
 }
