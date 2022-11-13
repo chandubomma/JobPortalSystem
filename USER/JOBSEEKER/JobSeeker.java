@@ -11,15 +11,15 @@ import USER.RECRUITER.Job;
 import MAIN.Main;
 
 public class JobSeeker extends User{
-   
+    private String userKey;
     private int age;
     private String college;
     private String qualification;
-    private float percentage;
+    private int percentage;
     private String skill1;
     private String skill2;
     private String skill3;
-    private String experience;
+    private int experience;
     private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
@@ -32,11 +32,11 @@ super.setUserType("jobseeker");
 } 
     
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
-                    String mobileNumber, String dateOfBirth, String college, String qualification,
-                    float percentage, String skill1, String skill2, String skill3, String experience) 
+                    String mobileNumber, String dateOfBirth, String userKey, String college, String qualification,
+                    int percentage, String skill1, String skill2, String skill3, int experience) 
     {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-       
+        this.userKey = userKey;
         this.college = college;
         this.qualification = qualification;
         this.percentage = percentage;
@@ -47,7 +47,13 @@ super.setUserType("jobseeker");
         super.setUserType("jobseeker");
     }
 
-   
+    public String getUserKey() {
+        return userKey;
+    }
+
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
+    }
 
     public int getAge() {
         return age;
@@ -81,7 +87,7 @@ super.setUserType("jobseeker");
         this.qualification = qualification;
     }
 
-    public float getPercentage() {
+    public int getPercentage() {
         return percentage;
     }
 
@@ -125,13 +131,24 @@ super.setUserType("jobseeker");
         return eligibleJobs;
     }
 
-    
+    public void setEligibleJobs() {
+        int i;
+        for(i=0;i<=numberOfJobs;i++)
+        {
+            //get details of the job from job database
+            Job obj=new Job(id, jobTitle, location, companyName, deadline, numberOfJobs, maxAge, minExperience, description)
+            if(obj.isEligible(this))
+                this.eligibleJobs.add(obj);
+        }
+    }
 
     public ArrayList<Job> getAppliedJobs() {
         return appliedJobs;
     }
 
-   
+    public void setAppliedJobs(ArrayList<Job> appliedJobs) {
+        this.appliedJobs = appliedJobs;
+    }
 
    
     @Override
