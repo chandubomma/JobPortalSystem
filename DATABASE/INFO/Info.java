@@ -1,4 +1,5 @@
 package DATABASE.INFO;
+<<<<<<< HEAD
 
 import java.sql.*;
 import DATABASE.Database;
@@ -16,6 +17,16 @@ public class Info {
             e.printStackTrace();
         }
     }
+=======
+import USER.ADMINISTRATOR.Administrator;
+import java.sql.*;
+import DATABASE.Database;
+public class Info {
+    Database Db=new Database();
+    Connection con =DriverManager.getConnection(Db.getDbURL(),Db.getDbUserName(),Db.getDbPassword());
+    Statement st =   con.createStatement();
+ 
+>>>>>>> ac29f4e189483bbae3486e9edb6aea4ee0660af4
    public void count(Administrator user) throws SQLException{
        
        ResultSet rs =  st.executeQuery("select usertype,count(email) from user group by usertype;");
@@ -23,11 +34,17 @@ public class Info {
          int js= rs.getInt(2);
          rs.next();
          int rc =rs.getInt(2);
+<<<<<<< HEAD
          rs.next();
          int ad =rs.getInt(2);
          int total =js+rc+ad;
          System.out.println("                   Total logins : "+total);
          System.out.println("Jobseekers : "+js+"    Recruiters : "+rc+"Administraters : "+ad);
+=======
+         int total =js+rc;
+         System.out.println("       Total logins : "+total);
+         System.out.println("Jobseekers : "+js+"    Recruiters : "+rc);
+>>>>>>> ac29f4e189483bbae3486e9edb6aea4ee0660af4
    }
   public void display_company() throws SQLException{
    int k=1;
@@ -42,5 +59,8 @@ public class Info {
    ResultSet rs =st.executeQuery("Select distint job from jobs;");
    System.out.println(k+"."+rs.getString(1));
  }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac29f4e189483bbae3486e9edb6aea4ee0660af4
 }
