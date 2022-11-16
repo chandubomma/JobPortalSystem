@@ -1,22 +1,19 @@
 package USER.RECRUITER;
-import DATABASE.RecruiterDb;
-import USER.RECRUITER.Job;
-
-import USER.User;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
-
-
-
-import MAIN.MainDriver;
+import DATABASE.RecruiterDb;
+import USER.User;
 
 public class Recruiter extends User {
     private String CompanyName;
     private String Designation;
-    private static RecruiterDb recruiterDb = new RecruiterDb();
+   
+    public Recruiter(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
+    }
+
+
     public Recruiter(String companyName,String designation,String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
@@ -52,15 +49,19 @@ public class Recruiter extends User {
     @Override
     public boolean Register() throws SQLException {
     
-        return(recruiterDb.addUserRecord(this) &&
-        recruiterDb.addRecruiterRecord(this));
+        return(RecruiterDb.addUserRecord(this) &&
+        RecruiterDb.addRecruiterRecord(this));
         
     }
     
     @Override
     public boolean Login(String email, String password) throws SQLException{
-        String userPassword = recruiterDb.getUserPassword(email);
-        if(userPassword.equals(password))return true;
+        String userPassword = RecruiterDb.getUserPassword(email);
+        if(userPassword.equals(password)){
+            this.setLoggedIn(true);
+            RecruiterDb.updateUserLoginStatus(getEmail(), isLoggedIn());
+            return true;
+        }
         else return false;
     }
 
@@ -72,7 +73,7 @@ public class Recruiter extends User {
 
     @Override
     public boolean deleteUser() throws SQLException {
-        return(recruiterDb.deleteUserRecord(this) && recruiterDb.deleteRecruiterRecord(this));
+        return(RecruiterDb.deleteUserRecord(this) && RecruiterDb.deleteRecruiterRecord(this));
     
     }
 }

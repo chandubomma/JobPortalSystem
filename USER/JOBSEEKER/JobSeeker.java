@@ -20,7 +20,7 @@ public class JobSeeker extends User{
     private String skill2;
     private String skill3;
     private int experience;
-    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
+   
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();  
@@ -46,6 +46,7 @@ super.setUserType("jobseeker");
         this.experience = experience;
         super.setUserType("jobseeker");
     }
+    
 
     public String getUserKey() {
         return userKey;
@@ -132,7 +133,7 @@ super.setUserType("jobseeker");
     }
 
     public void setEligibleJobs() throws SQLException {
-        ResultSet rs = jobSeekerDb.getAllJobs();
+        ResultSet rs = JobSeekerDb.getAllJobs();
         while(rs.next())
         {
             //get details of the job from job database
@@ -151,14 +152,14 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
-        return jobSeekerDb.insertJobApplicant(this, job);
+        return JobSeekerDb.insertJobApplicant(this, job);
     }
    
     @Override
     public boolean Register() throws SQLException {
         
-           return( jobSeekerDb.addUserRecord(this) &&
-            jobSeekerDb.addJobSeekerRecord(this));
+           return( JobSeekerDb.addUserRecord(this) &&
+            JobSeekerDb.addJobSeekerRecord(this));
        
        
     }
@@ -174,14 +175,18 @@ super.setUserType("jobseeker");
     @Override
     public boolean deleteUser() throws SQLException {
       
-            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.deleteJobSeekerRecord(this));
+            return(JobSeekerDb.deleteUserRecord(this) && JobSeekerDb.deleteJobSeekerRecord(this));
        
     }
 
     @Override
     public boolean Login(String email, String password) throws SQLException {
-       String userPassword = jobSeekerDb.getUserPassword(email);
-       if(userPassword.equals(password))return true;
+       String userPassword = JobSeekerDb.getUserPassword(email);
+       if(userPassword.equals(password)){
+        this.setLoggedIn(true);
+        JobSeekerDb.updateUserLoginStatus(getEmail(), isLoggedIn());
+        return true;
+    }
        else return false;
         
     }

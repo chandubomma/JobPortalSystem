@@ -2,8 +2,6 @@ package USER;
 
 import java.sql.SQLException;
 
-import DATABASE.UserDb;
-
 /*
  *  User class is an Abstract class where Register and Login are some abstract methods 
  *  where its implementation depends on the type of User who uses it

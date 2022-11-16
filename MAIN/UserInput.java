@@ -10,15 +10,15 @@ public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
 
     public static JobSeeker scanJobSeekerDetails(JobSeeker jobSeeker){
-        System.out.println("Enter First Name : ");
+        System.out.print("Enter First Name : ");
         jobSeeker.setFirstName(scanner.next());
-        System.out.println("Enter Last Name : ");
+        System.out.print("Enter Last Name : ");
         jobSeeker.setLastName(scanner.next());
-        System.out.println("Enter Email : ");
+        System.out.print("Enter Email : ");
         jobSeeker.setEmail(scanner.next());
-        System.out.println("Enter Password : ");
+        System.out.print("Enter Password : ");
         jobSeeker.setPassword(scanner.next());
-        System.out.println("Enter Date Of Birth : ");
+        System.out.print("Enter Date Of Birth : ");
         jobSeeker.setDateOfBirth(scanner.next());
 
      
@@ -26,18 +26,24 @@ public  class UserInput {
     }
 
     public static Recruiter scanRecruiterDetails(Recruiter recruiter){
-        System.out.println("Enter First Name : ");
+        System.out.print("Enter First Name : ");
         recruiter.setFirstName(scanner.next());
-        System.out.println("Enter Last Name : ");
+        System.out.print("Enter Last Name : ");
         recruiter.setLastName(scanner.next());
-        System.out.println("Enter Email : ");
+        System.out.print("Enter Email : ");
         recruiter.setEmail(scanner.next());
-        System.out.println("Enter Password : ");
+        System.out.print("Enter Password : ");
         recruiter.setPassword(scanner.next());
-        System.out.println("Enter Date Of Birth : ");
+        System.out.print("Enter Date Of Birth : ");
         recruiter.setDateOfBirth(scanner.next());
 
         return recruiter;
+    }
+
+    public static String scanPassword(){
+        System.out.print("Enter Password : ");
+        String password = scanner.next();
+        return password;
     }
     
 }
