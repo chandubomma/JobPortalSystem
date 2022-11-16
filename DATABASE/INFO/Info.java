@@ -3,8 +3,6 @@ package DATABASE.INFO;
 
 import java.sql.*;
 
-import com.mysql.cj.protocol.Resultset;
-
 import DATABASE.UserDb;
 import USER.ADMINISTRATOR.Administrator;
 public class Info extends UserDb {
@@ -20,7 +18,7 @@ public class Info extends UserDb {
          int ad =resultSet.getInt(2);
          int total =js+rc+ad;
          System.out.println("                   Total logins : "+total);
-         System.out.println("Jobseekers : "+js+"    Recruiters : "+rc+"Administraters : "+ad)
+         System.out.println("Jobseekers : "+js+"    Recruiters : "+rc+"Administraters : "+ad);
    }
   public void display_company() throws SQLException{
    int k=1;

@@ -9,7 +9,7 @@ import USER.RECRUITER.Recruiter;
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
 
-    public JobSeeker scanJobSeekerDetails(JobSeeker jobSeeker){
+    public static JobSeeker scanJobSeekerDetails(JobSeeker jobSeeker){
         System.out.println("Enter First Name : ");
         jobSeeker.setFirstName(scanner.next());
         System.out.println("Enter Last Name : ");
@@ -25,7 +25,7 @@ public  class UserInput {
         return jobSeeker;
     }
 
-    public Recruiter scanRecruiterDetails(Recruiter recruiter){
+    public static Recruiter scanRecruiterDetails(Recruiter recruiter){
         System.out.println("Enter First Name : ");
         recruiter.setFirstName(scanner.next());
         System.out.println("Enter Last Name : ");

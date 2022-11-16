@@ -11,7 +11,7 @@ import java.util.*;
 
 
 
-import MAIN.Main;
+import MAIN.MainDriver;
 
 public class Recruiter extends User {
     private String CompanyName;
@@ -50,7 +50,7 @@ public class Recruiter extends User {
 
 
     @Override
-    public boolean Register() {
+    public boolean Register() throws SQLException {
     
         return(recruiterDb.addUserRecord(this) &&
         recruiterDb.addRecruiterRecord(this));
@@ -71,7 +71,7 @@ public class Recruiter extends User {
     }
 
     @Override
-    public boolean deleteUser() {
+    public boolean deleteUser() throws SQLException {
         return(recruiterDb.deleteUserRecord(this) && recruiterDb.deleteRecruiterRecord(this));
     
     }

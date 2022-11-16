@@ -1,5 +1,6 @@
 package USER.JOBSEEKER;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +9,6 @@ import java.util.*;
 import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
-import MAIN.Main;
 
 public class JobSeeker extends User{
     private String userKey;
@@ -131,12 +131,12 @@ super.setUserType("jobseeker");
         return eligibleJobs;
     }
 
-    public void setEligibleJobs() {
-        int i;
-        for(i=0;i<=numberOfJobs;i++)
+    public void setEligibleJobs() throws SQLException {
+        ResultSet rs = jobSeekerDb.getAllJobs();
+        while(rs.next())
         {
             //get details of the job from job database
-            Job obj=new Job(id, jobTitle, location, companyName, deadline, numberOfJobs, maxAge, minExperience, description)
+            Job obj = new Job(rs.getString("id"),rs.getString("jobTitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description"));
             if(obj.isEligible(this))
                 this.eligibleJobs.add(obj);
         }
@@ -150,6 +150,9 @@ super.setUserType("jobseeker");
         this.appliedJobs = appliedJobs;
     }
 
+    public boolean applyForJob(Job job) throws SQLException{
+        return jobSeekerDb.insertJobApplicant(this, job);
+    }
    
     @Override
     public boolean Register() throws SQLException {
