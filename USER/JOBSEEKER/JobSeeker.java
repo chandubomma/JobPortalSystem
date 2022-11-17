@@ -20,7 +20,7 @@ public class JobSeeker extends User{
     private String skill2;
     private String skill3;
     private int experience;
-   
+   private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();  
@@ -133,7 +133,7 @@ super.setUserType("jobseeker");
     }
 
     public void setEligibleJobs() throws SQLException {
-        ResultSet rs = JobSeekerDb.getAllJobs();
+        ResultSet rs = jobSeekerDb.getAllJobs();
         while(rs.next())
         {
             //get details of the job from job database
@@ -152,14 +152,14 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
-        return JobSeekerDb.insertJobApplicant(this, job);
+        return jobSeekerDb.insertJobApplicant(this, job);
     }
    
     @Override
     public boolean Register() throws SQLException {
         
-           return( JobSeekerDb.addUserRecord(this) &&
-            JobSeekerDb.addJobSeekerRecord(this));
+           return( jobSeekerDb.addUserRecord(this) &&
+            jobSeekerDb.addJobSeekerRecord(this));
        
        
     }
@@ -175,16 +175,16 @@ super.setUserType("jobseeker");
     @Override
     public boolean deleteUser() throws SQLException {
       
-            return(JobSeekerDb.deleteUserRecord(this) && JobSeekerDb.deleteJobSeekerRecord(this));
+            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.deleteJobSeekerRecord(this));
        
     }
 
     @Override
     public boolean Login(String email, String password) throws SQLException {
-       String userPassword = JobSeekerDb.getUserPassword(email);
+       String userPassword = jobSeekerDb.getUserPassword(email);
        if(userPassword.equals(password)){
         this.setLoggedIn(true);
-        JobSeekerDb.updateUserLoginStatus(getEmail(), isLoggedIn());
+        jobSeekerDb.updateUserLoginStatus(getEmail(), isLoggedIn());
         return true;
     }
        else return false;

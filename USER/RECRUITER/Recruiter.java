@@ -7,7 +7,7 @@ import USER.User;
 public class Recruiter extends User {
     private String CompanyName;
     private String Designation;
-   
+    private static RecruiterDb recruiterDb = new RecruiterDb();
     public Recruiter(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
@@ -49,17 +49,17 @@ public class Recruiter extends User {
     @Override
     public boolean Register() throws SQLException {
     
-        return(RecruiterDb.addUserRecord(this) &&
-        RecruiterDb.addRecruiterRecord(this));
+        return(recruiterDb.addUserRecord(this) &&
+        recruiterDb.addRecruiterRecord(this));
         
     }
     
     @Override
     public boolean Login(String email, String password) throws SQLException{
-        String userPassword = RecruiterDb.getUserPassword(email);
+        String userPassword = recruiterDb.getUserPassword(email);
         if(userPassword.equals(password)){
             this.setLoggedIn(true);
-            RecruiterDb.updateUserLoginStatus(getEmail(), isLoggedIn());
+            recruiterDb.updateUserLoginStatus(getEmail(), isLoggedIn());
             return true;
         }
         else return false;
@@ -73,7 +73,7 @@ public class Recruiter extends User {
 
     @Override
     public boolean deleteUser() throws SQLException {
-        return(RecruiterDb.deleteUserRecord(this) && RecruiterDb.deleteRecruiterRecord(this));
+        return(recruiterDb.deleteUserRecord(this) && recruiterDb.deleteRecruiterRecord(this));
     
     }
 }

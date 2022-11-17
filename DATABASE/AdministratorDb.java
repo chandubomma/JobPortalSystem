@@ -10,17 +10,17 @@ import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Recruiter;
 
 public class AdministratorDb extends UserDb {
-    public  static boolean addAdministratorRecord(Administrator administrator) throws SQLException{
+    public   boolean addAdministratorRecord(Administrator administrator) throws SQLException{
         String Query = "insert into administrator values('"+administrator.getEmail()+"','"+administrator.getAdministratorKey()+"')";
         return statement.execute(Query);
     }
 
-    public static boolean deleteAdministratorRecord(Administrator administrator) throws SQLException{
+    public  boolean deleteAdministratorRecord(Administrator administrator) throws SQLException{
         String Query = "delete from administrator where email="+administrator.getEmail();
         return statement.execute(Query);
     }
 
-    public static ArrayList<JobSeeker> getAllJobSeekers() throws SQLException{
+    public  ArrayList<JobSeeker> getAllJobSeekers() throws SQLException{
         String Query = "select * from user where type = 'jobseeker'";
         ResultSet rs = statement.executeQuery(Query);
         ArrayList<JobSeeker> userList  = new ArrayList<>();
@@ -30,7 +30,7 @@ public class AdministratorDb extends UserDb {
         return userList;
     }
 
-    public static User getUser(String email) throws SQLException{
+    public  User getUser(String email) throws SQLException{
         User user;
         String Query = "select * from user where email = '"+email+"'";
         ResultSet rs = statement.executeQuery(Query);

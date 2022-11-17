@@ -12,7 +12,7 @@ import USER.JOBSEEKER.JobSeeker;
 
 public class Administrator extends User{
     private String AdministratorKey;
-   
+    private static AdministratorDb administratorDb = new AdministratorDb();
 
     public Administrator(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth, String administratorKey) {
@@ -34,8 +34,8 @@ public class Administrator extends User{
     @Override
     public boolean Register() throws SQLException {
        
-        return(AdministratorDb.addUserRecord(this) &&
-        AdministratorDb.addAdministratorRecord(this));
+        return(administratorDb.addUserRecord(this) &&
+        administratorDb.addAdministratorRecord(this));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Administrator extends User{
 
     @Override
     public boolean deleteUser() throws SQLException {
-        return(AdministratorDb.deleteUserRecord(this) && AdministratorDb.deleteAdministratorRecord(this));
+        return(administratorDb.deleteUserRecord(this) && administratorDb.deleteAdministratorRecord(this));
     }
 
     public String getAdministratorKey() {
@@ -58,7 +58,7 @@ public class Administrator extends User{
     }
     /* methods, a administrator has access to do  */
     public ArrayList<JobSeeker> getAllJobSeekerList() throws SQLException{
-       return AdministratorDb.getAllJobSeekers();
+       return administratorDb.getAllJobSeekers();
     }
 
     public boolean approveUser(User user){
