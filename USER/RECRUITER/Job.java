@@ -35,6 +35,14 @@ public class Job {
         this.active= this.isActive();
     }
 
+    @Override
+    public String toString() {
+        return "Job [id=" + id + ", jobTitle=" + jobTitle + ", location=" + location + ", companyName=" + companyName
+                + ", deadline=" + deadline + ", numberOfVacancies=" + numberOfVacancies + ", skillRequired="
+                + skillRequired + ", maxAge=" + maxAge + ", minExperience=" + minExperience + ", description="
+                + description + ", active=" + active + "]";
+    }
+
     public String getId() {
         return id;
     }

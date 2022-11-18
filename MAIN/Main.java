@@ -1,12 +1,15 @@
 package MAIN;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import DATABASE.UserDb;
+import DATABASE.AdministratorDb;
+
 import USER.User;
+import USER.RECRUITER.Job;
 
 public class Main{
-   private static UserDb userDb = new UserDb();
+   private static AdministratorDb administratorDb  = new AdministratorDb();
    private static User user;
 
     public static void main(String[] args) throws SQLException {
@@ -38,8 +41,36 @@ public class Main{
         
     }
 
-    public static void jobSeekerMenu(){
+    public static void jobSeekerMenu() throws SQLException{
         UserOutput.printJobSeekerMenu();
+        int choice = UserInput.scanChoice();
+        switch(choice){
+            case 1 : {
+                jobSeekerProfileMenu();
+                break;
+            }
+            case 2 : {
+                jobSeekerJobMenu();
+                break;
+            }
+            case 3 : {
+                logout();
+                userMenu();
+                break;
+            }
+        }
+    }
+
+    public static void jobSeekerProfileMenu(){
+        UserOutput.printJobSeekerProfileMenu();
+        int choice = UserInput.scanChoice();
+        switch(choice){
+
+        }
+    }
+
+    public static void jobSeekerJobMenu(){
+        UserOutput.printJobSeekerJobMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
             
@@ -77,6 +108,9 @@ public class Main{
                user = login1(args);
                 break;
             }
+            case "viewjobs" : {
+
+            }
         }
     }
 
@@ -84,6 +118,7 @@ public class Main{
         if(args.length == 0)return null;
         else if(args.length == 1){
             if(args[0].toLowerCase().equals("help"))return "help";
+            else if(args[0].toLowerCase().equals("viewjobs"))return "viewjobs";
         }
         else if(args.length == 2){
             if(args[0].toLowerCase().equals("login"))return "login1";
@@ -94,10 +129,14 @@ public class Main{
         return null;
     }
 
+    public static void logout(){
+
+    }
+
     public static User login() throws SQLException{
         String email = UserInput.scanEmail();
         String password = UserInput.scanPassword();
-        User user = userDb.getUser(email);
+        User user = administratorDb .getUser(email);
         if(user==null){
             System.out.println("Invalid Credentials");
            
@@ -114,7 +153,7 @@ public class Main{
     
 
     public static User login(String[] args) throws SQLException{
-        User user = userDb.getUser(args[1]);
+        User user = administratorDb .getUser(args[1]);
         if(user==null){
             System.out.println("Invalid Credentials");
            
@@ -131,7 +170,7 @@ public class Main{
 
     public static User login1(String[] args) throws SQLException{
         String password = UserInput.scanPassword();
-        User user = userDb.getUser(args[1]);
+        User user = administratorDb .getUser(args[1]);
         if(user==null){
             System.out.println("Invalid Credentials");
         
@@ -142,6 +181,14 @@ public class Main{
             System.out.println("Try Again!");
         }
         return user;
+    }
+
+    public static void viewJobs() throws SQLException{
+        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        for(Job job : jobList){
+            UserOutput.printJobDetails(job);
+            System.out.println("***********************************************************************************************************");
+        }
     }
 
 }

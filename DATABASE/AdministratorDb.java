@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import USER.User;
 import USER.ADMINISTRATOR.Administrator;
 import USER.JOBSEEKER.JobSeeker;
+import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
 public class AdministratorDb extends UserDb {
@@ -30,5 +31,14 @@ public class AdministratorDb extends UserDb {
         return userList;
     }
 
+    public ArrayList<Job> getAllJobs() throws SQLException{
+        String Query = "select * from job";
+        ResultSet rs = statement.executeQuery(Query);
+        ArrayList<Job> jobList = new ArrayList<>();
+        while(rs.next()){
+            jobList.add(new Job(rs.getString("id"),rs.getString("jobTitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description")));
+        }
+        return jobList;
+    }
    
 }
