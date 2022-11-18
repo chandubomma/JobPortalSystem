@@ -13,6 +13,7 @@ public class UserDb  {
         database = new Database();
         
        try {
+       
         connection = DriverManager.getConnection(database.getDbURL(),database.getDbUserName(),database.getDbPassword());
          statement = connection.createStatement();
         } catch (SQLException e) {

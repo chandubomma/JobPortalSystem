@@ -2,7 +2,7 @@ package DATABASE;
 
 
 public class Database {
-    	private  String dbURL="jdbc:mysql://localhost:3306/jobportalsystem?useSSL=false";
+    	private  String dbURL="jdbc:mysql://localhost:3306/jobportalsystem";
     	private String dbUserName="root";
     	private String dbPassword="chandu@mysql";   // change this details according to your local mysql credentials
         public Database(){}
