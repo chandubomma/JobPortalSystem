@@ -18,4 +18,22 @@ public class UserOutput {
 
        
     }
+
+    public static void printUserLoginMenu(){
+        System.out.println("Enter 1 to login");
+        System.out.println("Enter 2 to Register");
+        System.out.println("Enter 0 to exit");
+    }
+
+    public static void printJobSeekerMenu(){
+
+    }
+    
+    public static void printRecruiterMenu(){
+
+    }
+
+    public static void printAdministratorMenu(){
+        
+    }
 }

@@ -45,5 +45,16 @@ public  class UserInput {
         String password = scanner.next();
         return password;
     }
+
+    public static int scanChoice(){
+        System.out.print("Enter Choice : ");
+        int choice = scanner.nextInt();
+        return choice;
+    }
+    public static String scanEmail(){
+        System.out.print("Enter Email : ");
+        String email = scanner.next();
+        return email;
+    }
     
 }
