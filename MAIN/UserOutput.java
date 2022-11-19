@@ -1,5 +1,7 @@
 package MAIN;
 
+import java.util.ArrayList;
+
 import USER.RECRUITER.Job;
 
 public class UserOutput {
@@ -33,7 +35,7 @@ public class UserOutput {
         System.out.println("3 : Logout");
     }
 
-    public static void printJobSeekerProfileMenu(){
+    public static void printProfileMenu(){
         System.out.println("1 : View Profile");
         System.out.println("2 : Modify Profile");
     }
@@ -45,11 +47,35 @@ public class UserOutput {
     }
     
     public static void printRecruiterMenu(){
+        System.out.println("1 : Profile");
+        System.out.println("2 : Job");
+        System.out.println("3 : Applications");
+        System.out.println("4 : Logout");
+    }
 
+    public static void printRecruiterJobMenu(){
+        System.out.println("1 : View Jobs posted by You");
+        System.out.println("2 : Post a Job");
+        System.out.println("3 : Modify a Job Posting");
+        System.out.println("4 : Delete A Job Posting");
+        System.out.println("5 : Back");
+    }
+
+    public static void printApplicationsMenu(){
+        
     }
 
     public static void printAdministratorMenu(){
 
+    }
+
+    public static void printJobTitles(ArrayList<Job> jobList){
+        int variable = 1;
+        for(Job job : jobList){
+            System.out.println(variable+" : "+job.getJobTitle()+" ID"+job.getId());
+            variable++;
+        }
+        System.out.println(variable+" : View All");
     }
 
     public static void printJobDetails(Job job){

@@ -4,11 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import USER.User;
 import USER.ADMINISTRATOR.Administrator;
 import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
-import USER.RECRUITER.Recruiter;
 
 public class AdministratorDb extends UserDb {
     public   boolean addAdministratorRecord(Administrator administrator) throws SQLException{

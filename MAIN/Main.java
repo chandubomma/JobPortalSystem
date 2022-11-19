@@ -4,13 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DATABASE.AdministratorDb;
-
+import DATABASE.RecruiterDb;
 import USER.User;
 import USER.RECRUITER.Job;
+import USER.RECRUITER.Recruiter;
 
 public class Main{
    private static AdministratorDb administratorDb  = new AdministratorDb();
+   private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
+   private static Recruiter recruiter;
 
     public static void main(String[] args) throws SQLException {
        if(args.length==0)userMenu();
@@ -25,9 +28,17 @@ public class Main{
             switch(choice){
                 case 1 : {
                    user= login();
-                   if(user.getUserType().toLowerCase().equals("jobseeker"))jobSeekerMenu();
-                    else if(user.getUserType().toLowerCase().equals("recruiter"))recruiterMenu();
-                   else if(user.getUserType().toLowerCase().equals("administrator"))administratorMenu();
+                   if(user.getUserType().toLowerCase().equals("jobseeker")){
+
+                    jobSeekerMenu();
+                }
+                    else if(user.getUserType().toLowerCase().equals("recruiter")){
+                        recruiter = (Recruiter) administratorDb.getUser(user.getEmail());
+                        recruiterMenu();
+                    }
+                   else if(user.getUserType().toLowerCase().equals("administrator")){
+                    administratorMenu();
+                }
                    break;
                 }
                 case 2 : {
@@ -46,7 +57,7 @@ public class Main{
         int choice = UserInput.scanChoice();
         switch(choice){
             case 1 : {
-                jobSeekerProfileMenu();
+                profileMenu();
                 break;
             }
             case 2 : {
@@ -61,12 +72,30 @@ public class Main{
         }
     }
 
-    public static void jobSeekerProfileMenu(){
-        UserOutput.printJobSeekerProfileMenu();
+    public static void profileMenu(){
+        UserOutput.printProfileMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
+            case 1 : {
+                viewUserProfile();
+                break;
+            }
+            case 2 : {
+                modifyUserProfile();
+                break;
+            }
+            case 3 : {
 
+            }
         }
+    }
+
+    public static void viewUserProfile(){
+
+    }
+
+    public static void modifyUserProfile(){
+
     }
 
     public static void jobSeekerJobMenu(){
@@ -77,12 +106,56 @@ public class Main{
         }
     }
 
-    public static void recruiterMenu(){
+    public static void recruiterMenu() throws SQLException{
         UserOutput.printRecruiterMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
-            
+            case 1 : {
+               profileMenu();
+               break;
+            }
+            case 2 : {
+                recruiterJobMenu();
+                break;
+            }
+            case 3 : {
+                applicationsMenu();
+                break;
+            }
+            case 4 : {
+                logout();
+                userMenu();
+                break;
+            }
         }
+    }
+
+    public static void recruiterJobMenu() throws SQLException{
+        UserOutput.printRecruiterJobMenu();
+        int choice = UserInput.scanChoice();
+        
+        switch(choice){
+            case 1 :{
+                viewJobs(recruiter);
+                break;
+            }
+            case 2 : {
+
+            }
+            case 3 : {
+
+            }
+            case 4 : {
+
+            }
+            case 5 : {
+
+            }
+        }
+    }
+
+    public static void applicationsMenu(){
+
     }
 
     public static void administratorMenu(){
@@ -190,5 +263,21 @@ public class Main{
             System.out.println("***********************************************************************************************************");
         }
     }
+
+    public static void viewJobs(Recruiter recruiter) throws SQLException{
+        ArrayList<Job> jobList = recruiterDb.getJobsPosted(recruiter.getCompanyName());
+        UserOutput.printJobTitles(jobList);
+        int choice = UserInput.scanChoice();
+        if(choice >=1 && choice <= jobList.size())UserOutput.printJobDetails(jobList.get(choice));
+        else if(choice == jobList.size()+1){
+            for(Job job : jobList){
+                UserOutput.printJobDetails(job);
+                System.out.println("***********************************************************************************************************");
+            }
+        }
+        else System.out.println("Invalid Choice!");
+    }
+
+   
 
 }
