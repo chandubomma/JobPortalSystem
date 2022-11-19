@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import DATABASE.AdministratorDb;
 import DATABASE.RecruiterDb;
+import DATABASE.INFO.Info;
 import USER.User;
+import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
@@ -13,7 +15,9 @@ public class Main{
    private static AdministratorDb administratorDb  = new AdministratorDb();
    private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
+   private static JobSeeker jobseeker;
    private static Recruiter recruiter;
+   private static Info info;
 
     public static void main(String[] args) throws SQLException {
        if(args.length==0)userMenu();
@@ -29,7 +33,7 @@ public class Main{
                    user= login();
                    if(user==null)return;
                    if(user.getUserType().toLowerCase().equals("jobseeker")){
-
+                   jobseeker = (JobSeeker) administratorDb.getUser(user.getEmail());
                     jobSeekerMenu();
                 }
                     else if(user.getUserType().toLowerCase().equals("recruiter")){
@@ -77,6 +81,7 @@ public class Main{
         int choice = UserInput.scanChoice();
         switch(choice){
             case 1 : {
+                
                 viewUserProfile();
                 break;
             }
@@ -90,19 +95,30 @@ public class Main{
         }
     }
 
-    public static void viewUserProfile(){
-
-    }
-
+    public static void viewUserProfile() {
+         if(user.getUserType().equalsIgnoreCase("jobseeker")){
+           jobseeker.getDetails(); 
+         }
+         if(user.getUserType().equalsIgnoreCase("recruiter")){
+        
+         }
+     }
     public static void modifyUserProfile(){
 
     }
 
-    public static void jobSeekerJobMenu(){
+    public static void jobSeekerJobMenu() throws SQLException{
         UserOutput.printJobSeekerJobMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
-            
+            case 1 : info.display_jobs();
+            break;
+            case 2 : UserInput.applyjobs(jobseeker);
+            break;
+            case 3 : jobseeker.getAppliedJobs();
+            break;
+            case 4 : jobSeekerMenu();
+            break;
         }
     }
 

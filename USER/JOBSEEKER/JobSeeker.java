@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import javax.xml.crypto.OctetStreamData;
+
 import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
@@ -148,8 +150,11 @@ super.setUserType("jobseeker");
         }
     }
 
-    public ArrayList<Job> getAppliedJobs() {
-        return appliedJobs;
+    public void getAppliedJobs() {
+
+     for(Job i : appliedJobs){
+        System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
+     }
     }
 
     public void setAppliedJobs(ArrayList<Job> appliedJobs) {
@@ -157,7 +162,9 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
+        appliedJobs.add(job);
         return jobSeekerDb.insertJobApplicant(this, job);
+        
     }
    
     @Override
@@ -194,5 +201,17 @@ super.setUserType("jobseeker");
     }
        else return false;
         
+    }
+    public void getDetails(){
+      System.out.println("User key : "+getUserKey());   
+      System.out.println("Name :"+getFirstName()+" "+getLastName());
+      System.out.println("Date of birth : "+getDateOfBirth());
+      System.out.println("Age : "+getAge());
+      System.out.println("Gender : "+getGender());
+      System.out.println("Experience : "+getExperience());
+      System.out.println("skills :"+getSkill1()+","+getSkill2()+","+getSkill3());
+      System.out.println("Qualification : "+getQualification());
+      System.out.println("College : "+getCollege());
+      System.out.println("percentage : "+getPercentage()); 
     }
 }

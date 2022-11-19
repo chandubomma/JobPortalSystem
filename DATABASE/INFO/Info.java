@@ -29,9 +29,10 @@ public class Info extends UserDb {
    }
   }
  public void display_jobs() throws SQLException{
-   int k=1;
-   ResultSet resultSet =statement.executeQuery("Select distint job from jobs;");
-   System.out.println(k+"."+resultSet.getString(1));
-   k++;
+   ResultSet rs =statement.executeQuery("Select * from jobs;");
+   while(rs.next()){
+   System.out.println("| "+rs.getString(1)+" | "+rs.getString(2)+ " | "+rs.getString(3)+" | "+rs.getString(4)+" | "+rs.getString(5)+ " | "+rs.getInt(6)+ " | "+rs.getString(7)+" | "+rs.getInt(8)+" | "+rs.getInt(9)+" | "+rs.getString(10));
+  
+   }
  }
 }

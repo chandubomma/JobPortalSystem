@@ -1,9 +1,11 @@
 package MAIN;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
 import USER.JOBSEEKER.JobSeeker;
+import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
 public  class UserInput {
@@ -56,5 +58,25 @@ public  class UserInput {
         String email = scanner.next();
         return email;
     }
-    
+    public static void applyjobs(JobSeeker user) throws SQLException{
+       System.out.print("Enter job ID : ");
+       String ID = scanner.next();
+       boolean flag=false;
+        user.setEligibleJobs();
+       for(Job i : user.getEligibleJobs()){
+        if(i.getId().equals(ID)){
+            if(user.applyForJob(i)){
+             System.out.println("****Application successful****"); 
+            }
+            else {
+             System.out.println("****Application failed****");   
+            }
+            flag=true;
+            break;
+        }
+        if(!flag){
+         System.out.println("you aren't eligible for the job");   
+        }
+       }
+    }
 }

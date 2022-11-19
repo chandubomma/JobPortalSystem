@@ -44,6 +44,7 @@ public class UserOutput {
         System.out.println("1 : View Jobs");
         System.out.println("2 : Apply for Job");
         System.out.println("3 : View Applied Jobs");
+        System.out.println("4 : view profile");
     }
     
     public static void printRecruiterMenu(){
