@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import javax.xml.crypto.OctetStreamData;
-
 import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
