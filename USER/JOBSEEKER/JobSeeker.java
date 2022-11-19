@@ -20,7 +20,7 @@ public class JobSeeker extends User{
             String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
     }
-
+   
     private String skill3;
     private int experience;
    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
@@ -33,6 +33,10 @@ public class JobSeeker extends User{
 super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
 super.setUserType("jobseeker");
 } 
+
+    public JobSeeker(){
+        super.setUserType("jobseeker");
+    }
     
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
                     String mobileNumber, String dateOfBirth,int age, String college, String qualification,
@@ -55,7 +59,9 @@ super.setUserType("jobseeker");
     public int getAge() {
         return age;
     }
-
+     public void setAge(int age){
+      this.age=age;
+     }
     public void setAge() {
         LocalDate curDate=LocalDate.now();
         DateTimeFormatter jkl=DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -159,8 +165,7 @@ super.setUserType("jobseeker");
     @Override
     public boolean Register() throws SQLException {
         
-           return( jobSeekerDb.addUserRecord(this) &&
-            jobSeekerDb.addJobSeekerRecord(this));
+           return( jobSeekerDb.addUserRecord(this) & jobSeekerDb.addJobSeekerRecord(this));
        
        
     }

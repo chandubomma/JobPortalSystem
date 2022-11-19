@@ -2,6 +2,7 @@ package MAIN;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import DATABASE.AdministratorDb;
 import DATABASE.JobSeekerDb;
@@ -49,7 +50,7 @@ public class Main{
                    break;
                 }
                 case 2 : {
-                 
+                   register();
                 }
                 
                 case 0 : {
@@ -259,7 +260,16 @@ public class Main{
         }
         return user;
     }
-
+    public static void register() throws SQLException{
+        Scanner in = new Scanner(System.in);
+       System.out.println("1.Jobseeker  2.Recruiter");
+       System.out.println("Choose the usertype :");
+       int choice= in.nextInt();
+       if(choice==1){
+        jobseeker=UserInput.scanJobSeekerDetails();
+        jobseeker.Register();
+       }
+    }
 
     public static User login1(String[] args) throws SQLException{
         String password = UserInput.scanPassword();
