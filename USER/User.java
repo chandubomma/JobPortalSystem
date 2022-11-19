@@ -18,7 +18,7 @@ public abstract class User{
     private String mobileNumber;
     private String dateOfBirth;
     private String userType;
-    private boolean isLoggedIn;
+    private String isLoggedIn;
     
     public String getUserType() {
         return userType;
@@ -42,6 +42,18 @@ public abstract class User{
         this.mobileNumber = mobileNumber;
         this.dateOfBirth = dateOfBirth;
         
+    }
+    public User(String firstName, String lastName, String email, String password, String gender, String mobileNumber,
+            String dateOfBirth, String userType, String isLoggedIn) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.mobileNumber = mobileNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.userType = userType;
+        this.isLoggedIn = isLoggedIn;
     }
     /*Constructor for User class with all arguments */
     public String getFirstName() {
@@ -99,10 +111,10 @@ public abstract class User{
     public abstract boolean Register() throws SQLException;
     public abstract boolean Logout();
     public abstract boolean deleteUser() throws SQLException;
-    public boolean isLoggedIn() {
+    public String isLoggedIn() {
         return isLoggedIn;
     }
-    public void setLoggedIn(boolean isLoggedIn) {
+    public void setLoggedIn(String isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
     }
     

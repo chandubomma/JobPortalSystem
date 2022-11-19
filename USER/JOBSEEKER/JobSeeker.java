@@ -18,6 +18,11 @@ public class JobSeeker extends User{
     private int percentage;
     private String skill1;
     private String skill2;
+    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
+    }
+
     private String skill3;
     private int experience;
    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
@@ -137,7 +142,7 @@ super.setUserType("jobseeker");
         while(rs.next())
         {
             //get details of the job from job database
-            Job obj = new Job(rs.getString("id"),rs.getString("jobTitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description"));
+            Job obj = new Job(rs.getString("id"),rs.getString("jobtitle"),rs.getString("location"),rs.getString("companyname"),rs.getString("deadline"),rs.getInt("numberofvacancies"),rs.getString("skillrequired"),rs.getInt("maxage"),rs.getInt("minexperience"),rs.getString("description"));
             if(obj.isEligible(this))
                 this.eligibleJobs.add(obj);
         }
@@ -183,7 +188,7 @@ super.setUserType("jobseeker");
     public boolean Login(String email, String password) throws SQLException {
        String userPassword = jobSeekerDb.getUserPassword(email);
        if(userPassword.equals(password)){
-        this.setLoggedIn(true);
+        this.setLoggedIn("true");
         jobSeekerDb.updateUserLoginStatus(getEmail(), isLoggedIn());
         return true;
     }

@@ -22,13 +22,13 @@ public class RecruiterDb extends UserDb {
         String Query = "insert into job values ('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getDescription()+"','"+job.getCompanyName()+"','"+job.getSkillRequired()+"','"+job.getNumberOfVacancies()+"','"+job.getLocation()+"','"+job.getMinExperience()+"','"+job.getMaxAge()+"','"+job.getDeadline()+"')";
         return statement.execute(Query);
     }
-    public  boolean updateUserLoginStatus(String email,boolean status) throws SQLException{
+    public  boolean updateUserLoginStatus(String email,String status) throws SQLException{
         String Query = "update user set loginstatus ="+status;
         return statement.execute(Query);
     }
 
     public ArrayList<Job> getJobsPosted(String companyName) throws SQLException{
-        String Query = "select * from job where companyname = '"+companyName+"'";
+        String Query = "select * from job where companyname = "+companyName;
         ResultSet rs = statement.executeQuery(Query);
         ArrayList<Job> jobList = new ArrayList<>();
         while(rs.next()){

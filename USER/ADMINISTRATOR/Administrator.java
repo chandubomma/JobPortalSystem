@@ -15,6 +15,11 @@ public class Administrator extends User{
     private static AdministratorDb administratorDb = new AdministratorDb();
 
     public Administrator(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
+    }
+
+    public Administrator(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth, String administratorKey) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
         AdministratorKey = administratorKey;

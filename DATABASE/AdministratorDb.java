@@ -34,7 +34,7 @@ public class AdministratorDb extends UserDb {
         ResultSet rs = statement.executeQuery(Query);
         ArrayList<Job> jobList = new ArrayList<>();
         while(rs.next()){
-            jobList.add(new Job(rs.getString("id"),rs.getString("jobTitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description")));
+            jobList.add(new Job(rs.getString("id"),rs.getString("jobtitle"),rs.getString("location"),rs.getString("companyname"),rs.getString("deadline"),rs.getInt("numberofvacancies"),rs.getString("skillrequired"),rs.getInt("maxage"),rs.getInt("minexperience"),rs.getString("description")));
         }
         return jobList;
     }

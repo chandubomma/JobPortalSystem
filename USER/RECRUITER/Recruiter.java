@@ -14,14 +14,19 @@ public class Recruiter extends User {
     }
 
 
-    public Recruiter(String companyName,String designation,String firstName, String lastName, String email, String password, String gender,
-            String mobileNumber, String dateOfBirth) {
-        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-       super.setUserType("recruiter");
-       this.CompanyName=companyName;
-       this.Designation=designation;
+    public Recruiter(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
     }
-     
+
+    public Recruiter(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn, String companyName,
+            String designation) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
+        CompanyName = companyName;
+        Designation = designation;
+    }
+
 
     public String getCompanyName() {
         return CompanyName;
@@ -58,7 +63,7 @@ public class Recruiter extends User {
     public boolean Login(String email, String password) throws SQLException{
         String userPassword = recruiterDb.getUserPassword(email);
         if(userPassword.equals(password)){
-            this.setLoggedIn(true);
+            this.setLoggedIn("true");
             recruiterDb.updateUserLoginStatus(getEmail(), isLoggedIn());
             return true;
         }

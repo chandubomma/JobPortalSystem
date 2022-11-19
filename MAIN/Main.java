@@ -22,12 +22,12 @@ public class Main{
 
 
     public static void userMenu() throws SQLException{
-      
             UserOutput.printUserLoginMenu();
             int choice = UserInput.scanChoice();
             switch(choice){
                 case 1 : {
                    user= login();
+                   if(user==null)return;
                    if(user.getUserType().toLowerCase().equals("jobseeker")){
 
                     jobSeekerMenu();
@@ -149,7 +149,8 @@ public class Main{
 
             }
             case 5 : {
-
+                recruiterMenu();
+                break;
             }
         }
     }
@@ -214,7 +215,7 @@ public class Main{
             System.out.println("Invalid Credentials");
            
         }
-        if(user.Login(email,password )){
+       else if(user.Login(email,password )){
             System.out.println("Login Successful!");
             
         }else{
