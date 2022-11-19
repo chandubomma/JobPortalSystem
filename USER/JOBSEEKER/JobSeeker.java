@@ -147,8 +147,9 @@ super.setUserType("jobseeker");
         return appliedJobs;
     }
 
-    public void setAppliedJobs(ArrayList<Job> appliedJobs) {
-        this.appliedJobs = appliedJobs;
+    public void setAppliedJobs(String job_id) throws SQLException {
+      Job job = jobSeekerDb.getJobDetails(job_id);
+        this.appliedJobs.add(job);
     }
 
     public boolean applyForJob(Job job) throws SQLException{

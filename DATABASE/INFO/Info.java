@@ -2,11 +2,13 @@ package DATABASE.INFO;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import DATABASE.UserDb;
 import USER.ADMINISTRATOR.Administrator;
 public class Info extends UserDb {
-
+  ArrayList<String> Jobs= new ArrayList<String>();
+  ArrayList<String> Companies= new ArrayList<String>();
    public void count(Administrator user) throws SQLException{
        
         resultSet =  statement.executeQuery("select usertype,count(email) from user group by usertype;");
@@ -24,14 +26,19 @@ public class Info extends UserDb {
    int k=1;
    ResultSet resultSet = statement.executeQuery("select distinct company_name from jobs;");
    while(resultSet.next()){
+    Companies.add(resultSet.getString(1));
      System.out.println(k+"."+resultSet.getString(1)); 
      k++;
    }
   }
  public void display_jobs() throws SQLException{
    int k=1;
+   
    ResultSet resultSet =statement.executeQuery("Select distint job from jobs;");
+   while(resultSet.next()){
+     Jobs.add(resultSet.getString(1));
    System.out.println(k+"."+resultSet.getString(1));
    k++;
+   }
  }
 }
