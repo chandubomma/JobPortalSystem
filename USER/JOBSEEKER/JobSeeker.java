@@ -15,7 +15,7 @@ public class JobSeeker extends User{
     private int age;
     private String college;
     private String qualification;
-    private int percentage;
+    private Double percentage;
     private String skill1;
     private String skill2;
     private String skill3;
@@ -33,7 +33,7 @@ super.setUserType("jobseeker");
     
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
                     String mobileNumber, String dateOfBirth, String userKey, String college, String qualification,
-                    int percentage, String skill1, String skill2, String skill3, int experience) 
+                    Double percentage, String skill1, String skill2, String skill3, int experience) 
     {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
         this.userKey = userKey;
@@ -88,11 +88,11 @@ super.setUserType("jobseeker");
         this.qualification = qualification;
     }
 
-    public int getPercentage() {
+    public Double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(int percentage) {
+    public void setPercentage(Double percentage) {
         this.percentage = percentage;
     }
 
@@ -137,7 +137,7 @@ super.setUserType("jobseeker");
         while(rs.next())
         {
             //get details of the job from job database
-            Job obj = new Job(rs.getString("id"),rs.getString("jobTitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description"));
+            Job obj = new Job(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getInt(9),rs.getString(10));
             if(obj.isEligible(this))
                 this.eligibleJobs.add(obj);
         }

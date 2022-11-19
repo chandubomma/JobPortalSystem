@@ -140,7 +140,8 @@ public class Main{
                 break;
             }
             case 2 : {
-
+            viewapplicants(recruiter);
+            
             }
             case 3 : {
 
