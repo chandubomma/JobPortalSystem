@@ -10,11 +10,10 @@ import USER.User;
 import USER.RECRUITER.Job;
 
 public class JobSeeker extends User{
-    private String userKey;
     private int age;
     private String college;
     private String qualification;
-    private int percentage;
+    private Double percentage;
     private String skill1;
     private String skill2;
     public JobSeeker(String firstName, String lastName, String email, String password, String gender,
@@ -29,37 +28,30 @@ public class JobSeeker extends User{
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();  
 
-    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+     public JobSeeker(String firstName, String lastName, String email, String password, String gender,
     String mobileNumber, String dateOfBirth) {
 super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
 super.setUserType("jobseeker");
 } 
     
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
-                    String mobileNumber, String dateOfBirth, String userKey, String college, String qualification,
-                    int percentage, String skill1, String skill2, String skill3, int experience) 
+                    String mobileNumber, String dateOfBirth,int age, String college, String qualification,
+                    Double percentage, String skill1, String skill2, String skill3, int experience) 
     {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-        this.userKey = userKey;
+     
         this.college = college;
         this.qualification = qualification;
         this.percentage = percentage;
         this.skill1 = skill1;
         this.skill2 = skill2;
         this.skill3 = skill3;
+        this.age=age;
         this.experience = experience;
         super.setUserType("jobseeker");
+       
     }
     
-
-    public String getUserKey() {
-        return userKey;
-    }
-
-    public void setUserKey(String userKey) {
-        this.userKey = userKey;
-    }
-
     public int getAge() {
         return age;
     }
@@ -92,11 +84,11 @@ super.setUserType("jobseeker");
         this.qualification = qualification;
     }
 
-    public int getPercentage() {
+    public Double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(int percentage) {
+    public void setPercentage(Double percentage) {
         this.percentage = percentage;
     }
 
@@ -199,8 +191,7 @@ super.setUserType("jobseeker");
        else return false;
         
     }
-    public void getDetails(){
-      System.out.println("User key : "+getUserKey());   
+    public void getDetails(){   
       System.out.println("Name :"+getFirstName()+" "+getLastName());
       System.out.println("Date of birth : "+getDateOfBirth());
       System.out.println("Age : "+getAge());

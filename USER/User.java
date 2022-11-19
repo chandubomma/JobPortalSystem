@@ -117,5 +117,6 @@ public abstract class User{
     public void setLoggedIn(String isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
     }
+  
     
 }

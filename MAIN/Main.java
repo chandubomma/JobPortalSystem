@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DATABASE.AdministratorDb;
+import DATABASE.JobSeekerDb;
 import DATABASE.RecruiterDb;
 import DATABASE.INFO.Info;
 import USER.User;
@@ -13,6 +14,7 @@ import USER.RECRUITER.Recruiter;
 
 public class Main{
    private static AdministratorDb administratorDb  = new AdministratorDb();
+   private static JobSeekerDb jobseekerDb = new JobSeekerDb();
    private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
    private static JobSeeker jobseeker;
@@ -34,6 +36,7 @@ public class Main{
                    if(user==null)return;
                    if(user.getUserType().toLowerCase().equals("jobseeker")){
                    jobseeker = (JobSeeker) administratorDb.getUser(user.getEmail());
+               
                     jobSeekerMenu();
                 }
                     else if(user.getUserType().toLowerCase().equals("recruiter")){
@@ -46,7 +49,7 @@ public class Main{
                    break;
                 }
                 case 2 : {
-
+                 
                 }
                 
                 case 0 : {

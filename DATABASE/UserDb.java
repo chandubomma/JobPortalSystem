@@ -1,6 +1,8 @@
 package DATABASE;
 import java.sql.*;
 
+import com.mysql.cj.protocol.Resultset;
+
 import USER.User;
 import USER.ADMINISTRATOR.Administrator;
 import USER.JOBSEEKER.JobSeeker;
@@ -44,12 +46,13 @@ public class UserDb  {
 
     public  User getUser(String email) throws SQLException{
         User user;
-        String Query = "select * from user where email = '"+email+"'";
+        String Query = "select user.*,jobseeker.* from user,jobseeker where user.email = '"+email+"'";
         ResultSet rs = statement.executeQuery(Query);
+      
         if(!rs.next())return null;
         String userType = rs.getString("usertype");
         if(userType.toLowerCase().equals("jobseeker")){
-            user = new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"));
+            user = new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getInt("age"),rs.getString("college"),rs.getString("qualification"),rs.getDouble("percentage"),rs.getString("skill1"),rs.getString("skill2"),rs.getString("skill3"),rs.getInt("experience"));
             return user;
         }
         if(userType.toLowerCase().equals("recruiter")){
