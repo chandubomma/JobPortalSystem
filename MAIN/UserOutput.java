@@ -97,5 +97,11 @@ public class UserOutput {
        System.out.println("2. Update  lastname");
        System.out.println("3. Update email");
        System.out.println("4. update password");
+       System.out.println("5. Update date of birth");
+       System.out.println("6. Update age");
+       System.out.println("7. Update experience");
+       System.out.println("8. Update mobilenumber");
+       System.out.println("9. Back");
+       System.out.print("Choose your option :");
     }
 }

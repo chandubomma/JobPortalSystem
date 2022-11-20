@@ -13,7 +13,7 @@ public class JobSeekerDb extends UserDb {
     }
 
     public  boolean deleteJobSeekerRecord(JobSeeker jobSeeker) throws SQLException{
-        String Query = "delete from jobseeker where email="+jobSeeker.getEmail();
+        String Query = "delete from jobseeker where email= '"+jobSeeker.getEmail()+"';";
         return statement.execute(Query);
     }
 

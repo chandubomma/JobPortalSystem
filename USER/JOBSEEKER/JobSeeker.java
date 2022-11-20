@@ -184,7 +184,7 @@ super.setUserType("jobseeker");
     @Override
     public boolean deleteUser() throws SQLException {
       
-            return(jobSeekerDb.deleteUserRecord(this) && jobSeekerDb.deleteJobSeekerRecord(this));
+            return(jobSeekerDb.deleteUserRecord(this) & jobSeekerDb.deleteJobSeekerRecord(this));
        
     }
 
