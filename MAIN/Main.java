@@ -105,7 +105,7 @@ public class Main{
         
          }
      }
-    public static void modifyUserProfile(){
+    public static void modifyUserProfile() throws SQLException{
         if(user.getUserType().equalsIgnoreCase("jobseeker")){
             UserInput.modifyJobseeker(jobseeker); 
           }

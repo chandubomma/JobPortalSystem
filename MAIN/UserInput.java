@@ -1,9 +1,10 @@
 package MAIN;
 
+import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-
+import USER.User;
 import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
@@ -103,8 +104,68 @@ public  class UserInput {
        }
     }
 
-    public static void modifyJobseeker(JobSeeker jobSeeker) {
-       
+    public static void modifyJobseeker(JobSeeker jobSeeker) throws SQLException {
+       UserOutput.printUpdatesRequirement(jobSeeker);
+       int choice = scanner.nextInt();
+       switch(choice){
+        case 1 : {
+            System.out.print("Enter new firstname : ");
+            String fn= scanner.next();
+            jobSeeker.setFirstName(fn);
+            break;
+        }
+        case 2 : {
+          System.out.print("Enter new last name : ");  
+          String ln = scanner.next();
+          jobSeeker.setLastName(ln);
+          break;
+        }
+        case 3 :{
+           System.out.print("Enter new email : ");
+           String email=scanner.next();
+           jobSeeker.setEmail(email);
+           break; 
+        }
+        case 4 : {
+          System.out.print("Enter new password : ");
+          String password = scanner.next();
+          jobSeeker.setPassword(password);
+          break;  
+        }
+        case 5 : {
+           System.out.print("Enter new date of birth(YYYY-MM-DD) : ");
+           String date = scanner.next();
+           jobSeeker.setDateOfBirth(date);
+           break;  
+        }
+        case 6 : {
+          System.out.print("Enter age : ");
+           int age = scanner.nextInt();
+           jobSeeker.setAge(age);
+           break;  
+        }
+        case 7 : {
+            System.out.print("Enter experience : ");
+            int exp=scanner.nextInt();
+            jobSeeker.setExperience(exp);
+            break;
+        }
+        case 8 : {
+            System.out.print("Enter new mobile number : ");
+            String mn = scanner.next();
+            jobSeeker.setMobileNumber(mn);
+            break;
+        }
+        case 9 : {
+            Main.jobSeekerMenu();
+        }
+    }
+        if(choice!=9){
+          jobSeeker.deleteUser();
+          jobSeeker.Register();  
+          System.out.println("Successfully updated");
+        }
+        Main.jobSeekerMenu();
     }
 
 }
