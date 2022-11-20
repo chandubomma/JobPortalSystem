@@ -29,6 +29,9 @@ public abstract class User{
     /*
      * data fields above are the basic details of user(any of jobSeeker,Recuiter,Administrator) who uses Job Portal System
      */
+    public User(){
+
+    }
     public User(String email){
         this.email = email;
     }
@@ -117,5 +120,6 @@ public abstract class User{
     public void setLoggedIn(String isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
     }
+  
     
 }
