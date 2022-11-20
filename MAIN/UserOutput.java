@@ -2,6 +2,7 @@ package MAIN;
 
 import java.util.ArrayList;
 
+import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 
 public class UserOutput {
@@ -38,6 +39,7 @@ public class UserOutput {
     public static void printProfileMenu(){
         System.out.println("1 : View Profile");
         System.out.println("2 : Modify Profile");
+        System.out.println("3 : Back");
     }
 
     public static void printJobSeekerJobMenu(){
@@ -89,5 +91,11 @@ public class UserOutput {
         System.out.println("Vacancies : "+job.getNumberOfVacancies());
         System.out.println("Experience : "+job.getMinExperience());
         System.out.println("Last Date : "+job.getDeadline());
+    }
+    public static void printUpdatesRequirement(JobSeeker user){
+       System.out.println("1. Update  firstname");
+       System.out.println("2. Update  lastname");
+       System.out.println("3. Update email");
+       System.out.println("4. update password");
     }
 }
