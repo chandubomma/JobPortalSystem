@@ -40,8 +40,14 @@ public class UserDb  {
     public  String getUserPassword(String email) throws SQLException{
         String Query = "select password from user where email = '"+email+"'";
         resultSet = statement.executeQuery(Query);
-        resultSet.next();
+        if(resultSet.next())
         return(resultSet.getString("password"));
+        else return null;
+    }
+
+    public  boolean updateUserLoginStatus(String email,String status) throws SQLException{
+        String Query = "update user set loginstatus ="+status+"where email = "+email;
+        return statement.execute(Query);
     }
 
     public  User getUser(String email) throws SQLException{
