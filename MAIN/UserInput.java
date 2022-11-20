@@ -1,15 +1,18 @@
 package MAIN;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
 import USER.JOBSEEKER.JobSeeker;
+import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static JobSeeker scanJobSeekerDetails(JobSeeker jobSeeker){
+    public static JobSeeker scanJobSeekerDetails(){
+        JobSeeker jobSeeker = new JobSeeker();
         System.out.print("Enter First Name : ");
         jobSeeker.setFirstName(scanner.next());
         System.out.print("Enter Last Name : ");
@@ -20,8 +23,30 @@ public  class UserInput {
         jobSeeker.setPassword(scanner.next());
         System.out.print("Enter Date Of Birth : ");
         jobSeeker.setDateOfBirth(scanner.next());
-
-     
+        System.out.print("Enter age : ");
+        jobSeeker.setAge(scanner.nextInt());
+        scanner.nextLine();
+        System.out.print("Enter gender : ");
+        jobSeeker.setGender(scanner.next());
+        System.out.print("Enter mobile number : ");
+        jobSeeker.setMobileNumber(scanner.next());
+        scanner.nextLine();
+        System.out.print("Enter qualification : ");
+        jobSeeker.setQualification(scanner.nextLine());
+        System.out.print("Enter college : ");
+        jobSeeker.setCollege(scanner.nextLine());
+        System.out.print("Enter percentage : ");
+        jobSeeker.setPercentage(scanner.nextDouble());
+        scanner.nextLine();
+        System.out.print("Enter skill1 : ");
+        jobSeeker.setSkill1(scanner.nextLine());
+        System.out.print("Enter skill2 : ");
+        jobSeeker.setSkill2(scanner.nextLine());
+        System.out.print("Enter skill3 : ");
+        jobSeeker.setSkill3(scanner.nextLine());
+        System.out.print("Enter experience : ");
+        jobSeeker.setExperience(scanner.nextInt());
+        jobSeeker.setLoggedIn("true");
         return jobSeeker;
     }
 
@@ -56,5 +81,25 @@ public  class UserInput {
         String email = scanner.next();
         return email;
     }
-    
+    public static void applyjobs(JobSeeker user) throws SQLException{
+       System.out.print("Enter job ID : ");
+       String ID = scanner.next();
+       boolean flag=false;
+        user.setEligibleJobs();
+       for(Job i : user.getEligibleJobs()){
+        if(i.getId().equals(ID)){
+            if(user.applyForJob(i)){
+             System.out.println("****Application successful****"); 
+            }
+            else {
+             System.out.println("****Application failed****");   
+            }
+            flag=true;
+            break;
+        }
+        if(!flag){
+         System.out.println("you aren't eligible for the job");   
+        }
+       }
+    }
 }

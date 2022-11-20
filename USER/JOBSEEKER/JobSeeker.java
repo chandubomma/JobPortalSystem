@@ -5,24 +5,22 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
 
 public class JobSeeker extends User{
-    private String userKey;
     private int age;
     private String college;
     private String qualification;
-    private int percentage;
+    private Double percentage;
     private String skill1;
     private String skill2;
     public JobSeeker(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
     }
-
+   
     private String skill3;
     private int experience;
    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
@@ -30,41 +28,40 @@ public class JobSeeker extends User{
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();  
 
-    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+     public JobSeeker(String firstName, String lastName, String email, String password, String gender,
     String mobileNumber, String dateOfBirth) {
 super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
 super.setUserType("jobseeker");
 } 
+
+    public JobSeeker(){
+        super.setUserType("jobseeker");
+    }
     
     public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
-                    String mobileNumber, String dateOfBirth, String userKey, String college, String qualification,
-                    int percentage, String skill1, String skill2, String skill3, int experience) 
+                    String mobileNumber, String dateOfBirth,int age, String college, String qualification,
+                    Double percentage, String skill1, String skill2, String skill3, int experience) 
     {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-        this.userKey = userKey;
+     
         this.college = college;
         this.qualification = qualification;
         this.percentage = percentage;
         this.skill1 = skill1;
         this.skill2 = skill2;
         this.skill3 = skill3;
+        this.age=age;
         this.experience = experience;
         super.setUserType("jobseeker");
+       
     }
     
-
-    public String getUserKey() {
-        return userKey;
-    }
-
-    public void setUserKey(String userKey) {
-        this.userKey = userKey;
-    }
-
     public int getAge() {
         return age;
     }
-
+     public void setAge(int age){
+      this.age=age;
+     }
     public void setAge() {
         LocalDate curDate=LocalDate.now();
         DateTimeFormatter jkl=DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -93,11 +90,11 @@ super.setUserType("jobseeker");
         this.qualification = qualification;
     }
 
-    public int getPercentage() {
+    public Double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(int percentage) {
+    public void setPercentage(Double percentage) {
         this.percentage = percentage;
     }
 
@@ -148,8 +145,11 @@ super.setUserType("jobseeker");
         }
     }
 
-    public ArrayList<Job> getAppliedJobs() {
-        return appliedJobs;
+    public void getAppliedJobs() {
+
+     for(Job i : appliedJobs){
+        System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
+     }
     }
 
     public void setAppliedJobs(ArrayList<Job> appliedJobs) {
@@ -157,14 +157,15 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
+        appliedJobs.add(job);
         return jobSeekerDb.insertJobApplicant(this, job);
+        
     }
    
     @Override
     public boolean Register() throws SQLException {
         
-           return( jobSeekerDb.addUserRecord(this) &&
-            jobSeekerDb.addJobSeekerRecord(this));
+           return( jobSeekerDb.addUserRecord(this) & jobSeekerDb.addJobSeekerRecord(this));
        
        
     }
@@ -194,5 +195,16 @@ super.setUserType("jobseeker");
     }
        else return false;
         
+    }
+    public void getDetails(){   
+      System.out.println("Name :"+getFirstName()+" "+getLastName());
+      System.out.println("Date of birth : "+getDateOfBirth());
+      System.out.println("Age : "+getAge());
+      System.out.println("Gender : "+getGender());
+      System.out.println("Experience : "+getExperience());
+      System.out.println("skills :"+getSkill1()+","+getSkill2()+","+getSkill3());
+      System.out.println("Qualification : "+getQualification());
+      System.out.println("College : "+getCollege());
+      System.out.println("percentage : "+getPercentage()); 
     }
 }

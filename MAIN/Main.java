@@ -2,18 +2,25 @@ package MAIN;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import DATABASE.AdministratorDb;
+import DATABASE.JobSeekerDb;
 import DATABASE.RecruiterDb;
+import DATABASE.INFO.Info;
 import USER.User;
+import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
 public class Main{
    private static AdministratorDb administratorDb  = new AdministratorDb();
+   private static JobSeekerDb jobseekerDb = new JobSeekerDb();
    private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
+   private static JobSeeker jobseeker;
    private static Recruiter recruiter;
+   private static Info info;
 
     public static void main(String[] args) throws SQLException {
        if(args.length==0)userMenu();
@@ -29,7 +36,8 @@ public class Main{
                    user= login();
                    if(user==null)return;
                    if(user.getUserType().toLowerCase().equals("jobseeker")){
-
+                   jobseeker = (JobSeeker) administratorDb.getUser(user.getEmail());
+               
                     jobSeekerMenu();
                 }
                     else if(user.getUserType().toLowerCase().equals("recruiter")){
@@ -42,7 +50,7 @@ public class Main{
                    break;
                 }
                 case 2 : {
-
+                   register();
                 }
                 
                 case 0 : {
@@ -77,6 +85,7 @@ public class Main{
         int choice = UserInput.scanChoice();
         switch(choice){
             case 1 : {
+                
                 viewUserProfile();
                 break;
             }
@@ -90,19 +99,30 @@ public class Main{
         }
     }
 
-    public static void viewUserProfile(){
-
-    }
-
+    public static void viewUserProfile() {
+         if(user.getUserType().equalsIgnoreCase("jobseeker")){
+           jobseeker.getDetails(); 
+         }
+         if(user.getUserType().equalsIgnoreCase("recruiter")){
+        
+         }
+     }
     public static void modifyUserProfile(){
 
     }
 
-    public static void jobSeekerJobMenu(){
+    public static void jobSeekerJobMenu() throws SQLException{
         UserOutput.printJobSeekerJobMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
-            
+            case 1 : info.display_jobs();
+            break;
+            case 2 : UserInput.applyjobs(jobseeker);
+            break;
+            case 3 : jobseeker.getAppliedJobs();
+            break;
+            case 4 : jobSeekerMenu();
+            break;
         }
     }
 
@@ -240,7 +260,16 @@ public class Main{
         }
         return user;
     }
-
+    public static void register() throws SQLException{
+        Scanner in = new Scanner(System.in);
+       System.out.println("1.Jobseeker  2.Recruiter");
+       System.out.println("Choose the usertype :");
+       int choice= in.nextInt();
+       if(choice==1){
+        jobseeker=UserInput.scanJobSeekerDetails();
+        jobseeker.Register();
+       }
+    }
 
     public static User login1(String[] args) throws SQLException{
         String password = UserInput.scanPassword();

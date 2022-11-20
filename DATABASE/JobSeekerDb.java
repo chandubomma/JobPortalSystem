@@ -8,7 +8,7 @@ import USER.RECRUITER.Job;
 
 public class JobSeekerDb extends UserDb {
     public  boolean addJobSeekerRecord(JobSeeker jobSeeker) throws SQLException{
-        String Query = "insert into jobseeker values('"+jobSeeker.getEmail()+"','"+jobSeeker.getExperience()+"','"+jobSeeker.getQualification()+"','"+jobSeeker.getAge()+"','"+jobSeeker.getCollege()+"','"+jobSeeker.getPercentage()+"','"+jobSeeker.getSkill1()+"','"+jobSeeker.getSkill2()+"','"+jobSeeker.getSkill3()+",)";
+        String Query = "insert into jobseeker values('"+jobSeeker.getEmail()+"','"+jobSeeker.getExperience()+"','"+jobSeeker.getQualification()+"','"+jobSeeker.getAge()+"','"+jobSeeker.getCollege()+"',"+jobSeeker.getPercentage()+",'"+jobSeeker.getSkill1()+"','"+jobSeeker.getSkill2()+"','"+jobSeeker.getSkill3()+"')";
         return statement.execute(Query);
     }
 
