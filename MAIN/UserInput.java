@@ -88,7 +88,7 @@ public  class UserInput {
         user.setEligibleJobs();
        for(Job i : user.getEligibleJobs()){
         if(i.getId().equals(ID)){
-            if(user.applyForJob(i)){
+            if(user.applyForJob(i)==true){
              System.out.println("****Application successful****"); 
             }
             else {
@@ -102,4 +102,9 @@ public  class UserInput {
         }
        }
     }
+
+    public static void modifyJobseeker(JobSeeker jobSeeker) {
+       
+    }
+
 }

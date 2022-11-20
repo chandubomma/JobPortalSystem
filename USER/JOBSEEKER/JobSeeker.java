@@ -142,6 +142,7 @@ super.setUserType("jobseeker");
             Job obj = new Job(rs.getString("id"),rs.getString("jobtitle"),rs.getString("location"),rs.getString("companyname"),rs.getString("deadline"),rs.getInt("numberofvacancies"),rs.getString("skillrequired"),rs.getInt("maxage"),rs.getInt("minexperience"),rs.getString("description"));
             if(obj.isEligible(this))
                 this.eligibleJobs.add(obj);
+                System.out.println(obj.getId());
         }
     }
 
@@ -157,9 +158,11 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
-        appliedJobs.add(job);
-        return jobSeekerDb.insertJobApplicant(this, job);
-        
+        appliedJobs.add(job);    
+         if(jobSeekerDb.insertJobApplicant(this, job)){
+            return true;
+        }
+        return false;
     }
    
     @Override

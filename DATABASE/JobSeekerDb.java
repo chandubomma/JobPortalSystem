@@ -24,7 +24,7 @@ public class JobSeekerDb extends UserDb {
     }
 
     public  boolean insertJobApplicant(JobSeeker jobSeeker,Job job) throws SQLException{
-        String Query = "insert into applicants values('"+job.getId()+"','"+jobSeeker.getEmail()+"'applied')";
+        String Query = "insert into applicants values('"+jobSeeker.getEmail()+"','"+job.getId()+"','"+job.getJobTitle()+"','"+job.getCompanyName()+"','applied',NULL)";
         return statement.execute(Query);
     }
 
