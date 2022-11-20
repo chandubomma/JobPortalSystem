@@ -28,10 +28,7 @@ public class JobSeekerDb extends UserDb {
         return statement.execute(Query);
     }
 
-    public  boolean updateUserLoginStatus(String email,String status) throws SQLException{
-        String Query = "update user set loginstatus ="+status;
-        return statement.execute(Query);
-    }
+   
 
 
     //more methods here
