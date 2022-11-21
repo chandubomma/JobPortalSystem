@@ -116,4 +116,20 @@ public class UserOutput {
         System.out.println("7. Back");
         System.out.print("Choose your option :");
     }
+        public static void printUpdatesRequirement(Job job)
+    { 
+       System.out.println("1. Update Job Title");
+       System.out.println("2. Update location");
+       System.out.println("3. Update company name");
+       System.out.println("4. update deadline");
+       System.out.println("5. Update Number of vacancies");
+       System.out.println("6. Update skills required");
+       System.out.println("7. Update maximum age limit");
+       System.out.println("8. Update minimum experience");
+       System.out.println("9. Update Description");
+       System.out.println("10. Update Job Id");
+       System.out.println("11. Back");
+       System.out.print("Choose your option :");
+
+    }
 }
