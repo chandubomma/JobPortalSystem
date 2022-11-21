@@ -112,7 +112,16 @@ public  class UserInput {
         }
        }
     }
-
+     public static void postJob(Recruiter user) throws SQLException{
+        Job job = new Job();
+        if(user.postJob(job)==true)  
+        {
+           System.out.println("****Job posted successfully****");
+        }
+        else {
+            System.out.println("****Failed to post the job****");   
+           }
+    }
     public static void modifyJobseeker(JobSeeker jobSeeker) throws SQLException {
        UserOutput.printUpdatesRequirement(jobSeeker);
        int choice = scanner.nextInt();
