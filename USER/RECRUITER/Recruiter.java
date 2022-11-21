@@ -77,8 +77,8 @@ public class Recruiter extends User {
     }
 
     @Override
-    public boolean Logout() {
-        // TODO Auto-generated method stub
+    public boolean Logout() throws SQLException {
+        recruiterDb.updateUserLoginStatus(getEmail(),"false");
         return false;
     }
 

@@ -9,6 +9,13 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "MAIN.Main",
+            "projectName": "JobPortalSystem_b883921a"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "MAIN.Main",
             "projectName": "JobPortalSystem-1_a5e7793e"
         },
         {
