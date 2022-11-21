@@ -9,6 +9,7 @@ import DATABASE.JobSeekerDb;
 import DATABASE.RecruiterDb;
 import DATABASE.INFO.Info;
 import USER.User;
+import USER.ADMINISTRATOR.Administrator;
 import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
@@ -19,6 +20,7 @@ public class Main{
    private static User user;
    private static JobSeeker jobseeker;
    private static Recruiter recruiter;
+   private static Administrator  administrator;
    private static Info info = new Info();
 
     public static void main(String[] args) throws SQLException {
@@ -219,9 +221,25 @@ public class Main{
                user = login1(args);
                 break;
             }
-            case "viewjobs" : {
+            case "logout" : {
 
             }
+            case "registeradministrator" : {
+                registerAdministrator(args[1]);
+                break;
+            }
+            case "registerrecruiter" : {
+                registerRecruiter(args[1]);
+            }
+            case "registerjobseeker" : {
+                registerJobSeeker(args[1]);
+                break;
+            }
+            case "viewjobs" : {
+                viewJobs();
+                break;
+            }
+           
         }
     }
 
@@ -233,15 +251,46 @@ public class Main{
         }
         else if(args.length == 2){
             if(args[0].toLowerCase().equals("login"))return "login1";
+            if(args[0].equalsIgnoreCase("logout"))return "logout";
         }
         else if(args.length==3){
             if(args[0].toLowerCase().equals("login"))return "login";
+            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("administrator"))return "registeradministrator";
+            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("recruiter"))return "registerrecruiter";
+            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("jobseeker"))return "registerjobseeker";
         }
         return null;
     }
 
     public static void logout(){
         
+    }
+
+    public static void registerRecruiter(String csvFilePath) throws SQLException{
+        recruiter = new Recruiter();
+        if(recruiter.Register(csvFilePath)){
+            System.out.println("Registration Successfull!");
+            recruiter.getDetails();
+        }
+        else System.out.println("Registration failed!");
+    }
+
+    public static void registerJobSeeker(String csvFilePath) throws SQLException{
+        jobseeker = new JobSeeker();
+        if(jobseeker.Register(csvFilePath)){
+            System.out.println("Registration Successfull!");
+            jobseeker.getDetails();
+        }
+        else System.out.println("Registration failed!");
+    }
+
+    public static void registerAdministrator(String csvFilePath) throws SQLException{
+        administrator = new Administrator();
+        if(administrator.Register(csvFilePath)){
+            System.out.println("Registration Successfull!");
+           
+        }
+        else System.out.println("Registration failed!");
     }
 
     public static User login() throws SQLException{
@@ -277,6 +326,7 @@ public class Main{
         }
         return user;
     }
+    
     public static void register() throws SQLException{
         try (Scanner in = new Scanner(System.in)) {
             System.out.println("1.Jobseeker  2.Recruiter");

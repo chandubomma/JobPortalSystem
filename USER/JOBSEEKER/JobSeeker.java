@@ -1,10 +1,14 @@
 package USER.JOBSEEKER;
 
+import java.io.FileReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import com.opencsv.CSVReader;
+
 import DATABASE.JobSeekerDb;
 import USER.User;
 import USER.RECRUITER.Job;
@@ -16,17 +20,17 @@ public class JobSeeker extends User{
     private Double percentage;
     private String skill1;
     private String skill2;
-    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
-            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
-        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
-    }
-   
     private String skill3;
     private int experience;
    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
 
     ArrayList<Job> eligibleJobs = new ArrayList<Job>();
     ArrayList<Job> appliedJobs = new ArrayList<Job>();  
+
+    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+    String mobileNumber, String dateOfBirth, String userType, String isLoggedIn) {
+super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
+}
 
      public JobSeeker(String firstName, String lastName, String email, String password, String gender,
     String mobileNumber, String dateOfBirth) {
@@ -172,6 +176,45 @@ super.setUserType("jobseeker");
        
        
     }
+
+    
+    public boolean Register(String csvFilePath) throws SQLException {
+        CSVReader reader = null; 
+        try  
+        {  
+        reader = new CSVReader(new FileReader(csvFilePath));    
+        String [] nL;  
+        nL = reader.readNext();
+        this.setFirstName(nL[0]);  
+        this.setLastName(nL[1]);
+        this.setEmail(nL[2]);
+        this.setPassword(nL[3]);
+        this.setGender(nL[4]);
+        this.setMobileNumber(nL[5]);
+        this.setDateOfBirth(nL[6]);
+        this.setUserType("recruiter");
+        this.setLoggedIn("true");
+        this.setAge();
+        this.setCollege(nL[7]);
+        this.setQualification(nL[8]);
+        this.setPercentage(Double.parseDouble(nL[9]));
+        this.setSkill1(nL[10]);
+        this.setSkill2(nL[11]);
+        this.setSkill3(nL[12]);
+        this.setExperience(Integer.parseInt(nL[13]));
+           
+            return(jobSeekerDb.addUserRecord(this) &&
+            jobSeekerDb.addJobSeekerRecord(this)); 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
+        
+        
+    }
+    
 
     
 
