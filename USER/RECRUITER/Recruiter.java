@@ -8,6 +8,12 @@ public class Recruiter extends User {
     private String CompanyName;
     private String Designation;
     private static RecruiterDb recruiterDb = new RecruiterDb();
+    
+    public Recruiter()
+    {
+        super.setUserType("recruiter");
+    }
+    
     public Recruiter(String firstName, String lastName, String email, String password, String gender,
             String mobileNumber, String dateOfBirth) {
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
@@ -80,6 +86,19 @@ public class Recruiter extends User {
     public boolean deleteUser() throws SQLException {
         return(recruiterDb.deleteUserRecord(this) && recruiterDb.deleteRecruiterRecord(this));
     
+    }
+    
+    
+    public void getDetails()
+    {
+    System.out.println("USER PROFILE :");
+        System.out.println("NAME            : "+this.getFirstName()+" "+getLastName());
+        System.out.println("DATE OF BIRTH   : "+this.getDateOfBirth());
+        System.out.println("GENDER          : "+this.getGender());
+        System.out.println("EMAIL           : "+this.getEmail());
+        System.out.println("MOBILE NUMBER   : "+this.getMobileNumber());
+        System.out.println("COMPANY NAME    : "+this.getCompanyName());
+        System.out.println("DESIGNATION     : "+this.getDesignation());
     }
 }
 
