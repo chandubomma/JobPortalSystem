@@ -20,6 +20,10 @@ public class Job {
     private String description;
     private boolean active;
     
+     public Job()
+    {
+
+    }
     public Job(String id, String jobTitle, String location, String companyName, String deadline, int numberOfVacancies,
             String skillRequired, int maxAge, int minExperience, String description) {
         this.id = id;
