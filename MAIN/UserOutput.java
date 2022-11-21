@@ -3,6 +3,7 @@ package MAIN;
 import java.util.ArrayList;
 
 import USER.JOBSEEKER.JobSeeker;
+import USER.RECRUITER.Recruiter;
 import USER.RECRUITER.Job;
 
 public class UserOutput {
@@ -103,5 +104,16 @@ public class UserOutput {
        System.out.println("8. Update mobilenumber");
        System.out.println("9. Back");
        System.out.print("Choose your option :");
+    }
+     public static void printUpdatesRequirement(Recruiter user)
+    {
+        System.out.println("1. Update firstname");
+        System.out.println("2. Update lastname");
+        System.out.println("3. Update email");
+        System.out.println("4. update password");
+        System.out.println("5. Update date of birth");
+        System.out.println("6. Update mobilenumber");
+        System.out.println("7. Back");
+        System.out.print("Choose your option :");
     }
 }
