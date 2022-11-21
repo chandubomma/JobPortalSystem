@@ -1,7 +1,10 @@
 package USER.ADMINISTRATOR;
 
+import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.opencsv.CSVReader;
 
 import DATABASE.AdministratorDb;
 import USER.User;
@@ -30,6 +33,9 @@ public class Administrator extends User{
         super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
     }
 
+    public Administrator() {
+    }
+
     @Override
     public boolean Login (String email, String password) {
          
@@ -42,6 +48,37 @@ public class Administrator extends User{
         return(administratorDb.addUserRecord(this) &&
         administratorDb.addAdministratorRecord(this));
     }
+
+    public boolean Register(String csvFilePath) throws SQLException {
+        CSVReader reader = null; 
+        try  
+        {  
+        reader = new CSVReader(new FileReader(csvFilePath));    
+        String [] nL;  
+        nL = reader.readNext();
+        this.setFirstName(nL[0]);  
+        this.setLastName(nL[1]);
+        this.setEmail(nL[2]);
+        this.setPassword(nL[3]);
+        this.setGender(nL[4]);
+        this.setMobileNumber(nL[5]);
+        this.setDateOfBirth(nL[6]);
+        this.setUserType("administrator");
+        this.setLoggedIn("true");
+        
+           
+            return(administratorDb.addUserRecord(this)); 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
+        
+        
+    }
+
+    
 
     @Override
     public boolean Logout() {

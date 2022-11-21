@@ -15,7 +15,7 @@ public class AdministratorDb extends UserDb {
     }
 
     public  boolean deleteAdministratorRecord(Administrator administrator) throws SQLException{
-        String Query = "delete from administrator where email="+administrator.getEmail();
+        String Query = "delete from administrator where email='"+administrator.getEmail()+"'";
         return statement.execute(Query);
     }
 

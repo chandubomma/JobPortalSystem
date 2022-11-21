@@ -1,6 +1,8 @@
 package USER.RECRUITER;
 import java.sql.SQLException;
-
+import java.io.FileReader;  
+import java.io.IOException;
+import com.opencsv.CSVReader; 
 import DATABASE.RecruiterDb;
 import USER.User;
 
@@ -64,6 +66,37 @@ public class Recruiter extends User {
         recruiterDb.addRecruiterRecord(this));
         
     }
+
+    public boolean Register(String csvFilePath) throws SQLException {
+        CSVReader reader = null; 
+        try  
+        {  
+        reader = new CSVReader(new FileReader(csvFilePath));    
+        String [] nL;  
+        nL = reader.readNext();
+        this.setFirstName(nL[0]);  
+        this.setLastName(nL[1]);
+        this.setEmail(nL[2]);
+        this.setPassword(nL[3]);
+        this.setGender(nL[4]);
+        this.setMobileNumber(nL[5]);
+        this.setDateOfBirth(nL[6]);
+        this.setUserType("recruiter");
+        this.setLoggedIn("true");
+        this.setCompanyName(nL[7]);
+        this.setDesignation(nL[8]);
+           
+            return(recruiterDb.addUserRecord(this) &&
+            recruiterDb.addRecruiterRecord(this)); 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
+        
+        
+    }
     
     @Override
     public boolean Login(String email, String password) throws SQLException{
@@ -87,6 +120,39 @@ public class Recruiter extends User {
         return(recruiterDb.deleteUserRecord(this) && recruiterDb.deleteRecruiterRecord(this));
     
     }
+
+    public static boolean addJobs(String pathCSV){
+        CSVReader reader = null;  
+        try  
+        {  
+        reader = new CSVReader(new FileReader(pathCSV));    
+        String [] nL;  
+        reader.readNext();
+        //read one line at a time  
+            while ((nL = reader.readNext()) != null)  
+            {  
+                int numberOfVacancies = Integer.parseInt(nL[5]);
+                int maxage = Integer.parseInt(nL[7]);
+                int minExperience = Integer.parseInt(nL[8]);
+               Job job = new Job(nL[0],nL[1],nL[2],nL[3],nL[4],numberOfVacancies,nL[6],maxage,minExperience,nL[9]);
+               if(recruiterDb.getJobRecord(job.getId())==null){
+                recruiterDb.addJobRecord(job);
+                System.out.println("Posted Job with ID = "+job.getId()+" : "+job.getJobTitle());
+               }else{
+                recruiterDb.updateJobRecord(job);
+                System.out.println("updated Job Post with ID = "+job.getId()+" : "+job.getJobTitle());
+               }
+            }
+            return true; 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
+
+    }
+
     
     
     public void getDetails()
