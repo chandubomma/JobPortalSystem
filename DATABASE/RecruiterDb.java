@@ -36,4 +36,7 @@ public class RecruiterDb extends UserDb {
         }
         return jobList;
     }
+    public boolean insertRecruiterJob(Recruiter recruiter, Job job) {
+        return false;
+    }
 }
