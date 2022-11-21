@@ -219,8 +219,8 @@ super.setUserType("jobseeker");
     
 
     @Override
-    public boolean Logout() {
-        // TODO Auto-generated method stub
+    public boolean Logout() throws SQLException {
+       jobSeekerDb.updateUserLoginStatus(getEmail(), "false");
         return false;
     }
 

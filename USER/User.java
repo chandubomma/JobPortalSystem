@@ -112,7 +112,7 @@ public abstract class User{
     /*below are the abstract methods in User class */
     public abstract boolean Login(String email,String password) throws SQLException;
     public abstract boolean Register() throws SQLException;
-    public abstract boolean Logout();
+    public abstract boolean Logout() throws SQLException;
     public abstract boolean deleteUser() throws SQLException;
     public String isLoggedIn() {
         return isLoggedIn;
