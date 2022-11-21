@@ -240,8 +240,8 @@ public class Main{
         return null;
     }
 
-    public static void logout(){
-        
+    public static void logout() throws SQLException{
+        user.Logout();
     }
 
     public static User login() throws SQLException{
