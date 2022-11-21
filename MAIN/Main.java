@@ -19,6 +19,7 @@ public class Main{
    private static User user;
    private static JobSeeker jobseeker;
    private static Recruiter recruiter;
+    private static Job job;
    private static Info info = new Info();
 
     public static void main(String[] args) throws SQLException {
@@ -177,7 +178,8 @@ public class Main{
                 break;
             }
             case 2 : {
-
+                job = UserInput.scanJobDetails();
+                recruiter.postJob(job);
             }
             case 3 : {
 
