@@ -102,12 +102,15 @@ public class Main{
            jobseeker.getDetails(); 
          }
          if(user.getUserType().equalsIgnoreCase("recruiter")){
-        
+            recruiter.getDetails();
          }
      }
     public static void modifyUserProfile() throws SQLException{
         if(user.getUserType().equalsIgnoreCase("jobseeker")){
             UserInput.modifyJobseeker(jobseeker); 
+          }
+        if(user.getUserType().equalsIgnoreCase("recruiter")){
+            UserInput.modifyRecruiter(recruiter); 
           }
     }
     public static void exitProfile() throws SQLException{
