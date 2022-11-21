@@ -19,7 +19,8 @@ public class Main{
    private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
    private static JobSeeker jobseeker;
-   private static Recruiter recruiter;
+   private static Recrui
+    private static Job job;
    private static Administrator  administrator;
    private static Info info = new Info();
 
@@ -179,7 +180,8 @@ public class Main{
                 break;
             }
             case 2 : {
-
+                job = UserInput.scanJobDetails();
+                recruiter.postJob(job);
             }
             case 3 : {
 
