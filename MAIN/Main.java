@@ -19,7 +19,7 @@ public class Main{
    private static RecruiterDb recruiterDb = new RecruiterDb();
    private static User user;
    private static JobSeeker jobseeker;
-   private static Recrui
+   private static Recruiter recruiter;
     private static Job job;
    private static Administrator  administrator;
    private static Info info = new Info();
@@ -52,6 +52,7 @@ public class Main{
                 }
                 case 2 : {
                    register();
+
                 }
                 
                 case 0 : {
@@ -107,6 +108,9 @@ public class Main{
          if(user.getUserType().equalsIgnoreCase("recruiter")){
             recruiter.getDetails();
          }
+         if(user.getUserType().equalsIgnoreCase("administrator")){
+            administrator.getDetails();
+         }
      }
     public static void modifyUserProfile() throws SQLException{
         if(user.getUserType().equalsIgnoreCase("jobseeker")){
@@ -115,6 +119,9 @@ public class Main{
         if(user.getUserType().equalsIgnoreCase("recruiter")){
             UserInput.modifyRecruiter(recruiter); 
           }
+          if(user.getUserType().equalsIgnoreCase("administrator")){
+            UserInput.modifyAdministrator(administrator);
+        }  
     }
     public static void exitProfile() throws SQLException{
         if(user.getUserType().equalsIgnoreCase("jobseeker")){
@@ -122,6 +129,9 @@ public class Main{
           }
           if(user.getUserType().equalsIgnoreCase("recruiter")){
               recruiterMenu();        
+        }
+        if(user.getUserType().equalsIgnoreCase("administrator")){
+            administratorMenu();
         }
     }
 
@@ -203,11 +213,16 @@ public class Main{
 
     }
 
-    public static void administratorMenu(){
+    public static void administratorMenu() throws SQLException{
         UserOutput.printAdministratorMenu();
         int choice = UserInput.scanChoice();
         switch(choice){
-            
+            case 1 : profileMenu();
+            break;
+            case 2 : info.count(administrator);
+                     info.dispay_users(administrator);
+                     break;
+            case 3 : logout();         
         }
     }
 
@@ -334,13 +349,23 @@ public class Main{
     
     public static void register() throws SQLException{
         try (Scanner in = new Scanner(System.in)) {
-            System.out.println("1.Jobseeker  2.Recruiter");
+            System.out.println("1.Jobseeker  2.Recruiter 3.Administrator");
                System.out.println("Choose the usertype :");
                int choice= in.nextInt();
                if(choice==1){
                 jobseeker=UserInput.scanJobSeekerDetails();
                 jobseeker.Register();
                 jobSeekerMenu();
+               }
+               if(choice==2){
+                recruiter=UserInput.scanRecruiterDetails();
+                recruiter.Register();
+                recruiterMenu();
+               }
+               if(choice==3){
+                administrator=UserInput.scanAdministratorDetails();
+                administrator.Register();
+                administratorMenu();
                }
         }
     }

@@ -243,14 +243,14 @@ super.setUserType("jobseeker");
         
     }
     public void getDetails(){   
-      System.out.println("Name :"+getFirstName()+" "+getLastName());
+      System.out.println("Name          : "+getFirstName()+" "+getLastName());
       System.out.println("Date of birth : "+getDateOfBirth());
-      System.out.println("Age : "+getAge());
-      System.out.println("Gender : "+getGender());
-      System.out.println("Experience : "+getExperience());
-      System.out.println("skills :"+getSkill1()+","+getSkill2()+","+getSkill3());
+      System.out.println("Age           : "+getAge());
+      System.out.println("Gender        : "+getGender());
+      System.out.println("Experience    : "+getExperience());
+      System.out.println("skills        : "+getSkill1()+","+getSkill2()+","+getSkill3());
       System.out.println("Qualification : "+getQualification());
-      System.out.println("College : "+getCollege());
-      System.out.println("percentage : "+getPercentage()); 
+      System.out.println("College       : "+getCollege());
+      System.out.println("percentage    : "+getPercentage()); 
     }
 }
