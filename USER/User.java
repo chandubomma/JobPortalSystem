@@ -114,6 +114,7 @@ public abstract class User{
     public abstract boolean Register() throws SQLException;
     public abstract boolean Logout() throws SQLException;
     public abstract boolean deleteUser() throws SQLException;
+    public abstract void getDetails();
     public String isLoggedIn() {
         return isLoggedIn;
     }

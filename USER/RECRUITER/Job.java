@@ -177,4 +177,16 @@ public class Job {
         }
         return false;
     }
+
+    public  void printJobDetails(){
+        System.out.println("Job Title       : "+this.getJobTitle());
+        System.out.println("Job ID          : "+this.getId());
+        System.out.println("Company Name    : "+this.getCompanyName());
+        System.out.println("Location        : "+this.getLocation());
+        System.out.println("Job Description : "+this.getDescription());
+        System.out.println("Skills          : "+this.getSkillRequired());
+        System.out.println("Vacancies       : "+this.getNumberOfVacancies());
+        System.out.println("Experience      : "+this.getMinExperience());
+        System.out.println("Last Date       : "+this.getDeadline());
+    }
 }

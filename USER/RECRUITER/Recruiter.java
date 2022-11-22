@@ -135,7 +135,7 @@ public class Recruiter extends User {
     
     }
 
-    public static boolean addJobs(String pathCSV){
+    public static boolean postJobs(String pathCSV){
         CSVReader reader = null;  
         try  
         {  
@@ -150,11 +150,13 @@ public class Recruiter extends User {
                 int minExperience = Integer.parseInt(nL[8]);
                Job job = new Job(nL[0],nL[1],nL[2],nL[3],nL[4],numberOfVacancies,nL[6],maxage,minExperience,nL[9]);
                if(recruiterDb.getJobRecord(job.getId())==null){
-                recruiterDb.addJobRecord(job);
+               if(recruiterDb.addJobRecord(job))
                 System.out.println("Posted Job with ID = "+job.getId()+" : "+job.getJobTitle());
+                else System.out.println("Failed to add job post with ID = "+job.getId()+" : "+job.getJobTitle());
                }else{
-                recruiterDb.updateJobRecord(job);
+                if(recruiterDb.updateJobRecord(job))
                 System.out.println("updated Job Post with ID = "+job.getId()+" : "+job.getJobTitle());
+                else System.out.println("Failed to update Job Post with ID = "+job.getId()+" : "+job.getJobTitle());
                }
             }
             return true; 
@@ -165,6 +167,32 @@ public class Recruiter extends User {
         return false ;
         }  
 
+    }
+
+    public static boolean deleteJobs(String pathCSV){
+        CSVReader reader = null;  
+        try  
+        {  
+        reader = new CSVReader(new FileReader(pathCSV));    
+        String [] nL;  
+        reader.readNext();
+        //read one line at a time  
+            while ((nL = reader.readNext()) != null)  
+            {  
+                String jobID = nL[0];
+               if(recruiterDb.getJobRecord(jobID)!=null){
+               if(recruiterDb.deleteJobRecord(jobID))
+                System.out.println("Deleted Job Post with ID = "+jobID);
+                else System.out.println("Failed to delete Job Post with ID = "+jobID);
+               }
+            }
+            return true; 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
     }
 
     public void getDetails()
@@ -189,5 +217,7 @@ public class Recruiter extends User {
     public boolean postJob(Job job) {
         return false;
     }
+
+   
 }
 
