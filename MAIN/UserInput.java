@@ -8,6 +8,7 @@ import USER.User;
 import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
+import DATABASE.RecruiterDb;
 
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
@@ -74,6 +75,30 @@ public  class UserInput {
         recruiter.setLoggedIn("true");
         return recruiter;
     }
+    public static Job scanJobDetails(){
+        Job job = new Job();
+        System.out.print("Enter Id :");
+        job.setId(scanner.next());
+        System.out.print("Enter Job Title :");
+        job.setJobTitle(scanner.next());
+        System.err.print("Enter Company Name :");
+        job.setCompanyName(scanner.next());
+        System.out.print("Enter Company Location :");
+        job.setLocation(scanner.next());
+        System.out.print("Enter DeadLine :");
+        job.setDeadline(scanner.next());
+        System.out.print("Enter Number of Vacancies :");
+        job.setNumberOfVacancies(scanner.nextInt());
+        System.out.print("Enter Skills Required :");
+        job.setSkillRequired(scanner.next());
+        System.out.print("Enter Maximum Age Limit :");
+        job.setMaxAge(scanner.nextInt());
+        System.out.print("Enter Min Experience Required : ");
+        job.setMinExperience(scanner.nextInt());
+        System.out.print("Enter Description :");
+        job.setDescription(scanner.next());
+        return job;
+    }
 
     public static String scanPassword(){
         System.out.print("Enter Password : ");
@@ -91,6 +116,7 @@ public  class UserInput {
         String email = scanner.next();
         return email;
     }
+    
     public static void applyjobs(JobSeeker user) throws SQLException{
        System.out.print("Enter job ID : ");
        String ID = scanner.next();
@@ -112,6 +138,7 @@ public  class UserInput {
         }
        }
     }
+     
      public static void postJob(Recruiter user) throws SQLException{
         Job job = new Job();
         if(user.postJob(job)==true)  
@@ -122,6 +149,28 @@ public  class UserInput {
             System.out.println("****Failed to post the job****");   
            }
     }
+    
+      public static void deleteJob(Recruiter user) throws SQLException{
+        System.out.print("Enter job ID : ");
+        String ID = scanner.next();
+        boolean flag=false;
+        for(Job i : user.getPostedJobs()){
+         if(i.getId().equals(ID)){
+             if(user.deleteJob(i)==true){
+              System.out.println("****Job deletion successful****"); 
+             }
+             else {
+              System.out.println("****Job deletion failed****");   
+             }
+             flag=true;
+             break;
+         }
+         if(!flag){
+          System.out.println("Job is not in the records");   
+         }
+        }
+     }
+     
     public static void modifyJobseeker(JobSeeker jobSeeker) throws SQLException {
        UserOutput.printUpdatesRequirement(jobSeeker);
        int choice = scanner.nextInt();
@@ -249,5 +298,83 @@ public  class UserInput {
            Main.jobSeekerMenu();
         
     }
+    
+    public static void modifyJob(Recruiter user,Job job) throws SQLException {
+        UserOutput.printUpdatesRequirement(job);
+        int choice = scanner.nextInt();
+        switch(choice){
+         case 1 : {
+             System.out.print("Enter new Job Title : ");
+             String jt= scanner.next();
+             job.setJobTitle(jt);
+             break;
+         }
+         case 2 : {
+           System.out.print("Enter new location: ");  
+           String ln = scanner.next();
+           job.setLocation(ln);
+           break;
+         }
+         case 3 :{
+            System.out.print("Enter company name : ");
+            String cn=scanner.next();
+            job.setCompanyName(cn);
+            break; 
+         }
+         case 4 : {
+           System.out.print("Enter new deadline : ");
+           String dl = scanner.next();
+           job.setDeadline(dl);
+           break;  
+         }
+         case 5 : {
+            System.out.print("Enter number of Vacancies: ");
+            int vac = scanner.nextInt();
+            job.setNumberOfVacancies(vac);
+            break;  
+         }
+         case 6:{
+            System.out.print("Enter skills required : ");
+            String sr = scanner.next();
+            job.setSkillRequired(sr);
+            break;  
+         }
+         case 7: {
+             System.out.print("Enter Maximum age limit: ");
+             int ma = scanner.nextInt();
+             job.setMaxAge(ma);
+             break; 
+         }
+         case 8 : {
+            System.out.print("Enter experience : ");
+            int exp=scanner.nextInt();
+            job.setMinExperience(exp);
+            break; 
+            
+         }
+         case 9 : {
+            System.out.print("Enter description : ");
+            String desc = scanner.next();
+            job.setDescription(desc);
+            break;
+         }
+         case 10:{
+            System.out.print("Enter job Id : ");
+            String id = scanner.next();
+            job.setId(id);
+            break;
+         }
+         case 11 : {
+             Main.recruiterJobMenu();
+         }
+     }
+         if(choice!=11){
+           RecruiterDb recruiterDb = new RecruiterDb();
+           recruiterDb.updateJobRecord(job);
+           System.out.println("Successfully updated");
+         }
+         Main.jobSeekerMenu();
+     }
+
   
 }

@@ -182,12 +182,15 @@ public class Main{
             case 2 : {
                 job = UserInput.scanJobDetails();
                 recruiter.postJob(job);
+                break;
             }
             case 3 : {
-
+                UserInput.modifyJob(recruiter,job); 
+                break;
             }
             case 4 : {
-
+                UserInput.deleteJob(recruiter);
+                break;
             }
             case 5 : {
                 recruiterMenu();

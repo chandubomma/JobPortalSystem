@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.opencsv.CSVReader;
 import DATABASE.RecruiterDb;
 import USER.User;
+import java.util.ArrayList;
 
 public class Recruiter extends User {
     private String CompanyName;
@@ -157,8 +158,6 @@ public class Recruiter extends User {
 
     }
 
-    
-    
     public void getDetails()
     {
     System.out.println("USER PROFILE :");
@@ -169,6 +168,13 @@ public class Recruiter extends User {
         System.out.println("MOBILE NUMBER   : "+this.getMobileNumber());
         System.out.println("COMPANY NAME    : "+this.getCompanyName());
         System.out.println("DESIGNATION     : "+this.getDesignation());
+    }
+    
+       public boolean deleteJob(Job i) throws SQLException {
+        postedJobs.remove(i);
+        if(recruiterDb.deleteJobRecord(i.getId()) && recruiterDb.deleteRecruiterJob(this, i))
+            return true;
+        return false;
     }
 
     public boolean postJob(Job job) {

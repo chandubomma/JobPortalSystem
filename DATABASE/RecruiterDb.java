@@ -22,6 +22,10 @@ public class RecruiterDb extends UserDb {
         String Query = "insert into job values ('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getDescription()+"','"+job.getCompanyName()+"','"+job.getSkillRequired()+"','"+job.getNumberOfVacancies()+"','"+job.getLocation()+"','"+job.getMinExperience()+"','"+job.getMaxAge()+"','"+job.getDeadline()+"')";
         return !statement.execute(Query);
     }
+    public boolean deleteJobRecord(String jobID) throws SQLException{
+        String Query = "delete from job where id = '"+jobID+"'";
+        return statement.execute(Query);
+}
     public  boolean updateUserLoginStatus(String email,String status) throws SQLException{
         String Query = "update user set loginstatus ="+status;
         return !statement.execute(Query);
@@ -36,7 +40,7 @@ public class RecruiterDb extends UserDb {
         }
         return null;
     }
-
+    
     public boolean updateJobRecord(Job job) throws SQLException{
         String Query = "update job set title = '"+job.getJobTitle()+"',location = '"+job.getLocation()+"',companyname = '"+job.getCompanyName()+"',deadline = '"+job.getDeadline()+"',numberofvacancies = "+job.getNumberOfVacancies()+",skillrequired = '"+job.getSkillRequired()+"',maxage = "+job.getMaxAge()+",minexperience = "+job.getMinExperience()+",description = "+job.getDescription()+" where jobid = "+job.getId();
         return !statement.execute(Query);
@@ -52,6 +56,10 @@ public class RecruiterDb extends UserDb {
         }
         return jobList;
     }
-
-   
+       public boolean deleteRecruiterJob(Recruiter recruiter, Job job) {
+        return false;
+    }
+    public boolean insertRecruiterJob(Recruiter recruiter, Job job) {
+        return false;
+    }
 }
