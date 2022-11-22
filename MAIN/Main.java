@@ -84,8 +84,10 @@ public class Main{
     }
 
     public static void profileMenu() throws SQLException{
+        while(true){
         UserOutput.printProfileMenu();
         int choice = UserInput.scanChoice();
+        
         switch(choice){
             case 1 : {
                 
@@ -98,8 +100,13 @@ public class Main{
             }
             case 3 : {
                exitProfile();
-            } 
+            }
+            default : System.out.println("Invalid choice! Try again");  
         }
+        if(choice==3){
+            break; 
+         } 
+    }
     }
 
     public static void viewUserProfile() {

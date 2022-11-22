@@ -481,7 +481,7 @@ public  class UserInput {
         System.out.print("Enter Job title : ");
         String title =scanner.next();
         info.display_applicants_via_title(user, title);
-
+        
     }
 
     public static void viewdetails(Recruiter recruiter) throws SQLException {

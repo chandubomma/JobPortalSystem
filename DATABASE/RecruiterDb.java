@@ -68,6 +68,12 @@ public class RecruiterDb extends UserDb {
         return statement.execute(Query);
     }
 
+    public boolean postJob(Recruiter recruiter, Job job) throws SQLException {
+        String Query="insert into job values('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getLocation()+"','"+job.getCompanyName()+"','"+job.getDeadline()+"','"+job.getNumberOfVacancies()+"','"+job.getSkillRequired()+"','"+job.getMaxAge()+"','"+job.getMinExperience()+"','"+job.getDescription()+"');";
+
+        return statement.execute(Query);
+    }
+
   
   
 }

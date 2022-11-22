@@ -46,21 +46,23 @@ public class UserDb  {
     }
 
     public  boolean updateUserLoginStatus(String email,String status) throws SQLException{
-        String Query = "update user set loginstatus ='"+status+"' where email = "+email;
+        String Query = "update user set loginstatus ='"+status+"' where email = '"+email+"';";
         return !statement.execute(Query);
     }
 
     public  User getUser(String email) throws SQLException{
         User user;
+
         String Query = "select * from user where email = '"+email+"'";
+
         ResultSet rs = statement.executeQuery(Query);
       
         if(!rs.next())return null;
         String userType = rs.getString("usertype");
         if(userType.toLowerCase().equals("jobseeker")){
             rs.close();
-            rs = statement.executeQuery("Select user.*,jobseeker.* from user,jobseeker where user.email='"+email+"'");
-           if (rs.next())return null;
+            rs = statement.executeQuery("Select user.*,jobseeker.* from user,jobseeker where user.email='"+email+"';");
+           if (!rs.next())return null;
             user = new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getInt("age"),rs.getString("college"),rs.getString("qualification"),rs.getDouble("percentage"),rs.getString("skill1"),rs.getString("skill2"),rs.getString("skill3"),rs.getInt("experience"));
             return user;
         }
