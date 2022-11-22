@@ -186,8 +186,12 @@ public class Recruiter extends User {
         return false;
     }
 
-    public boolean postJob(Job job) {
-        return false;
+    public boolean postJob(Job job) throws SQLException {
+        return recruiterDb.postJob(this,job);    
+    }
+
+    public void selectApplicant(String email,String description) throws SQLException {
+           recruiterDb.selectApplicant(email,description);
     }
 }
 
