@@ -77,8 +77,10 @@ public class UserOutput {
 
     public static void printApplicationsMenu(){
      System.out.println("1 : view applicants");
-     System.out.println("2 .Select Applicant");
-     System.out.println("3 : Back");   
+     System.out.println("2 :View applicants via job ID");
+     System.out.println("3 :View applicants via Job title");
+     System.out.println("4 .Select Applicant");
+     System.out.println("5 : Back");   
     }
 
     public static void printAdministratorMenu(){
@@ -145,5 +147,10 @@ public class UserOutput {
        System.out.println("11. Back");
        System.out.print("Choose your option :");
 
+    }
+    public static void printApplicantDetails(){
+     System.out.println("1 : Details of the applicant using email ");
+     System.out.println("2 : Back");
+     System.out.println("Choose your choice");   
     }
 }

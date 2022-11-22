@@ -209,15 +209,23 @@ public class Main{
         }
     }
 
-    public static void applicationsMenu(){
+    public static void applicationsMenu() throws SQLException{
     UserOutput.printApplicationsMenu();
     int choice=UserInput.scanChoice();
     switch(choice){
      case 1 : info.display_applicants(recruiter);
-           
+            UserInput.viewdetails(recruiter);     
      break;
-     case 2 : UserInput.selectApplicant();
+     case 2 : UserInput.display_applicantViaID(recruiter);  
+     break;
+     case 3 : UserInput.display_applicantViaTitle(recruiter);
+     break;
+     case 4 : UserInput.selectApplicant(recruiter);
+     break;
+     case 5 : recruiterMenu();
+     break;
     }
+    
     }
 
     public static void administratorMenu() throws SQLException{
