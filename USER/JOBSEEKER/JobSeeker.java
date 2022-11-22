@@ -1,13 +1,16 @@
 package USER.JOBSEEKER;
 
-import java.io.FileReader;
-import java.sql.ResultSet;
+import java.io.FileReader;  
+import java.io.IOException;
 import java.sql.SQLException;
+
+import com.opencsv.CSVReader;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import com.opencsv.CSVReader;
+
 
 import DATABASE.JobSeekerDb;
 import USER.User;
@@ -42,24 +45,24 @@ super.setUserType("jobseeker");
         super.setUserType("jobseeker");
     }
     
-    public JobSeeker(String firstName, String lastName, String email, String password, String gender, 
-                    String mobileNumber, String dateOfBirth,int age, String college, String qualification,
-                    Double percentage, String skill1, String skill2, String skill3, int experience) 
-    {
-        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth);
-     
+    
+    
+    public JobSeeker(String firstName, String lastName, String email, String password, String gender,
+            String mobileNumber, String dateOfBirth, String userType, String isLoggedIn, int age, String college,
+            String qualification, Double percentage, String skill1, String skill2, String skill3, int experience) {
+        super(firstName, lastName, email, password, gender, mobileNumber, dateOfBirth, userType, isLoggedIn);
+        this.age = age;
         this.college = college;
         this.qualification = qualification;
         this.percentage = percentage;
         this.skill1 = skill1;
         this.skill2 = skill2;
         this.skill3 = skill3;
-        this.age=age;
         this.experience = experience;
+        
         super.setUserType("jobseeker");
-       
     }
-    
+
     public int getAge() {
         return age;
     }

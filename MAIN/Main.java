@@ -245,14 +245,15 @@ public class Main{
 
             }
             case "registeradministrator" : {
-                registerAdministrator(args[1]);
+                registerAdministrator(args[2]);
                 break;
             }
             case "registerrecruiter" : {
-                registerRecruiter(args[1]);
+                registerRecruiter(args[2]);
+                break;
             }
             case "registerjobseeker" : {
-                registerJobSeeker(args[1]);
+                registerJobSeeker(args[2]);
                 break;
             }
             case "viewjobs" : {
@@ -289,9 +290,9 @@ public class Main{
     public static void registerRecruiter(String csvFilePath) throws SQLException{
         recruiter = new Recruiter();
         if(recruiter.Register(csvFilePath)){
+            
             System.out.println("Registration Successfull!");
-            recruiter.getDetails();
-        }
+            recruiter.getDetails();        }
         else System.out.println("Registration failed!");
     }
 
