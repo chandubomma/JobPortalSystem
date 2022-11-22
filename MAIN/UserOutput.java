@@ -77,7 +77,9 @@ public class UserOutput {
     }
 
     public static void printApplicationsMenu(){
-        
+     System.out.println("1 : view applicants");
+     System.out.println("2 .Select Applicant");
+     System.out.println("3 : Back");   
     }
 
     public static void printAdministratorMenu(){
