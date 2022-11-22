@@ -3,8 +3,11 @@ package DATABASE.INFO;
 
 import java.sql.*;
 
+import com.mysql.cj.protocol.Resultset;
+
 import DATABASE.UserDb;
 import USER.ADMINISTRATOR.Administrator;
+import USER.RECRUITER.Recruiter;
 public class Info extends UserDb {
 
    public void count(Administrator user) throws SQLException{
@@ -49,4 +52,18 @@ public class Info extends UserDb {
   }
   System.out.println("Active users : "+c);
  }
+public void display_applicants(Recruiter user) {
+  String Query="Select a.email,a.id,a.jobtitle,j.skillrequired,j.minexperience from applicants a,jobseeker j where a.companyname=b.companyname and a.companyname='"+user.getCompanyName()+"';";
+  ResultSet rs;
+  try {
+    rs = statement.executeQuery(Query);
+  System.out.printf("| %30s| %10s| %20s | %20s| %11s|","email","job ID","Job title","skill needed","experience");
+  while(rs.next()){
+  System.out.printf("| %30s| %10s| %20s | %20s| %11s|",rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5));  
+  }
+} catch (SQLException e) {
+  System.out.println(e);
+  }
+}
+
 }

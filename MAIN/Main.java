@@ -210,7 +210,14 @@ public class Main{
     }
 
     public static void applicationsMenu(){
-
+    UserOutput.printApplicationsMenu();
+    int choice=UserInput.scanChoice();
+    switch(choice){
+     case 1 : info.display_applicants(recruiter);
+           
+     break;
+     case 2 : UserInput.selectApplicant();
+    }
     }
 
     public static void administratorMenu() throws SQLException{
