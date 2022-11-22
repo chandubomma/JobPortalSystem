@@ -36,7 +36,7 @@ public class Job {
         this.maxAge = maxAge;
         this.minExperience = minExperience;
         this.description = description;
-        this.active= this.isActive();
+       // this.active= this.isActive();
     }
 
    
@@ -186,7 +186,7 @@ public class Job {
         System.out.println("Job Description : "+this.getDescription());
         System.out.println("Skills          : "+this.getSkillRequired());
         System.out.println("Vacancies       : "+this.getNumberOfVacancies());
-        System.out.println("Experience      : "+this.getMinExperience());
+        System.out.println("Experience      : "+this.getMinExperience()+" years");
         System.out.println("Last Date       : "+this.getDeadline());
     }
 }

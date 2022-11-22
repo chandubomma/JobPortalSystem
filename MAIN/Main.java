@@ -247,6 +247,10 @@ public class Main{
 
     public static void userMenu(String[] args) throws SQLException{
         String arg = commandArgs(args);
+        if(arg==null){
+            System.out.println("Invalid command line arguments!");
+            return;
+        }
         switch(arg){
             case "help" : {
                 UserOutput.printHelp();
@@ -445,7 +449,8 @@ public class Main{
             return;
         }
         else if(user.getUserType().equalsIgnoreCase("recruiter")){
-            Recruiter.postJobs(args[2]);
+            recruiter = (Recruiter) user;
+            recruiter.postJobs(args[2]);
         }
         else System.out.println("You are not authorized to perform this operation");
     }

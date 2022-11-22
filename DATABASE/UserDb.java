@@ -52,7 +52,7 @@ public class UserDb  {
 
     public  User getUser(String email) throws SQLException{
         User user;
-        String Query = "select * from user where email = "+email;
+        String Query = "select * from user where email = '"+email+"'";
         ResultSet rs = statement.executeQuery(Query);
       
         if(!rs.next())return null;

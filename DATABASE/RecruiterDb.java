@@ -19,7 +19,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public  boolean addJobRecord(Job job) throws SQLException{
-        String Query = "insert into job values ('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getDescription()+"','"+job.getCompanyName()+"','"+job.getSkillRequired()+"','"+job.getNumberOfVacancies()+"','"+job.getLocation()+"','"+job.getMinExperience()+"','"+job.getMaxAge()+"','"+job.getDeadline()+"')";
+        String Query = "insert into job values ('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getLocation()+"','"+job.getCompanyName()+"','"+job.getDeadline()+"','"+job.getNumberOfVacancies()+"','"+job.getSkillRequired()+"','"+job.getMaxAge()+"','"+job.getMinExperience()+"','"+job.getDescription()+"')";
         return !statement.execute(Query);
     }
     public boolean deleteJobRecord(String jobID) throws SQLException{
@@ -32,17 +32,17 @@ public class RecruiterDb extends UserDb {
     }
 
     public Job getJobRecord(String jobID) throws SQLException{
-        String Query = "select * from job where jobid = "+jobID;
-        resultSet = statement.executeQuery(Query);
+        String Query = "select * from job where id = '"+jobID+"'";
+       ResultSet resultSet = statement.executeQuery(Query);
         if(resultSet.next()){
-            Job job = new Job(resultSet.getString("jobid"), resultSet.getString("jobtitle"), resultSet.getString("location"), resultSet.getString("companyname"), resultSet.getString("deadline"), resultSet.getInt("numberofvacancies"), resultSet.getString("skillrequired"), resultSet.getInt("maxage"), resultSet.getInt("minexperience"), resultSet.getString("description"));
+            Job job = new Job(resultSet.getString("id"), resultSet.getString("jobtitle"), resultSet.getString("location"), resultSet.getString("companyname"), resultSet.getString("deadline"), resultSet.getInt("numberofvacancies"), resultSet.getString("skillrequired"), resultSet.getInt("maxage"), resultSet.getInt("minexperience"), resultSet.getString("description"));
             return job;
         }
         return null;
     }
     
     public boolean updateJobRecord(Job job) throws SQLException{
-        String Query = "update job set title = '"+job.getJobTitle()+"',location = '"+job.getLocation()+"',companyname = '"+job.getCompanyName()+"',deadline = '"+job.getDeadline()+"',numberofvacancies = "+job.getNumberOfVacancies()+",skillrequired = '"+job.getSkillRequired()+"',maxage = "+job.getMaxAge()+",minexperience = "+job.getMinExperience()+",description = "+job.getDescription()+" where jobid = "+job.getId();
+        String Query = "update job set jobtitle = '"+job.getJobTitle()+"',location = '"+job.getLocation()+"',companyname = '"+job.getCompanyName()+"',deadline = '"+job.getDeadline()+"',numberofvacancies = "+job.getNumberOfVacancies()+",skillrequired = '"+job.getSkillRequired()+"',maxage = "+job.getMaxAge()+",minexperience = "+job.getMinExperience()+",description ='"+job.getDescription()+"' where id = '"+job.getId()+"'";
         return !statement.execute(Query);
 
     }
