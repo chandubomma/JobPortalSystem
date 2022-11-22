@@ -41,8 +41,13 @@ public class Administrator extends User{
     }
 
     @Override
-    public boolean Login (String email, String password) {
-         
+    public boolean Login (String email, String password) throws SQLException {
+        if(getEmail().equals(email)){
+          if(getPassword().equals(password)){
+            setLoggedIn("true");
+            return administratorDb.updateUserLoginStatus(email, password);
+          }  
+        } 
         return false;
     }
 
@@ -85,9 +90,9 @@ public class Administrator extends User{
     
 
     @Override
-    public boolean Logout() {
-        // TODO 
-        return false;
+    public boolean Logout() throws SQLException {
+         setLoggedIn("false");
+        return administratorDb.updateUserLoginStatus(this.getEmail(), "false");
     }
 
     @Override
