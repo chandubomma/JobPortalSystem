@@ -172,5 +172,9 @@ public class Recruiter extends User {
             return true;
         return false;
     }
+
+    public void postJob(Job job) {
+        
+    }
 }
 
