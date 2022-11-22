@@ -12,13 +12,23 @@ public class UserOutput {
         System.out.println("There can be multiple command line arguments, be sure first argument always refers to the operation you want to perform");
         System.out.println("For Example : login 'useremail' 'password'");
         System.out.println("Below are some command line arguments you can use : ");
-        System.out.println("login 'useremail' 'password'");
+        System.out.println("help                                                        --- prints all command line arguments one can use to perform operations ");
+        System.out.println("login 'useremail' 'password'                                --- user login using email and password");
         System.out.println("login 'useremail'");
-        System.out.println("logout 'useremail' ");
-        System.out.println("viewmyprofile 'useremail'");
-        System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user]");
-        System.out.println("viewjobs");
-        System.out.println("viewmyappliedjobs 'useremail'");
+        System.out.println("logout 'useremail'                                          --- to logout user with email 'useremail'");
+        System.out.println("viewprofile 'useremail'                                     --- user can view his profile using this arguments");
+        System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user] --- recruiter or administrator with email 'useremail' can search and view profile of any other user with email 'useremail2'");
+        System.out.println("viewjobs                                                    --- prints all job posts available on the job4u platform");
+        System.out.println("viewappliedjobs 'jobseekeremail'                            --- to view jobs applied by a jobseeker with email 'useremail'");
+        System.out.println("viewpostedjobs 'recruiteremail'                             --- to view jobs posted by a recruiter");
+        System.out.println("searchjob 'jobid'                                           --- to search details of a job post with job id 'jobid'");
+        System.out.println("searchjobs 'jobtitle'                                       --- search jobs using job title string");
+        System.out.println("searchjobs 'jobtitle' lt 'min experience'                   --- search jobs using job title string and required experience less than 'min experience'");
+        System.out.println("searchjobs 'jobtitle' gt 'number of vacancies'              --- search jobs using job title string and number of vacancies greater than 'no of vacancies'");
+        System.out.println("applyjob 'useremail' 'jobid'                                --- to apply for a job post with id = 'jobid'");
+        System.out.println("postjobs 'recruiteremail' 'jobs csv file path'              --- recruiter can post multiple jobs using csv file");
+        System.out.println("updatejobs 'recruiteremail' 'jobs csv file path'            --- recruiter can update multiple job posts using csv file");
+        System.out.println("deletejobs 'recruiteremail' 'job ids csv file path          --- recruiter can delete multiple job posts with csv file containing job ids");
          // add more...
         System.out.println("***********************************************************************************************************************");
 

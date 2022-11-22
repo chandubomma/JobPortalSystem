@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Recruiter extends User {
     private String CompanyName;
     private String Designation;
+    private ArrayList<Job> postedJobs = new ArrayList<>();
     private static RecruiterDb recruiterDb = new RecruiterDb();
     
     public Recruiter()
@@ -61,6 +62,14 @@ public class Recruiter extends User {
         this.Designation = designation;
     }
 
+
+    public ArrayList<Job> getPostedJobs() {
+        return postedJobs;
+    }
+
+    public void setPostedJobs() throws SQLException {
+        this.postedJobs = recruiterDb.getJobsPosted(CompanyName);
+    }
 
     @Override
     public boolean Register() throws SQLException {

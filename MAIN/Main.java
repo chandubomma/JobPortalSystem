@@ -245,6 +245,46 @@ public class Main{
                 viewJobs();
                 break;
             }
+            case "viewprofile" : {
+
+            }
+            case "viewappliedjobs" : {
+
+            }
+            case "viewpostedjobs" : {
+                recruiter = (Recruiter) recruiterDb.getUser(args[1]);
+                if(recruiter == null) {
+
+                }else viewJobs(recruiter);
+                break;
+            }
+            case "searchprofile" : {
+
+            }
+            case "searchjob" : {
+
+            }
+            case "searchjobs" : {
+
+            }
+            case "searchjobsltminexperience" :{
+
+            }
+            case "searchjobsgtnumberofvacancies" : {
+
+            }
+            case "applyjob" : {
+
+            }
+            case "postjobs" : {
+
+            }
+            case "updatejobs" : {
+
+            }
+            case "deletejobs" : {
+
+            }
            
         }
     }
@@ -257,13 +297,28 @@ public class Main{
         }
         else if(args.length == 2){
             if(args[0].toLowerCase().equals("login"))return "login1";
-            if(args[0].equalsIgnoreCase("logout"))return "logout";
+            else if(args[0].equalsIgnoreCase("logout"))return "logout";
+            else if(args[0].equalsIgnoreCase("viewprofile"))return "viewprofile";
+            else if(args[0].equalsIgnoreCase("viewappliedjobs"))return "viewappliedjobs";
+            else if(args[0].equalsIgnoreCase("searchjob"))return "searchjob";
+            else if(args[0].equalsIgnoreCase("searchjobs"))return "searchjobs";
+            else if(args[0].equalsIgnoreCase("viewpostedjobs"))return "viewpostedjobs";
+            
         }
         else if(args.length==3){
             if(args[0].toLowerCase().equals("login"))return "login";
-            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("administrator"))return "registeradministrator";
-            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("recruiter"))return "registerrecruiter";
-            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("jobseeker"))return "registerjobseeker";
+            else if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("administrator"))return "registeradministrator";
+            else if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("recruiter"))return "registerrecruiter";
+            else if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("jobseeker"))return "registerjobseeker";
+            else if(args[0].equalsIgnoreCase("searchprofile"))return "searchprofile";
+            else if(args[0].equalsIgnoreCase("applyjob"))return "applyjob";
+            else if(args[0].equalsIgnoreCase("postjobs"))return "postjobs";
+            else if(args[0].equalsIgnoreCase("updatejobs"))return "updatejobs";
+            else if(args[0].equalsIgnoreCase("deletejobs"))return "deletejobs";
+        }
+        else if(args.length==4){
+            if(args[0].equalsIgnoreCase("searchjobs") && args[2].equalsIgnoreCase("lt"))return "searchjobsltminexperience";
+            else if(args[0].equalsIgnoreCase("searchjobs") && args[2].equalsIgnoreCase("gt"))return "searchjobsgtnumberofvacancies";
         }
         return null;
     }

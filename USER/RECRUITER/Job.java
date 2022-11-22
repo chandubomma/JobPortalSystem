@@ -39,8 +39,7 @@ public class Job {
         this.active= this.isActive();
     }
 
-    public Job() {
-    }
+   
 
     @Override
     public String toString() {
