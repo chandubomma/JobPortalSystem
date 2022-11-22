@@ -180,8 +180,9 @@ super.setUserType("jobseeker");
     }
 
     public boolean applyForJob(Job job) throws SQLException{
-        appliedJobs.add(job);    
+           
          if(jobSeekerDb.insertJobApplicant(this, job)){
+            appliedJobs.add(job); 
             return true;
         }
         return false;
