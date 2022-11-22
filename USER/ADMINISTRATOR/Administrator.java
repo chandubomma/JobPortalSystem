@@ -37,6 +37,7 @@ public class Administrator extends User{
     }
 
     public Administrator() {
+
     }
 
     @Override
@@ -113,6 +114,14 @@ public class Administrator extends User{
     public boolean removeUser(User user){
         //TODO
         return false;
+    }
+
+    public void getDetails() {
+        System.out.println("Name            : "+this.getFirstName()+" "+getLastName());
+        System.out.println("Date of birth   : "+this.getDateOfBirth());
+        System.out.println("Gender          : "+this.getGender());
+        System.out.println("Email           : "+this.getEmail());
+        System.out.println("Contact number  : "+this.getMobileNumber());
     }
 
     /*more methods to add come here */

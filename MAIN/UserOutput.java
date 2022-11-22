@@ -80,7 +80,9 @@ public class UserOutput {
     }
 
     public static void printAdministratorMenu(){
-
+        System.out.println("1 : Profile");
+        System.out.println("2 : Users");
+        System.out.println("3 : logout");
     }
 
     public static void printJobTitles(ArrayList<Job> jobList){
@@ -115,7 +117,7 @@ public class UserOutput {
        System.out.println("9. Back");
        System.out.print("Choose your option :");
     }
-     public static void printUpdatesRequirement(Recruiter user)
+     public static void printUpdatesRequirement()
     {
         System.out.println("1. Update firstname");
         System.out.println("2. Update lastname");
