@@ -135,7 +135,7 @@ public class Recruiter extends User {
     
     }
 
-    public static boolean postJobs(String pathCSV){
+    public  boolean postJobs(String pathCSV){
         CSVReader reader = null;  
         try  
         {  
@@ -145,10 +145,10 @@ public class Recruiter extends User {
         //read one line at a time  
             while ((nL = reader.readNext()) != null)  
             {  
-                int numberOfVacancies = Integer.parseInt(nL[5]);
-                int maxage = Integer.parseInt(nL[7]);
-                int minExperience = Integer.parseInt(nL[8]);
-               Job job = new Job(nL[0],nL[1],nL[2],nL[3],nL[4],numberOfVacancies,nL[6],maxage,minExperience,nL[9]);
+                int numberOfVacancies = Integer.parseInt(nL[4]);
+                int maxage = Integer.parseInt(nL[6]);
+                int minExperience = Integer.parseInt(nL[7]);
+               Job job = new Job(nL[0],nL[1],nL[2],this.getCompanyName(),nL[3],numberOfVacancies,nL[5],maxage,minExperience,nL[8]);
                if(recruiterDb.getJobRecord(job.getId())==null){
                if(recruiterDb.addJobRecord(job))
                 System.out.println("Posted Job with ID = "+job.getId()+" : "+job.getJobTitle());
