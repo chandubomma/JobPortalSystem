@@ -10,6 +10,7 @@ import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 import DATABASE.RecruiterDb;
+import DATABASE.INFO.Info;
 
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
@@ -459,6 +460,42 @@ public  class UserInput {
                 System.out.println("Successfully updated");
            }
            Main.administratorMenu();
+    }
+
+    public static void selectApplicant(Recruiter user) throws SQLException {
+        String email=scanEmail();
+        System.out.println("Description : ");
+        String description = scanner.nextLine();
+        user.selectApplicant(email,description);
+    }
+
+    public static void display_applicantViaID(Recruiter user) {
+        Info info=new Info();
+        System.out.print("Enter Job ID : ");
+        String ID =scanner.next();
+        info.display_applicants_via_ID(user, ID);
+
+    }
+    public static void display_applicantViaTitle(Recruiter user) {
+        Info info=new Info();
+        System.out.print("Enter Job title : ");
+        String title =scanner.next();
+        info.display_applicants_via_title(user, title);
+
+    }
+
+    public static void viewdetails(Recruiter recruiter) throws SQLException {
+        UserOutput.printApplicantDetails();
+        int choice = scanChoice();
+        if(choice==1){
+        String email=scanEmail();
+        Info info=new Info();
+        JobSeeker jobSeeker=info.getApplicantDetails(email);
+        jobSeeker.getDetails();
+        }
+        if(choice==2){
+         Main.applicationsMenu();
+        }
     }
 
    

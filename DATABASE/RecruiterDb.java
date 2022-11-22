@@ -62,4 +62,12 @@ public class RecruiterDb extends UserDb {
     public boolean insertRecruiterJob(Recruiter recruiter, Job job) {
         return false;
     }
+
+    public boolean selectApplicant(String email,String description) throws SQLException {
+        String Query = "update applicant set status='applied',description='"+description+"' where email ='"+email+"';";
+        return statement.execute(Query);
+    }
+
+  
+  
 }
