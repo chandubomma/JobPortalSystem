@@ -38,4 +38,15 @@ public class Info extends UserDb {
    }
    System.out.println("--------------------------------------------------------------------------");
  }
+ public void dispay_users(Administrator user) throws SQLException{
+  int c=0;
+  ResultSet rs =statement.executeQuery("select * from users;");
+  while(rs.next()){
+    System.out.printf("| %30s| %20s| %10s",rs.getString("email"),rs.getString("usertype"),rs.getString("loginstatus"));
+    if(rs.getString("loginstatus")=="1"){
+      c++;
+    }
+  }
+  System.out.println("Active users : "+c);
+ }
 }

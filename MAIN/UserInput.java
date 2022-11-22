@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import USER.User;
+import USER.ADMINISTRATOR.Administrator;
 import USER.JOBSEEKER.JobSeeker;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
@@ -12,6 +13,7 @@ import DATABASE.RecruiterDb;
 
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
+   
 
     public static JobSeeker scanJobSeekerDetails(){
         JobSeeker jobSeeker = new JobSeeker();
@@ -98,6 +100,25 @@ public  class UserInput {
         System.out.print("Enter Description :");
         job.setDescription(scanner.next());
         return job;
+    }
+    public static Administrator scanAdministratorDetails() {
+        Administrator administrator=new Administrator();
+        JobSeeker jobSeeker = new JobSeeker();
+        System.out.print("Enter First Name    : ");
+        administrator.setFirstName(scanner.next());
+        System.out.print("Enter Last Name     : ");
+        administrator.setLastName(scanner.next());
+        System.out.print("Enter Email         : ");
+        administrator.setEmail(scanner.next());
+        System.out.print("Enter Password      : ");
+        administrator.setPassword(scanner.next());
+        System.out.print("Enter Date Of Birth : ");
+        administrator.setDateOfBirth(scanner.next());
+        System.out.println("Gender            : ");
+        administrator.setGender(scanner.next());
+        System.out.println("Mobile number : ");
+        administrator.setMobileNumber(scanner.next());
+        return administrator;
     }
 
     public static String scanPassword(){
@@ -236,7 +257,7 @@ public  class UserInput {
     }
     
      public static void modifyRecruiter(Recruiter recruiter) throws SQLException{
-        UserOutput.printUpdatesRequirement(recruiter);
+        UserOutput.printUpdatesRequirement();
         System.out.print("Enter the field you wish to update : ");
         int choice = scanner.nextInt();
         switch(choice)
@@ -295,7 +316,7 @@ public  class UserInput {
                 recruiter.Register();
                 System.out.println("Successfully updated");
            }
-           Main.jobSeekerMenu();
+           Main.recruiterMenu();
         
     }
     
@@ -373,8 +394,74 @@ public  class UserInput {
            recruiterDb.updateJobRecord(job);
            System.out.println("Successfully updated");
          }
-         Main.jobSeekerMenu();
+         Main.recruiterJobMenu();
      }
 
+
+    public static void modifyAdministrator(Administrator user) throws SQLException {
+        UserOutput.printUpdatesRequirement();
+        System.out.print("Enter the field you wish to update : ");
+        int choice = scanner.nextInt();
+        switch(choice)
+        {
+            case(1):
+            {
+                System.out.print("Enter the new First Name : ");
+                String name=scanner.next();
+                user.setFirstName(name);
+                break;
+            }
+            case(2):
+            {
+                System.out.print("Enter new Last Name : ");
+                String name=scanner.next();
+                user.setLastName(name);
+                break;
+            }
+            case(3):
+            {
+                System.out.print("Enter new email : ");
+                String email=scanner.next();
+                user.setEmail(email);
+                break;
+            }
+            case(4):
+            {
+                System.out.print("Enter new password : ");
+                String password=scanner.next();
+                user.setPassword(password);
+                break;
+            }
+            case(5):
+            {
+                System.out.print("Enter new Date Of Birth (yyyy-MM-dd) : ");
+                String dob=scanner.next();
+                user.setDateOfBirth(dob);
+                break;
+            }
+            case(6):
+            {
+                System.out.print("Enter new Mobile Number : ");
+                String mn=scanner.next();
+                user.setMobileNumber(mn);
+                break;
+            }
+            case(7):
+            {  
+                Main.administratorMenu();
+            }
+            
+        }
+           if(choice!=7)
+           {
+                user.deleteUser();
+                user.Register();
+                System.out.println("Successfully updated");
+           }
+           Main.administratorMenu();
+    }
+
+   
+     
   
 }
