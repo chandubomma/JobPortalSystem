@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import com.opencsv.CSVReader;
 import DATABASE.RecruiterDb;
 import USER.User;
+import USER.JOBSEEKER.Application;
+
 import java.util.ArrayList;
 
 public class Recruiter extends User {
@@ -218,8 +220,8 @@ public class Recruiter extends User {
         return recruiterDb.postJob(this,job);    
     }
 
-    public void selectApplicant(String email,String description) throws SQLException {
-           recruiterDb.selectApplicant(email,description);
+    public void selectApplicant(Application application,String description) throws SQLException {
+           recruiterDb.selectApplicant(application,description);
     }
 
    

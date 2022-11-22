@@ -14,7 +14,7 @@ import DATABASE.INFO.Info;
 
 public  class UserInput {
     private static Scanner scanner = new Scanner(System.in);
-   
+   private static RecruiterDb recruiterDb = new RecruiterDb();
 
     public static JobSeeker scanJobSeekerDetails(){
         JobSeeker jobSeeker = new JobSeeker();
@@ -463,10 +463,14 @@ public  class UserInput {
     }
 
     public static void selectApplicant(Recruiter user) throws SQLException {
+        System.out.print("Enter JobSeeker Email : ");
         String email=scanEmail();
-        System.out.println("Description : ");
+        System.out.print("Enter Job ID : ");
+        String jobID = scanner.next();
+        System.out.print("Description : ");
         String description = scanner.nextLine();
-        user.selectApplicant(email,description);
+        
+        user.selectApplicant(recruiterDb.getApplicant(email, jobID),description);
     }
 
     public static void display_applicantViaID(Recruiter user) {
