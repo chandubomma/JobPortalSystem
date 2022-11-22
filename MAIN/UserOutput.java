@@ -17,6 +17,7 @@ public class UserOutput {
         System.out.println("login 'useremail'");
         System.out.println("logout 'useremail'                                          --- to logout user with email 'useremail'");
         System.out.println("viewprofile 'useremail'                                     --- user can view his profile using this arguments");
+        System.out.println("updateprofile 'useremail'                                   --- arguments to update any type of user");
         System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user] --- recruiter or administrator with email 'useremail' can search and view profile of any other user with email 'useremail2'");
         System.out.println("viewjobs                                                    --- prints all job posts available on the job4u platform");
         System.out.println("viewappliedjobs 'jobseekeremail'                            --- to view jobs applied by a jobseeker with email 'useremail'");
@@ -98,17 +99,7 @@ public class UserOutput {
         System.out.println(variable+" : View All");
     }
 
-    public static void printJobDetails(Job job){
-        System.out.println("Job Title : "+job.getJobTitle());
-        System.out.println("Job ID : "+job.getId());
-        System.out.println("Company Name : "+job.getCompanyName());
-        System.out.println("Location : "+job.getLocation());
-        System.out.println("Job Description : "+job.getDescription());
-        System.out.println("Skills : "+job.getSkillRequired());
-        System.out.println("Vacancies : "+job.getNumberOfVacancies());
-        System.out.println("Experience : "+job.getMinExperience());
-        System.out.println("Last Date : "+job.getDeadline());
-    }
+    
     public static void printUpdatesRequirement(JobSeeker user){
        System.out.println("1. Update  firstname");
        System.out.println("2. Update  lastname");

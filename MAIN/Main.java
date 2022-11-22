@@ -7,6 +7,7 @@ import java.util.Scanner;
 import DATABASE.AdministratorDb;
 import DATABASE.JobSeekerDb;
 import DATABASE.RecruiterDb;
+import DATABASE.UserDb;
 import DATABASE.INFO.Info;
 import USER.User;
 import USER.ADMINISTRATOR.Administrator;
@@ -113,6 +114,17 @@ public class Main{
          }
      }
     public static void modifyUserProfile() throws SQLException{
+        if(user.getUserType().equalsIgnoreCase("jobseeker")){
+            UserInput.modifyJobseeker(jobseeker); 
+          }
+        if(user.getUserType().equalsIgnoreCase("recruiter")){
+            UserInput.modifyRecruiter(recruiter); 
+          }
+          if(user.getUserType().equalsIgnoreCase("administrator")){
+            UserInput.modifyAdministrator(administrator);
+        }  
+    }
+    public static void modifyUserProfile(User user) throws SQLException{
         if(user.getUserType().equalsIgnoreCase("jobseeker")){
             UserInput.modifyJobseeker(jobseeker); 
           }
@@ -257,7 +269,9 @@ public class Main{
                 break;
             }
             case "logout" : {
-
+                user = administratorDb.getUser(args[1]);
+                logout(user);
+                break;
             }
             case "registeradministrator" : {
                 registerAdministrator(args[2]);
@@ -276,7 +290,13 @@ public class Main{
                 break;
             }
             case "viewprofile" : {
-
+                viewProfile(args[1]);
+                break;
+            }
+            case "updateprofile" : {
+                user = administratorDb.getUser(args[1]);
+                modifyUserProfile();
+                break;
             }
             case "viewappliedjobs" : {
 
@@ -284,36 +304,53 @@ public class Main{
             case "viewpostedjobs" : {
                 recruiter = (Recruiter) recruiterDb.getUser(args[1]);
                 if(recruiter == null) {
-
+                    System.out.println("Invalid Recruiter Credentials");
                 }else viewJobs(recruiter);
                 break;
             }
             case "searchprofile" : {
+                user = administratorDb.getUser(args[1]);
+                if(user==null){
+                    System.out.println("No authorized person found with email = "+args[1]);
+                }
+                else if(user.getUserType().equalsIgnoreCase("recruiter") || user.getUserType().equalsIgnoreCase("administrator")){
+                   viewProfile(args[2]);
+                }
+                else System.out.println("You are not authorized to view details");
+                break;
 
             }
             case "searchjob" : {
-
+                viewJob(args[1]);
+                break;
             }
             case "searchjobs" : {
-
+                viewJobs(args[1]);
+                break;
             }
             case "searchjobsltminexperience" :{
-
+                viewJobs(args[1], args[3]);
+                break;
             }
             case "searchjobsgtnumberofvacancies" : {
-
+                int numberOfVacancies = Integer.parseInt(args[3]);
+                viewJobs(args[1], numberOfVacancies);
+                break;
             }
             case "applyjob" : {
 
             }
             case "postjobs" : {
-
+               postJobs(args);
+               break;
             }
             case "updatejobs" : {
-
+                postJobs(args);
+                break;
             }
             case "deletejobs" : {
-
+                deleteJobs(args);
+                break;
             }
            
         }
@@ -329,6 +366,7 @@ public class Main{
             if(args[0].toLowerCase().equals("login"))return "login1";
             else if(args[0].equalsIgnoreCase("logout"))return "logout";
             else if(args[0].equalsIgnoreCase("viewprofile"))return "viewprofile";
+            else if(args[0].equalsIgnoreCase("updateprofile"))return "updateprofile";
             else if(args[0].equalsIgnoreCase("viewappliedjobs"))return "viewappliedjobs";
             else if(args[0].equalsIgnoreCase("searchjob"))return "searchjob";
             else if(args[0].equalsIgnoreCase("searchjobs"))return "searchjobs";
@@ -354,6 +392,9 @@ public class Main{
     }
 
     public static void logout() throws SQLException{
+        user.Logout();
+    }
+    public static void logout(User user) throws SQLException{
         user.Logout();
     }
 
@@ -401,6 +442,37 @@ public class Main{
         return user;
     }
 
+    public static void postJobs(String[] args) throws SQLException{
+        user = administratorDb.getUser(args[1]);
+        if(user==null){
+            System.out.println("Invalid Recruiter Credentials");
+            return;
+        }
+        else if(user.isLoggedIn().equalsIgnoreCase("false")){
+            System.out.println("Please login to continue");
+            return;
+        }
+        else if(user.getUserType().equalsIgnoreCase("recruiter")){
+            Recruiter.postJobs(args[2]);
+        }
+        else System.out.println("You are not authorized to perform this operation");
+    }
+
+    public static void deleteJobs(String[] args) throws SQLException{
+        user = administratorDb.getUser(args[1]);
+        if(user==null){
+            System.out.println("Invalid Recruiter Credentials");
+            return;
+        }
+        else if(user.isLoggedIn().equalsIgnoreCase("false")){
+            System.out.println("Please login to continue");
+            return;
+        }
+        else if(user.getUserType().equalsIgnoreCase("recruiter")){
+            Recruiter.deleteJobs(args[2]);
+        }
+        else System.out.println("You are not authorized to perform this operation");
+    }
     
 
     public static User login(String[] args) throws SQLException{
@@ -456,11 +528,66 @@ public class Main{
         return user;
     }
 
+    public static void viewProfile(String email) throws SQLException{
+        user = administratorDb.getUser(email);
+        if(user==null){
+            System.out.println("No profile found with email = "+email);
+            return;
+        }
+        user.getDetails();
+        
+    }
+
     public static void viewJobs() throws SQLException{
         ArrayList<Job> jobList = administratorDb.getAllJobs();
         for(Job job : jobList){
-            UserOutput.printJobDetails(job);
+            job.printJobDetails();
             System.out.println("***********************************************************************************************************");
+        }
+    }
+
+    public static void viewJobs(String jobTitle) throws SQLException{
+        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        for(Job job : jobList){
+            String title = job.getJobTitle();
+            if(title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)){
+                job.printJobDetails();
+                System.out.println("***********************************************************************************************************");  
+            }
+        }
+    }
+
+    public static void viewJobs(String jobTitle,String minExperience) throws SQLException{
+        int minExp = Integer.parseInt(minExperience);
+        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        for(Job job : jobList){
+            String title = job.getJobTitle();
+            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)) && job.getMinExperience()<=minExp){
+                job.printJobDetails();
+                System.out.println("***********************************************************************************************************");  
+            }
+        }
+    }
+
+    public static void viewJobs(String jobTitle,int numberOfVacancies) throws SQLException{
+        
+        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        for(Job job : jobList){
+            String title = job.getJobTitle();
+            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)) && job.getNumberOfVacancies()>=numberOfVacancies){
+                job.printJobDetails();
+                System.out.println("***********************************************************************************************************");  
+            }
+        }
+    }
+
+    public static void viewJob(String jobID) throws SQLException{
+        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        for(Job job : jobList){
+           if(job.getId().equalsIgnoreCase(jobID)){
+            job.printJobDetails();
+            System.out.println("***********************************************************************************************************");
+           }
         }
     }
 
@@ -468,10 +595,10 @@ public class Main{
         ArrayList<Job> jobList = recruiterDb.getJobsPosted(recruiter.getCompanyName());
         UserOutput.printJobTitles(jobList);
         int choice = UserInput.scanChoice();
-        if(choice >=1 && choice <= jobList.size())UserOutput.printJobDetails(jobList.get(choice));
+        if(choice >=1 && choice <= jobList.size())jobList.get(choice).printJobDetails();
         else if(choice == jobList.size()+1){
             for(Job job : jobList){
-                UserOutput.printJobDetails(job);
+                job.printJobDetails();
                 System.out.println("***********************************************************************************************************");
             }
         }

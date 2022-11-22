@@ -153,15 +153,30 @@ super.setUserType("jobseeker");
         }
     }
 
-    public void getAppliedJobs() {
+    public void printAppliedJobs() {
 
      for(Job i : appliedJobs){
         System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
      }
     }
 
+    public void printEligibleJobs() {
+
+        for(Job i : eligibleJobs){
+           System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
+        }
+       }
+
     public void setAppliedJobs(ArrayList<Job> appliedJobs) {
         this.appliedJobs = appliedJobs;
+    }
+
+    public void setEligibleJobs(ArrayList<Job> eligibleJobs) {
+        this.eligibleJobs = eligibleJobs;
+    }
+
+    public ArrayList<Job> getAppliedJobs() {
+        return appliedJobs;
     }
 
     public boolean applyForJob(Job job) throws SQLException{
