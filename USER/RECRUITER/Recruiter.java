@@ -2,7 +2,9 @@ package USER.RECRUITER;
 import java.sql.SQLException;
 import java.io.FileReader;  
 import java.io.IOException;
-import com.opencsv.CSVReader; 
+import java.sql.SQLException;
+
+import com.opencsv.CSVReader;
 import DATABASE.RecruiterDb;
 import USER.User;
 
@@ -85,9 +87,11 @@ public class Recruiter extends User {
         this.setLoggedIn("true");
         this.setCompanyName(nL[7]);
         this.setDesignation(nL[8]);
+           if(recruiterDb.addUserRecord(this)){
+            if(recruiterDb.addRecruiterRecord(this))return true;
+            else return false;
+           }else return false;
            
-            return(recruiterDb.addUserRecord(this) &&
-            recruiterDb.addRecruiterRecord(this)); 
         }  
         catch (Exception e)   
         {  
@@ -165,6 +169,10 @@ public class Recruiter extends User {
         System.out.println("MOBILE NUMBER   : "+this.getMobileNumber());
         System.out.println("COMPANY NAME    : "+this.getCompanyName());
         System.out.println("DESIGNATION     : "+this.getDesignation());
+    }
+
+    public boolean postJob(Job job) {
+        return false;
     }
 }
 

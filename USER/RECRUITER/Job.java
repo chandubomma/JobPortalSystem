@@ -35,6 +35,9 @@ public class Job {
         this.active= this.isActive();
     }
 
+    public Job() {
+    }
+
     @Override
     public String toString() {
         return "Job [id=" + id + ", jobTitle=" + jobTitle + ", location=" + location + ", companyName=" + companyName
