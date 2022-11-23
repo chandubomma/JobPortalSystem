@@ -15,7 +15,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public  boolean deleteRecruiterRecord(Recruiter recruiter) throws SQLException{
-        String Query = "delete from recruiter where email="+recruiter.getEmail();
+        String Query = "delete from recruiter where email='"+recruiter.getEmail()+"'";
         return !statement.execute(Query);
     }
 
@@ -49,7 +49,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public ArrayList<Job> getJobsPosted(String companyName) throws SQLException{
-        String Query = "select * from job where companyname = "+companyName;
+        String Query = "select * from job where companyname = '"+companyName+"';";
         ResultSet rs = statement.executeQuery(Query);
         ArrayList<Job> jobList = new ArrayList<>();
         while(rs.next()){
@@ -65,7 +65,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public boolean selectApplicant(Application application,String description) throws SQLException {
-        String Query = "update applicant set status='applied',message='"+description+"' where email ='"+application.getApplicantEmail()+"' and id = '"+application.getJobID()+"'";
+        String Query = "update applicant set status='selected',message='"+description+"' where email ='"+application.getApplicantEmail()+"' and id = '"+application.getJobID()+"'";
         return statement.execute(Query);
     }
 
