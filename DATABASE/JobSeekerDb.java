@@ -28,6 +28,11 @@ public class JobSeekerDb extends UserDb {
         return !statement.execute(Query);
     }
 
+    public ResultSet appliedJobs(JobSeeker jobSeeker) throws SQLException {
+        String Query ="Select a.*,j.* from applicants a,job j where a.id=j.id and a.email'"+jobSeeker.getEmail()+"'';";
+        return statement.executeQuery(Query);
+    }
+
    
 
 
