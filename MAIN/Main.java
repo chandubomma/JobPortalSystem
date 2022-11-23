@@ -205,9 +205,9 @@ public class Main{
     }
 
     public static void recruiterJobMenu() throws SQLException{
+        while(true){
         UserOutput.printRecruiterJobMenu();
         int choice = UserInput.scanChoice();
-        
         switch(choice){
             case 1 :{
                 viewJobs(recruiter);
@@ -231,6 +231,10 @@ public class Main{
                 break;
             }
         }
+        if(choice==5){
+            break;
+        }
+    }
     }
 
     public static void applicationsMenu() throws SQLException{
@@ -750,14 +754,14 @@ public class Main{
         ArrayList<Job> jobList = recruiterDb.getJobsPosted(recruiter.getCompanyName());
         UserOutput.printJobTitles(jobList);
         int choice = UserInput.scanChoice();
-        if(choice >=1 && choice <= jobList.size())jobList.get(choice).printJobDetails();
+        if(choice >=1 && choice <= jobList.size())jobList.get(choice-1).printJobDetails();
         else if(choice == jobList.size()+1){
             for(Job job : jobList){
                 job.printJobDetails();
                 System.out.println("***********************************************************************************************************");
             }
         }
-        else System.out.println("Invalid Choice!");
+        else{ System.out.println("Invalid Choice!");}
     }
 
 

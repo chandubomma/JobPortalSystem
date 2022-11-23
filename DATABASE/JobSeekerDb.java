@@ -41,7 +41,7 @@ public class JobSeekerDb extends UserDb {
     }
 
     public ResultSet appliedJobs(JobSeeker jobSeeker) throws SQLException {
-        String Query ="Select a.*,j.* from applicants a,job j where a.id=j.id and a.email'"+jobSeeker.getEmail()+"'';";
+        String Query ="Select a.*,j.* from applicants a,job j where a.id=j.id and a.email='"+jobSeeker.getEmail()+"';";
         return statement.executeQuery(Query);
     }
 

@@ -259,7 +259,6 @@ public  class UserInput {
     
      public static void modifyRecruiter(Recruiter recruiter) throws SQLException{
         UserOutput.printUpdatesRequirement();
-        System.out.print("Enter the field you wish to update : ");
         int choice = scanner.nextInt();
         switch(choice)
         {
