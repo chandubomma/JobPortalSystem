@@ -33,7 +33,7 @@ public class UserDb  {
     }
      
     public  boolean deleteUserRecord(User user) throws SQLException{
-        String Query = "delete from user where email= '"+user.getEmail()+"';";
+        String Query = "delete from user where email= '"+user.getEmail()+"'";
         return !statement.execute(Query);
     }
 
@@ -67,10 +67,21 @@ public class UserDb  {
             return user;
         }
         else if(userType.toLowerCase().equals("recruiter")){
+            user = new Recruiter(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"));
             rs.close();
+<<<<<<< HEAD
             rs = statement.executeQuery("Select user.*,recruiter.* from user,recruiter r where user.email=r.email and user.email='"+email+"';");
             if(!rs.next())return null;
             user = new Recruiter(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getString("companyname"),rs.getString("designation"));
+=======
+            rs = statement.executeQuery("select * from recruiter where email = '"+user.getEmail()+"'");
+            if(rs.next()){
+                Recruiter recruiter = (Recruiter)user;
+                recruiter.setCompanyName(rs.getString("companyname"));
+                recruiter.setDesignation(rs.getString("designation"));
+                user = recruiter;
+            }
+>>>>>>> 9d710ffc0636edbb33df50198ff78c3d127cf896
             return user;
         }
         else if(userType.toLowerCase().equals("administrator")){
