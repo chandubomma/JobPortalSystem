@@ -42,6 +42,7 @@ public class Main{
                    if(user==null)return;
                    if(user.getUserType().toLowerCase().equals("jobseeker")){
                    jobseeker = (JobSeeker) administratorDb.getUser(user.getEmail());
+                   jobseeker.setAppliedJobs();
                     jobSeekerMenu();
                 }
                     else if(user.getUserType().toLowerCase().equals("recruiter")){
@@ -165,7 +166,9 @@ public class Main{
             break;
             case 2 : UserInput.applyjobs(jobseeker);
             break;
-            case 3 : jobseeker.getAppliedJobs();
+            case 3 : 
+            
+            jobseeker.printAppliedJobs();
             break;
             case 4 : jobSeekerMenu();
             break;

@@ -170,7 +170,13 @@ super.setUserType("jobseeker");
     public void setAppliedJobs(ArrayList<Job> appliedJobs) {
         this.appliedJobs = appliedJobs;
     }
-
+   public void setAppliedJobs() throws SQLException{
+    ResultSet rs = jobSeekerDb.appliedJobs(this);
+    while(rs.next()){
+     Job job= new Job(rs.getString("id"),rs.getString("jobtitle"),rs.getString("location"),rs.getString("companyName"),rs.getString("deadLine"),rs.getInt("numberOfVacancies"),rs.getString("skillRequired"),rs.getInt("maxAge"),rs.getInt("minExperience"),rs.getString("description"));
+     appliedJobs.add(job);   
+    }
+   }
     public void setEligibleJobs(ArrayList<Job> eligibleJobs) {
         this.eligibleJobs = eligibleJobs;
     }
