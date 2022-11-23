@@ -18,7 +18,7 @@ public class UserOutput {
         System.out.println("logout 'useremail'                                          --- to logout user with email 'useremail'");
         System.out.println("register recruiter 'path to csv file containing recruiter details' --- recruiter can register account using this arguments");
         System.out.println("register administrator 'path to csv file containing administrator details' --- administrator can register account using this arguments");
-        System.out.println("register recruiter 'path to csv file containing recruiter details' --- recruiter can register account using this arguments");
+        System.out.println("register jobseeker 'path to csv file containing jobseeker details' --- jobseeker can register account using this arguments");
         System.out.println("viewprofile 'useremail'                                     --- user can view his profile using this arguments");
         System.out.println("updateprofile 'useremail'                                   --- arguments to update any type of user");
         System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user] --- recruiter or administrator with email 'useremail' can search and view profile of any other user with email 'useremail2'");
@@ -29,7 +29,7 @@ public class UserOutput {
         System.out.println("searchjobs 'jobtitle'                                       --- search jobs using job title string");
         System.out.println("searchjobs 'jobtitle' lt 'min experience'                   --- search jobs using job title string and required experience less than 'min experience'");
         System.out.println("searchjobs 'jobtitle' gt 'number of vacancies'              --- search jobs using job title string and number of vacancies greater than 'no of vacancies'");
-        System.out.println("applyjob 'useremail' 'jobid'                                --- to apply for a job post with id = 'jobid'");
+        System.out.println("applyjob 'jobseekeremail' 'jobid'                                --- to apply for a job post with id = 'jobid'");
         System.out.println("postjobs 'recruiteremail' 'jobs csv file path'              --- recruiter can post multiple jobs using csv file");
         System.out.println("updatejobs 'recruiteremail' 'jobs csv file path'            --- recruiter can update multiple job posts using csv file");
         System.out.println("deletejobs 'recruiteremail' 'job ids csv file path          --- recruiter can delete multiple job posts with csv file containing job ids");

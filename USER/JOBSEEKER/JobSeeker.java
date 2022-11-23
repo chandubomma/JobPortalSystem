@@ -149,21 +149,21 @@ super.setUserType("jobseeker");
             Job obj = new Job(rs.getString("id"),rs.getString("jobtitle"),rs.getString("location"),rs.getString("companyname"),rs.getString("deadline"),rs.getInt("numberofvacancies"),rs.getString("skillrequired"),rs.getInt("maxage"),rs.getInt("minexperience"),rs.getString("description"));
             if(obj.isEligible(this))
                 this.eligibleJobs.add(obj);
-                System.out.println(obj.getId());
+              
         }
     }
 
     public void printAppliedJobs() {
 
      for(Job i : appliedJobs){
-        System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
+        System.out.printf("| %7s | %20s | %20s |\n",i.getId(),i.getJobTitle(),i.getCompanyName());
      }
     }
 
     public void printEligibleJobs() {
-
+        System.out.printf("| %7s | %20s | %20s |\n","jobID","jobTitle","CompanyName");
         for(Job i : eligibleJobs){
-           System.out.printf("| %7s | %20s | %20s |",i.getId(),i.getJobTitle(),i.getCompanyName());
+           System.out.printf("| %7s | %20s | %20s |\n",i.getId(),i.getJobTitle(),i.getCompanyName());
         }
        }
 
@@ -217,16 +217,16 @@ super.setUserType("jobseeker");
         this.setGender(nL[4]);
         this.setMobileNumber(nL[5]);
         this.setDateOfBirth(nL[6]);
-        this.setUserType("recruiter");
+        this.setUserType("jobseeker");
         this.setLoggedIn("true");
-        this.setAge();
-        this.setCollege(nL[7]);
-        this.setQualification(nL[8]);
-        this.setPercentage(Double.parseDouble(nL[9]));
-        this.setSkill1(nL[10]);
-        this.setSkill2(nL[11]);
-        this.setSkill3(nL[12]);
-        this.setExperience(Integer.parseInt(nL[13]));
+        this.setAge(Integer.parseInt(nL[7]));
+        this.setCollege(nL[8]);
+        this.setQualification(nL[9]);
+        this.setPercentage(Double.parseDouble(nL[10]));
+        this.setSkill1(nL[11]);
+        this.setSkill2(nL[12]);
+        this.setSkill3(nL[13]);
+        this.setExperience(Integer.parseInt(nL[14]));
            
             return(jobSeekerDb.addUserRecord(this) &&
             jobSeekerDb.addJobSeekerRecord(this)); 
