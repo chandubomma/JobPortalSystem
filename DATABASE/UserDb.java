@@ -61,27 +61,17 @@ public class UserDb  {
         String userType = rs.getString("usertype");
         if(userType.toLowerCase().equals("jobseeker")){
             rs.close();
-            rs = statement.executeQuery("Select user.*,jobseeker.* from user,jobseeker j where user.email=j.email and user.email='"+email+"';");
+            rs = statement.executeQuery("Select user.*,j.* from user,jobseeker j where user.email=j.email and user.email='"+email+"';");
            if (!rs.next())return null;
             user = new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getInt("age"),rs.getString("college"),rs.getString("qualification"),rs.getDouble("percentage"),rs.getString("skill1"),rs.getString("skill2"),rs.getString("skill3"),rs.getInt("experience"));
             return user;
         }
         else if(userType.toLowerCase().equals("recruiter")){
-            user = new Recruiter(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"));
             rs.close();
-<<<<<<< HEAD
-            rs = statement.executeQuery("Select user.*,recruiter.* from user,recruiter r where user.email=r.email and user.email='"+email+"';");
-            if(!rs.next())return null;
-            user = new Recruiter(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getString("companyname"),rs.getString("designation"));
-=======
-            rs = statement.executeQuery("select * from recruiter where email = '"+user.getEmail()+"'");
-            if(rs.next()){
-                Recruiter recruiter = (Recruiter)user;
-                recruiter.setCompanyName(rs.getString("companyname"));
-                recruiter.setDesignation(rs.getString("designation"));
-                user = recruiter;
-            }
->>>>>>> 9d710ffc0636edbb33df50198ff78c3d127cf896
+            rs = statement.executeQuery("Select user.*,r.* from user,recruiter r where user.email=r.email and user.email='"+email+"';");
+                     if(!rs.next()) return null;
+                        user = new Recruiter(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getString("companyname"),rs.getString("designation"));
+            
             return user;
         }
         else if(userType.toLowerCase().equals("administrator")){

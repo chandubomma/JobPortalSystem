@@ -65,14 +65,14 @@ public void display_applicants(Recruiter user) {
   }
 }
 public void display_applicants_via_ID(Recruiter user,String ID){
-String Query="Select a.email,a.id,a.jobtitle,j.skillrequired,j.minexperience from applicants a,jobseeker j where a.email=j.email and a.id='"+ID+"' and a.companyname='"+user.getCompanyName()+"';";
+String Query="Select a.email,a.id,a.jobtitle,j.skill1,j.skill2,j.skill3,j.minexperience from applicants a,jobseeker j where a.email=j.email and a.id='"+ID+"' and a.companyname='"+user.getCompanyName()+"';";
 ResultSet rs;
 try {
   rs = statement.executeQuery(Query);
 
-System.out.printf("| %30s| %10s| %20s | %20s| %11s|","email","job ID","Job title","skill needed","experience");
+System.out.printf("| %30s| %10s| %20s | %20s| %20s| %20s| %11s|","email","job ID","Job title","skill1","skill2","skill3","experience");
 while(rs.next()){
-System.out.printf("| %30s| %10s| %20s | %20s| %11s|",rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5));  
+System.out.printf("| %30s| %10s| %20s | %20s| %20s| %20s| %11s|",rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7));  
 }
 }
  catch (SQLException e) {
@@ -95,7 +95,8 @@ public void display_applicants_via_title(Recruiter user, String title) {
   }
 }
 public JobSeeker getApplicantDetails(String email) throws SQLException {
-  ResultSet rs = statement.executeQuery("Select u.*,j.* from Jobseeker where u.email=j.email and u.email='"+email+"';");
+  ResultSet rs = statement.executeQuery("Select u.*,j.* from user u, Jobseeker j where u.email=j.email and u.email='"+email+"';");
+  rs.next();
  JobSeeker user = new JobSeeker(rs.getString("firstname"),rs.getString("lastname"),rs.getString("email"),rs.getString("password"),rs.getString("gender"),rs.getString("mobilenumber"),rs.getString("dateofbirth"),rs.getString("usertype"),rs.getString("loginstatus"),rs.getInt("age"),rs.getString("college"),rs.getString("qualification"),rs.getDouble("percentage"),rs.getString("skill1"),rs.getString("skill2"),rs.getString("skill3"),rs.getInt("experience"));
    return user;
 }
