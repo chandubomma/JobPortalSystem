@@ -20,7 +20,7 @@ public class UserOutput {
         System.out.println("updateprofile 'useremail'                                   --- arguments to update any type of user");
         System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user] --- recruiter or administrator with email 'useremail' can search and view profile of any other user with email 'useremail2'");
         System.out.println("viewjobs                                                    --- prints all job posts available on the job4u platform");
-        System.out.println("viewappliedjobs 'jobseekeremail'                            --- to view jobs applied by a jobseeker with email 'useremail'");
+        System.out.println("viewapplications 'jobseekeremail'                            --- to view jobs applied by a jobseeker with email 'useremail'");
         System.out.println("viewpostedjobs 'recruiteremail'                             --- to view jobs posted by a recruiter");
         System.out.println("searchjob 'jobid'                                           --- to search details of a job post with job id 'jobid'");
         System.out.println("searchjobs 'jobtitle'                                       --- search jobs using job title string");
@@ -30,6 +30,9 @@ public class UserOutput {
         System.out.println("postjobs 'recruiteremail' 'jobs csv file path'              --- recruiter can post multiple jobs using csv file");
         System.out.println("updatejobs 'recruiteremail' 'jobs csv file path'            --- recruiter can update multiple job posts using csv file");
         System.out.println("deletejobs 'recruiteremail' 'job ids csv file path          --- recruiter can delete multiple job posts with csv file containing job ids");
+        System.out.println("viewapplicants 'recruiteremail'                             --- view all job applications applied for this recruiter");
+        System.out.println("viewapplicants 'recruiteremail' 'jobid'                     --- view job applications for a job with id  = jobid");
+        System.out.println("selectapplicant 'recruiteremail' 'jobseekeremail' ,jobid'   --- to select a application by recruiter");
          // add more...
         System.out.println("***********************************************************************************************************************");
 

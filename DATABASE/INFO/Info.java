@@ -40,7 +40,7 @@ public class Info extends UserDb {
    }
    System.out.println("--------------------------------------------------------------------------");
  }
- public void dispay_users(Administrator user) throws SQLException{
+ public void display_users(Administrator user) throws SQLException{
   int c=0;
   ResultSet rs =statement.executeQuery("select * from users;");
   while(rs.next()){

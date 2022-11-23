@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import USER.JOBSEEKER.Application;
 import USER.RECRUITER.Job;
 import USER.RECRUITER.Recruiter;
 
@@ -63,8 +64,8 @@ public class RecruiterDb extends UserDb {
         return false;
     }
 
-    public boolean selectApplicant(String email,String description) throws SQLException {
-        String Query = "update applicant set status='applied',description='"+description+"' where email ='"+email+"';";
+    public boolean selectApplicant(Application application,String description) throws SQLException {
+        String Query = "update applicant set status='applied',message='"+description+"' where email ='"+application.getApplicantEmail()+"' and id = '"+application.getJobID()+"'";
         return statement.execute(Query);
     }
 
@@ -74,6 +75,29 @@ public class RecruiterDb extends UserDb {
         return statement.execute(Query);
     }
 
+    public ArrayList<Application> getApplicants(String companyName) throws SQLException{
+        String Query = "select * from applicants where companyname = '"+companyName+"'";
+       ResultSet rs = statement.executeQuery(Query);
+       ArrayList<Application> applications = new ArrayList<>();
+       while(rs.next()){
+        applications.add(new Application(rs.getString("email"), rs.getString("id"), rs.getString("jobtitle"), rs.getString("companyname"), rs.getString("status"), rs.getString("message")));
+       }
+       return applications;
+    }
+
+    public  Application getApplicant(String email,String jobID)throws SQLException{
+        String Query = "select * from applicants where email = '"+email+"' and id = '"+jobID+"'";
+        ResultSet rs = statement.executeQuery(Query);
+        
+        if(rs.next()){
+        Application application= new Application(rs.getString("email"), rs.getString("id"), rs.getString("jobtitle"), rs.getString("companyname"), rs.getString("status"), rs.getString("message"));
+        return application;
+        }
+        return null;
+
+    }
+
+    
   
   
 }
