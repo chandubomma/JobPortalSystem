@@ -127,8 +127,8 @@ public class Recruiter extends User {
 
     @Override
     public boolean Logout() throws SQLException {
-        recruiterDb.updateUserLoginStatus(getEmail(),"false");
-        return false;
+       return(recruiterDb.updateUserLoginStatus(getEmail(),"false"));
+       
     }
 
     @Override
@@ -150,10 +150,10 @@ public class Recruiter extends User {
                 int numberOfVacancies = Integer.parseInt(nL[4]);
                 int maxage = Integer.parseInt(nL[6]);
                 int minExperience = Integer.parseInt(nL[7]);
-               Job job = new Job(nL[0],nL[1],nL[2],this.getCompanyName(),nL[3],numberOfVacancies,nL[5],maxage,minExperience,nL[8]);
+               Job job = new Job(nL[0],nL[1],nL[2],getCompanyName(),nL[3],numberOfVacancies,nL[5],maxage,minExperience,nL[8]);
                if(recruiterDb.getJobRecord(job.getId())==null){
                if(recruiterDb.addJobRecord(job))
-                System.out.println("Posted Job with ID = "+job.getId()+" : "+job.getJobTitle());
+                System.out.println("Posted Job with ID = "+job.getId()+" : "+job.getJobTitle()+" : "+getCompanyName());
                 else System.out.println("Failed to add job post with ID = "+job.getId()+" : "+job.getJobTitle());
                }else{
                 if(recruiterDb.updateJobRecord(job))

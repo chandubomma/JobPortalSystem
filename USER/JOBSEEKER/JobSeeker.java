@@ -245,8 +245,9 @@ super.setUserType("jobseeker");
 
     @Override
     public boolean Logout() throws SQLException {
-       jobSeekerDb.updateUserLoginStatus(getEmail(), "false");
-        return false;
+       if(jobSeekerDb.updateUserLoginStatus(getEmail(), "false"))return true;
+       return false;
+        
     }
 
     @Override
