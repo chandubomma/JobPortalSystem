@@ -314,6 +314,19 @@ public class Main{
                 modifyUserProfile();
                 break;
             }
+            case "viewjobsjobseeker" : {
+                user = administratorDb.getUser(args[1]);
+                if(user==null){
+                    System.out.println("Invalid user details");
+                }
+                else if(user.getUserType().equalsIgnoreCase("jobseeker")){
+                    jobseeker = (JobSeeker) user;
+                    jobseeker.setEligibleJobs();
+                    jobseeker.printEligibleJobs();
+                }
+                else System.out.println("Invalid operation ");
+                break;
+            }
             case "viewapplications" : {
                 viewApplications(args[1]);
                 break;
@@ -379,7 +392,7 @@ public class Main{
                 break;
             }
             case "selectapplicant" : {
-                selectApplicant(args[1], args[2], args[3]);
+                selectApplicant(args[1], args[2], args[3],args[4]);
                 break;
             }
            
@@ -397,6 +410,7 @@ public class Main{
             else if(args[0].equalsIgnoreCase("logout"))return "logout";
             else if(args[0].equalsIgnoreCase("viewprofile"))return "viewprofile";
             else if(args[0].equalsIgnoreCase("updateprofile"))return "updateprofile";
+            else if(args[0].toLowerCase().equals("viewjobs"))return "viewjobsjobseeker";
             else if(args[0].equalsIgnoreCase("viewapplications"))return "viewapplications";
             else if(args[0].equalsIgnoreCase("searchjob"))return "searchjob";
             else if(args[0].equalsIgnoreCase("searchjobs"))return "searchjobs";
@@ -419,7 +433,10 @@ public class Main{
         else if(args.length==4){
             if(args[0].equalsIgnoreCase("searchjobs") && args[2].equalsIgnoreCase("lt"))return "searchjobsltminexperience";
             else if(args[0].equalsIgnoreCase("searchjobs") && args[2].equalsIgnoreCase("gt"))return "searchjobsgtnumberofvacancies";
-            else if(args[0].equalsIgnoreCase("selectapplicant"))return "selectapplicant";
+            
+        }
+        else if(args.length==5){
+            if(args[0].equalsIgnoreCase("selectapplicant"))return "selectapplicant";
         }
         return null;
     }
@@ -510,7 +527,7 @@ public class Main{
         else System.out.println("You are not authorized to perform this operation");
     }
 
-    public static void selectApplicant(String recruiterEmail,String jobSeekerEmail,String jobID) throws SQLException{
+    public static void selectApplicant(String recruiterEmail,String jobSeekerEmail,String jobID,String Message) throws SQLException{
         user = administratorDb.getUser(recruiterEmail);
         if(user==null){
             System.out.println("Invalid Credentials");
@@ -527,7 +544,7 @@ public class Main{
                 System.out.println("No application found with given details");
                 return;
             }
-            recruiter.selectApplicant(application, jobID);
+            recruiter.selectApplicant(application, Message);
 
         }
     }
@@ -668,38 +685,46 @@ public class Main{
     }
 
     public static void viewJobs(String jobTitle) throws SQLException{
-        ArrayList<Job> jobList = administratorDb.getAllJobs();
+        ArrayList<Job> jobList = administratorDb.getAllJobs(); 
+        boolean var = true;
         for(Job job : jobList){
             String title = job.getJobTitle();
-            if(title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)){
+            if(title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || title.contains(jobTitle) || jobTitle.matches(title)||jobTitle.contains(title) || checkStrings(jobTitle, title) || checkStrings(jobTitle, title)){
                 job.printJobDetails();
                 System.out.println("***********************************************************************************************************");  
+                var = false;
             }
         }
+        if(var)System.out.println("No Job Posts Found");
     }
 
     public static void viewJobs(String jobTitle,String minExperience) throws SQLException{
         int minExp = Integer.parseInt(minExperience);
+        boolean var = true;
         ArrayList<Job> jobList = administratorDb.getAllJobs();
         for(Job job : jobList){
             String title = job.getJobTitle();
-            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)) && job.getMinExperience()<=minExp){
+            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title) || checkStrings(jobTitle, title) || checkStrings(title, jobTitle)) && job.getMinExperience()<=minExp){
                 job.printJobDetails();
                 System.out.println("***********************************************************************************************************");  
+                var = false;
             }
         }
+        if(var)System.out.println("No Job Posts Found!");
     }
 
     public static void viewJobs(String jobTitle,int numberOfVacancies) throws SQLException{
-        
+        boolean var = true;
         ArrayList<Job> jobList = administratorDb.getAllJobs();
         for(Job job : jobList){
             String title = job.getJobTitle();
-            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title)) && job.getNumberOfVacancies()>=numberOfVacancies){
+            if((title.equalsIgnoreCase(jobTitle) || title.matches(jobTitle) || title.contains(jobTitle) || jobTitle.contentEquals(title) || jobTitle.matches(title) || checkStrings(title, jobTitle) || checkStrings(jobTitle, title)) && job.getNumberOfVacancies()>=numberOfVacancies){
                 job.printJobDetails();
                 System.out.println("***********************************************************************************************************");  
+                var = false;
             }
         }
+        if(var)System.out.println("No Job Posts Found!");
     }
 
     public static void viewJob(String jobID) throws SQLException{
@@ -726,6 +751,39 @@ public class Main{
         else System.out.println("Invalid Choice!");
     }
 
+
+public static String getString(char x)
+{
+ 
+    String s = String.valueOf(x);
+    return s;
+}
+ 
+
+public static boolean checkStrings(String s1, String s2)
+{
+    String a = getString(s1.charAt(0)),
+           b = getString(s2.charAt(0));
+
+    for (int i = 1; i < s1.length(); i++)
+        if (s1.charAt(i) != s1.charAt(i - 1))
+        {
+            a += getString(s1.charAt(i));
+        }
+ 
+   
+    for (int i = 1; i < s2.length(); i++)
+        if (s2.charAt(i) != s2.charAt(i - 1))
+        {
+            b += getString(s2.charAt(i));
+        }
+ 
+   
+    if (a.equals(b))
+        return true;
+ 
+    return false;
+}
    
 
 }

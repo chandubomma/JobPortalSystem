@@ -29,7 +29,7 @@ public class UserOutput {
         System.out.println("searchjobs 'jobtitle'                                       --- search jobs using job title string");
         System.out.println("searchjobs 'jobtitle' lt 'min experience'                   --- search jobs using job title string and required experience less than 'min experience'");
         System.out.println("searchjobs 'jobtitle' gt 'number of vacancies'              --- search jobs using job title string and number of vacancies greater than 'no of vacancies'");
-        System.out.println("applyjob 'useremail' 'jobid'                                --- to apply for a job post with id = 'jobid'");
+        System.out.println("applyjob 'jobseekeremail' 'jobid'                                --- to apply for a job post with id = 'jobid'");
         System.out.println("postjobs 'recruiteremail' 'jobs csv file path'              --- recruiter can post multiple jobs using csv file");
         System.out.println("updatejobs 'recruiteremail' 'jobs csv file path'            --- recruiter can update multiple job posts using csv file");
         System.out.println("deletejobs 'recruiteremail' 'job ids csv file path          --- recruiter can delete multiple job posts with csv file containing job ids");

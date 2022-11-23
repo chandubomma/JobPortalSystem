@@ -221,7 +221,12 @@ public class Recruiter extends User {
     }
 
     public void selectApplicant(Application application,String description) throws SQLException {
-           recruiterDb.selectApplicant(application,description);
+        if(recruiterDb.selectApplicant(application,description)){
+            application.setApplicationStatus("selected");
+            application.setMessage(description);
+            application.printApplication();
+        }
+           
     }
 
    

@@ -57,6 +57,11 @@ public class Application {
     }
     
     public void printApplication(){
-        System.out.println("| "+applicantEmail+" | "+jobID+" | "+jobTitle+" | "+companyName+" | "+applicationStatus+" | "+message+" |");
+        System.out.println("Applicant Email     : "+getApplicantEmail());
+        System.out.println("Job ID              : "+getJobID());
+        System.out.println("Job Title           : "+getJobTitle());
+        System.out.println("Company Name        : "+getCompanyName());
+        System.out.println("Application Status  : "+getApplicationStatus());
+        System.out.println("Message             : "+getMessage());
     }
 }

@@ -161,20 +161,15 @@ public class Job {
     }
 
     public boolean isEligible(JobSeeker obj){
-        if(this.active==true)
-        {
-            if(obj.getAge()<this.maxAge || this.maxAge==0)
-            {
-                if(obj.getExperience()>=this.minExperience)
-                {
+       
+           
                     if (obj.getSkill1().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
                         obj.getSkill2().toLowerCase().equals(this.skillRequired.toLowerCase()) ||
                         obj.getSkill3().toLowerCase().equals(this.skillRequired.toLowerCase()) 
                         )
                         return true;
-                }
-            }
-        }
+           
+        
         return false;
     }
 
