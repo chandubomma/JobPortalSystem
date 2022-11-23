@@ -16,6 +16,9 @@ public class UserOutput {
         System.out.println("login 'useremail' 'password'                                --- user login using email and password");
         System.out.println("login 'useremail'");
         System.out.println("logout 'useremail'                                          --- to logout user with email 'useremail'");
+        System.out.println("register recruiter 'path to csv file containing recruiter details' --- recruiter can register account using this arguments");
+        System.out.println("register administrator 'path to csv file containing administrator details' --- administrator can register account using this arguments");
+        System.out.println("register recruiter 'path to csv file containing recruiter details' --- recruiter can register account using this arguments");
         System.out.println("viewprofile 'useremail'                                     --- user can view his profile using this arguments");
         System.out.println("updateprofile 'useremail'                                   --- arguments to update any type of user");
         System.out.println("searchprofile 'useremail1' 'useremail2' [useremail1 - administrator/recruiter , useremail2 - user] --- recruiter or administrator with email 'useremail' can search and view profile of any other user with email 'useremail2'");

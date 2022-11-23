@@ -422,10 +422,10 @@ public class Main{
     }
 
     public static void logout() throws SQLException{
-        user.Logout();
+        if(user.Logout())System.out.println("You are logged out");
     }
     public static void logout(User user) throws SQLException{
-        user.Logout();
+       if(user.Logout())System.out.println("You are logged out");
     }
 
     public static void registerRecruiter(String csvFilePath) throws SQLException{
@@ -485,6 +485,8 @@ public class Main{
         else if(user.getUserType().equalsIgnoreCase("recruiter")){
             recruiter = (Recruiter) user;
             recruiter.postJobs(args[2]);
+            System.out.println("Posted by : ");
+            recruiter.getDetails();
         }
         else System.out.println("You are not authorized to perform this operation");
     }
@@ -560,7 +562,7 @@ public class Main{
            
         }
         if(user.Login(args[1],args[2] )){
-            System.out.println("Login Successful!");
+            System.out.println("Hello,"+user.getFirstName()+" "+user.getLastName()+" Login Successful!");
             
         }else{
             System.out.println("Try Again!");
