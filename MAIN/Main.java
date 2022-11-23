@@ -22,7 +22,7 @@ public class Main{
    private static JobSeekerDb jobSeekerDb = new JobSeekerDb();
    private static User user;
    private static JobSeeker jobseeker;
-   private static Recruiter recruiter;
+   private static Recruiter recruiter = new Recruiter();
     private static Job job;
    private static Administrator  administrator;
    private static Info info = new Info();
@@ -596,21 +596,30 @@ public class Main{
                System.out.println("Choose the usertype :");
                int choice= in.nextInt();
                if(choice==1){
+                
                 jobseeker=UserInput.scanJobSeekerDetails();
-                jobseeker.Register();
+                if(jobseeker.Register()){
+                 user=administratorDb.getUser(jobseeker.getEmail());  
+                System.out.println("Registration successful");
                 jobSeekerMenu();
+                }
                }
-               if(choice==2){
-                recruiter=UserInput.scanRecruiterDetails();
-                recruiter.Register();
+               if(choice==2){ 
+                //recruiter= new Recruiter();
+                recruiter =UserInput.scanRecruiterDetails();     
+                if(recruiter.Register()){
+                user=administratorDb.getUser(recruiter.getEmail());
                 recruiterMenu();
+                }
                }
                if(choice==3){
                 administrator=UserInput.scanAdministratorDetails();
-                administrator.Register();
+                if(administrator.Register()){
+                 user=administratorDb.getUser(administrator.getEmail()); 
                 administratorMenu();
                }
-        }
+               }
+               }
     }
 
     public static User login1(String[] args) throws SQLException{

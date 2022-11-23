@@ -15,7 +15,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public  boolean deleteRecruiterRecord(Recruiter recruiter) throws SQLException{
-        String Query = "delete from recruiter where email="+recruiter.getEmail();
+        String Query = "delete from recruiter where email='"+recruiter.getEmail()+"'";
         return !statement.execute(Query);
     }
 
@@ -49,7 +49,7 @@ public class RecruiterDb extends UserDb {
     }
 
     public ArrayList<Job> getJobsPosted(String companyName) throws SQLException{
-        String Query = "select * from job where companyname = '"+companyName+"'";
+        String Query = "select * from job where companyname = '"+companyName+"';";
         ResultSet rs = statement.executeQuery(Query);
         ArrayList<Job> jobList = new ArrayList<>();
         while(rs.next()){
@@ -65,14 +65,14 @@ public class RecruiterDb extends UserDb {
     }
 
     public boolean selectApplicant(Application application,String description) throws SQLException {
-        String Query = "update applicants set status='selected',message='"+description+"' where email ='"+application.getApplicantEmail()+"' and id = '"+application.getJobID()+"'";
-        return !statement.execute(Query);
+        String Query = "update applicant set status='selected',message='"+description+"' where email ='"+application.getApplicantEmail()+"' and id = '"+application.getJobID()+"'";
+        return statement.execute(Query);
     }
 
     public boolean postJob(Recruiter recruiter, Job job) throws SQLException {
         String Query="insert into job values('"+job.getId()+"','"+job.getJobTitle()+"','"+job.getLocation()+"','"+job.getCompanyName()+"','"+job.getDeadline()+"','"+job.getNumberOfVacancies()+"','"+job.getSkillRequired()+"','"+job.getMaxAge()+"','"+job.getMinExperience()+"','"+job.getDescription()+"');";
 
-        return !statement.execute(Query);
+        return statement.execute(Query);
     }
 
     public ArrayList<Application> getApplicants(String companyName) throws SQLException{
